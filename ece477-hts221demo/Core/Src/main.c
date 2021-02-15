@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "hts221.h"
 
 /* USER CODE END Includes */
 
@@ -90,75 +91,9 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  /* === INIT CODE === */
-	  uint16_t hts221 = 0x5F;
+  HTS_Cal * hts_cal_data = hts221_init();
 
-	  HAL_StatusTypeDef ret;
-	  uint8_t buf[16];
-	  buf[0] = 0x20; // cr1
-	  buf[1] = 0x84; // bit 7 - device on, bit 2 - non-continuous data update
-
-	  // Set up the temperature sensor
-	  ret = HAL_I2C_Master_Transmit(&hi2c1, (hts221 << 1), buf, 2, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {
-		  // TODO: error handling
-	  }
-
-	  // Read in the calibration data
-	  uint16_t t0_out_cal, t1_out_cal;
-	  uint8_t t0_degC_x8_cal, t1_degC_x8_cal, t1_t0_msb_cal;
-
-	  // T0_degC_x8
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x32, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {}
-	  t0_degC_x8_cal = buf[0];
-
-	  // T1_degC_x8
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x33, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {}
-	  t1_degC_x8_cal = buf[0];
-
-	  // T1/T0 msb
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x35, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {}
-	  t1_t0_msb_cal = buf[0];
-
-	  //
-
-  /* === TEMPERATURE READING CODE === */
-	  // Write to CR2 for one-shot readings
-	  buf[0] = 0x21; // cr2
-	  buf[1] = 0x01; // oneshot mode enable
-	  ret = HAL_I2C_Master_Transmit(&hi2c1, (hts221 << 1), buf, 2, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {
-		  // TODO: error handling
-	  }
-
-	  // Read the status register
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x27, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {
-		  // TODO: error handling
-	  }
-	  if ((buf[0] & 0x3) == 0x3) {
-		  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x2A, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-		  while (ret != HAL_OK) {
-			  // TODO: error handling
-		  }
-		  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x2B, I2C_MEMADD_SIZE_8BIT, &(buf[1]), 1, HAL_MAX_DELAY);
-		  while (ret != HAL_OK) {
-			  // TODO: error handling
-		  }
-
-	  }
-
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x3, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {
-		  // TODO: error handling
-	  }
-	  ret = HAL_I2C_Mem_Read(&hi2c1, (hts221 << 1), 0x2B, I2C_MEMADD_SIZE_8BIT, &(buf[1]), 1, HAL_MAX_DELAY);
-	  while (ret != HAL_OK) {
-		  // TODO: error handling
-	  }
+  int temp = hts221_get_temp('C', hts_cal_data);
 
   /* USER CODE END 2 */
 }
