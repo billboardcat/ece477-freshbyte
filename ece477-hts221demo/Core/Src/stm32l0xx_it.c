@@ -23,6 +23,8 @@
 #include "stm32l0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include "hts221.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,9 +58,9 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern TIM_HandleTypeDef htim6;
 /* USER CODE BEGIN EV */
-
+extern HTS_Cal * hts_cal_data;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -140,6 +142,22 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32l0xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles TIM6 global interrupt and DAC1/DAC2 underrun error interrupts.
+  */
+void TIM6_DAC_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
+
+  /* USER CODE END TIM6_DAC_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim6);
+  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
+  int temp = hts221_get_temp('C', hts_cal_data);
+  printf("Current temperature is %d C\r\n", temp);
+
+  /* USER CODE END TIM6_DAC_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 

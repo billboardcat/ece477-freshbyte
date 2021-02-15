@@ -48,13 +48,14 @@ extern "C" {
 
 /* === REGISTER ADDRESS BITS === */
 // Let's just add the ones that we'll actually be using to keep it clean
-#define HTS_CTRL_REG1_PD 	(0x80)
-#define HTS_CTRL_REG1_BUD	(0x1 << 3)
+#define HTS_CTRL_REG1_PD 		(0x80)
+#define HTS_CTRL_REG1_BUD		(0x1 << 2)
+#define HTS_CTRL_REG2_ONE_SHOT	0x1
 
 /* === DATA STRUCTS === */
 typedef struct HTS_Cal{
 	int T0_OUT;
-	int correction_factor;  //slope
+	float correction_factor;  //slope
 	//= (delta of (T1_degC_x8 w/ MSB / 8) - T0 of the same) / (T1_OUT - T0_OUT)
 
 	int offset; //T0_degC_x8 w/ MSB then divided by 8
@@ -66,7 +67,7 @@ typedef struct HTS_Cal{
 /* === FUNCTION DECLARATIONS === */
 HTS_Cal * hts221_init(void);
 int hts221_get_temp(char unit, HTS_Cal * hts_cal_data);
-int hts221_calc_temp(uint16_t T_OUT, HTS_Cal * hts_cal_data);
+int hts221_calc_temp(int16_t T_OUT, HTS_Cal * hts_cal_data);
 
 
 #ifdef __cplusplus

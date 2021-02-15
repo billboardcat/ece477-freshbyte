@@ -8,6 +8,11 @@
 #include "hts221.h"
 #include <stdlib.h>
 
+// For debug
+#include <stdio.h>
+#include "stm32l0xx_hal.h"
+extern UART_HandleTypeDef huart1;
+
 extern I2C_HandleTypeDef hi2c1; // TODO: How do we handle this if I2C controller is changed?
 
 HTS_Cal * hts221_init () {
@@ -15,9 +20,9 @@ HTS_Cal * hts221_init () {
 	uint8_t buf[7];			// read buffer
 
 	/* === Set HTS221 to wake mode === */
-	buf[0] = HTS_CTRL_REG1;
-	buf[1] = HTS_CTRL_REG1_PD;
-	ret = HAL_I2C_Master_Transmit(&hi2c1, (HTS_ADDR << 1), buf, 2, HAL_MAX_DELAY);
+	buf[0] = HTS_CTRL_REG1_PD | HTS_CTRL_REG1_BUD;
+//	ret = HAL_I2C_Master_Transmit(&hi2c1, (HTS_ADDR << 1), buf, 2, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Write(&hi2c1, (HTS_ADDR << 1), HTS_CTRL_REG1, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
 		// TODO: error handling
 	}
@@ -70,11 +75,10 @@ HTS_Cal * hts221_init () {
 		uint16_t T0_degC_R32 = buf[0];
 		uint16_t T1_degC_R33 = buf[1];
 		uint16_t T1_T0_msb 	= buf[2];
-		uint16_t T0_OUT = (buf[3] | (buf[4] << 8));
-		uint16_t T1_OUT = (buf[5] | (buf[6] << 8));
+		int16_t T0_OUT = (buf[3] | (buf[4] << 8)); // This should be signed int
+		int16_t T1_OUT = (buf[5] | (buf[6] << 8)); // This should be signed int
 
 		// add msb's for 10 bit values
-
 		T0_degC_R32 |= (T1_T0_msb & 0b0011) << 8;
 		T1_degC_R33 |= (T1_T0_msb & 0b1100) << 6;
 
@@ -86,7 +90,7 @@ HTS_Cal * hts221_init () {
 		HTS_Cal * hts_cal_data = malloc(sizeof(HTS_Cal));
 
 		hts_cal_data->T0_OUT = T0_OUT;
-		hts_cal_data->correction_factor = (T1_degC_R33 - T0_degC_R32) / (T1_OUT - T0_OUT);
+		hts_cal_data->correction_factor = (float) (T1_degC_R33 - T0_degC_R32) / (T1_OUT - T0_OUT);
 		hts_cal_data->offset = T0_degC_R32;
 
 		//zeroed_temp = T_out - T0_Out
@@ -96,8 +100,6 @@ HTS_Cal * hts221_init () {
 	}
 
 	return NULL;
-
-	/* === Malloc struct and variables for struct === */
 }
 
 int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
@@ -105,8 +107,16 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 
 	HAL_StatusTypeDef ret;	// I2C return status
 	uint8_t buf[7];			// read buffer
-	uint16_t T_OUT;			// T_OUT raw temperature reading
+	int16_t T_OUT;			// T_OUT raw temperature reading
 	int temp_adj;			// calibrated temperature value
+
+	/* === Start a temperature reading === */
+	buf[0] = HTS_CTRL_REG2_ONE_SHOT;
+	ret = HAL_I2C_Mem_Write(&hi2c1, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	if (ret != HAL_OK) {
+		// TODO: error handling
+	}
+
 
 	/* === Read in temperature data === */
 
@@ -137,10 +147,9 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 		// TODO: error handling
 	}
 
-	T_OUT = buf[1] | (buf[2] << 8);
+	T_OUT = buf[1] | (((uint16_t) buf[2]) << 8);
 
 	temp_adj = hts221_calc_temp(T_OUT, hts_cal_data);
-
 
 	// Return in correct units
 	if (unit == 'F'){
@@ -155,7 +164,7 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 
 }
 
-int hts221_calc_temp(uint16_t T_OUT, HTS_Cal * hts_cal_data){
+int hts221_calc_temp(int16_t T_OUT, HTS_Cal * hts_cal_data){
 
 	int zeroed_temp = T_OUT - hts_cal_data->T0_OUT;
 	int temp_adj = (zeroed_temp * hts_cal_data->correction_factor) + hts_cal_data->offset;
