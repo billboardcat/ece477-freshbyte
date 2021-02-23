@@ -46,6 +46,10 @@ extern "C" {
 #define HTS_CAL_T1_OUT_L 0x3E
 #define HTS_CAL_T1_OUT_H 0x3F
 
+/* === Error Return Values === */
+#define HUMID_ERROR -1
+#define TEMP_ERROR -460 //this is 1 deg. F below absolute 0 in F. in C absolute 0 is -273
+
 /* === REGISTER ADDRESS BITS === */
 // Let's just add the ones that we'll actually be using to keep it clean
 #define HTS_CTRL_REG1_PD 		(0x80)
@@ -54,20 +58,28 @@ extern "C" {
 
 /* === DATA STRUCTS === */
 typedef struct HTS_Cal{
+	//TEMP
 	int T0_OUT;
-	float correction_factor;  //slope
+	float temp_correction_factor;  //slope
 	//= (delta of (T1_degC_x8 w/ MSB / 8) - T0 of the same) / (T1_OUT - T0_OUT)
-
-	int offset; //T0_degC_x8 w/ MSB then divided by 8
-
+	int temp_offset; //T0_degC_x8 w/ MSB then divided by 8
 	//zeroed_temp = T_out - T0_Out
 	//temp_adj = (zeroed_temp * correction_factor) + offset
+
+	//HUMIDITY
+	int H0_OUT;
+	float humid_correction_factor;
+	int humid_offset;
+
 } HTS_Cal;
 
 /* === FUNCTION DECLARATIONS === */
 HTS_Cal * hts221_init(void);
 int hts221_get_temp(char unit, HTS_Cal * hts_cal_data);
 int hts221_calc_temp(int16_t T_OUT, HTS_Cal * hts_cal_data);
+
+int hts221_get_humid(HTS_Cal * hts_cal_data);
+int hts221_calc_humid(int16_t H_OUT, HTS_Cal * hts_cal_data);
 
 
 #ifdef __cplusplus

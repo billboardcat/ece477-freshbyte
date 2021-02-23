@@ -154,7 +154,12 @@ void TIM6_DAC_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
   int temp = hts221_get_temp('C', hts_cal_data);
-  printf("Current temperature is %d C\r\n", temp);
+  if (temp == TEMP_ERROR) printf("Error reading temperature\r\n");
+  else printf("Current temperature is %d C\r\n", temp);
+
+  int humid = hts221_get_humid(hts_cal_data);
+  if (humid == HUMID_ERROR) printf("Error reading humidity\r\n");
+  else printf("Current Relative Humidity is %d%% \r\n", humid);
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
