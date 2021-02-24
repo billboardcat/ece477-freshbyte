@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "hts221.h"
+#include "bq27441.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,50 +64,7 @@ extern TIM_HandleTypeDef htim6;
 extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
 
-// TODO - change from enum to define
-typedef enum {
-	AVG,  // Average Current (DEFAULT)
-	STBY, // Standby Current
-	MAX   // Max Current
-} current_measure;
-
-// Parameters for the capacity() function, to specify which capacity to read
-typedef enum {
-	REMAIN,     // Remaining Capacity (DEFAULT)
-	FULL,       // Full Capacity
-	AVAIL,      // Available Capacity
-	AVAIL_FULL, // Full Available Capacity
-	REMAIN_F,   // Remaining Capacity Filtered
-	REMAIN_UF,  // Remaining Capacity Unfiltered
-	FULL_F,     // Full Capacity Filtered
-	FULL_UF,    // Full Capacity Unfiltered
-	DESIGN      // Design Capacity
-} capacity_measure;
-
-// Parameters for the soc() function
-typedef enum {
-	FILTERED,  // State of Charge Filtered (DEFAULT)
-	UNFILTERED // State of Charge Unfiltered
-} soc_measure;
-
-// Parameters for the soh() function
-typedef enum {
-	PERCENT,  // State of Health Percentage (DEFAULT)
-	SOH_STAT  // State of Health Status Bits
-} soh_measure;
-
-// Parameters for the temperature() function
-typedef enum {
-	BATTERY,      // Battery Temperature (DEFAULT)
-	INTERNAL_TEMP // Internal IC Temperature
-} temp_measure;
-
-// Parameters for the setGPOUTFunction() funciton
-typedef enum {
-	SOC_INT, // Set GPOUT to SOC_INT functionality
-	BAT_LOW  // Set GPOUT to BAT_LOW functionality
-} gpout_function;
-
+// TODO - change bq from enum to define
 
 /* USER CODE END EV */
 
@@ -203,25 +161,34 @@ void TIM6_DAC_IRQHandler(void)
   if (hts_cal_data != NULL){
 	  int temp = hts221_get_temp('C', hts_cal_data);
 	  if (temp == TEMP_ERROR) printf("Error reading temperature\r\n");
-	  else printf("Current temperature is %d C\r\n", temp);
+	  else printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 
 	  int humid = hts221_get_humid(hts_cal_data);
 	  if (humid == HUMID_ERROR) printf("Error reading humidity\r\n");
-	  else printf("Current Relative Humidity is %d%% \r\n", humid);
+	  else printf("Current Relative Humidity is \t\t%d\t%% \r\n", humid);
 
-	  uint16_t battery = BQ27441_voltage();
-//	  TODO: Stringify all these :'(
-//	  printf("Battery Voltage is ");
+	  uint16_t voltage = BQ27441_voltage();
 
 	  uint16_t soc = BQ27441_soc(FILTERED);
 
 	  uint16_t current = BQ27441_current(AVG);
 	  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
-	  uint16_t cap_max = BQ27441_capacity(FULL);
+	  uint16_t cap_max = BQ27441_capacity(DESIGN);
 	  int16_t power = BQ27441_power(); //average draw
 	  uint16_t soh = BQ27441_soh(PERCENT);
-	  uint16_t temp_bat = BQ27441_temperature(BATTERY);
-	  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP);
+	  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
+	  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
+
+	  printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
+	  printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
+	  printf("Current\t\t\t\t\t%d\tmA\r\n", current);
+	  printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
+	  printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
+	  printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
+	  printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
+	  printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
+	  printf("Current Temperature is\t\t\t%d\tK\r\n", temp_bq_IC);
+
 
   }
 
