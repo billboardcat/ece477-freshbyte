@@ -4,4 +4,8 @@
 Drivers/
 .settings/
 ece477-hts221demo/.settings/language.settings.xml
-.mxproject
+*/.mxproject
+*/.project
+*/language.settings.xml
+.idea
+*/*.o

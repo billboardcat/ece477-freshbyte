@@ -1,0 +1,3 @@
+hts221.c:18:11:hts221_init	56	static
+hts221.c:180:5:hts221_calc_temp	16	static
+hts221.c:113:5:hts221_get_temp	56	static
