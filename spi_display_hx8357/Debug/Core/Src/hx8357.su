@@ -1,0 +1,13 @@
+hx8357.c:130:6:hx8357_disp_init	16	static
+hx8357.c:157:6:hx8357_disp_reset	8	static
+hx8357.c:165:6:hx8357_writeCommand	16	static
+hx8357.c:171:6:hx8357_disp_invert	24	static
+hx8357.c:176:6:hx8357_disp_setAddrWindow	40	static
+hx8357.c:200:6:hx8357_writePixels	24	static
+hx8357.c:210:6:hx8357_writeColor	40	static
+hx8357.c:235:6:hx8357_writeFillRect	32	static
+hx8357.c:260:6:hx8357_writeHLine	32	static
+hx8357.c:264:6:hx8357_writeVLine	32	static
+hx8357.c:268:6:hx8357_writePixle	32	static
+hx8357.c:281:10:hx8357_color565	24	static
+hx8357.c:285:6:hx8357_drawRGBBitmap	48	static
