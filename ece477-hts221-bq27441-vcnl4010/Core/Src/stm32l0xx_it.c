@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include "hts221.h"
 #include "bq27441.h"
+#include "vcnl4010.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,8 +64,6 @@ extern TIM_HandleTypeDef htim6;
 /* USER CODE BEGIN EV */
 extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
-
-// TODO - change bq from enum to define
 
 /* USER CODE END EV */
 
@@ -159,6 +158,10 @@ void TIM6_DAC_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
   if (hts_cal_data != NULL){
+
+	  uint16_t proximity = VCNL4010_readProximity();
+	  printf("Proximity Reading is \t\t\t\t%d\r\n", proximity);
+
 	  int temp = hts221_get_temp('C', hts_cal_data);
 	  if (temp == TEMP_ERROR) printf("Error reading temperature\r\n");
 	  else printf("Current temperature is \t\t\t%d\tC\r\n", temp);
@@ -168,9 +171,7 @@ void TIM6_DAC_IRQHandler(void)
 	  else printf("Current Relative Humidity is \t\t%d\t%% \r\n", humid);
 
 	  uint16_t voltage = BQ27441_voltage();
-
 	  uint16_t soc = BQ27441_soc(FILTERED);
-
 	  uint16_t current = BQ27441_current(AVG);
 	  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
 	  uint16_t cap_max = BQ27441_capacity(DESIGN);
@@ -187,7 +188,7 @@ void TIM6_DAC_IRQHandler(void)
 	  printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
 	  printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
 	  printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
-	  printf("Current Temperature is\t\t\t%d\tK\r\n", temp_bq_IC);
+	  printf("Current Bat IC Temp is\t\t\t%d\tK\r\n", temp_bq_IC);
 
 
   }

@@ -14,9 +14,9 @@
 // For debug
 #include <stdio.h>
 #include "stm32l0xx_hal.h"
-extern UART_HandleTypeDef huart1;
+#include "i2c.h"
 
-extern I2C_HandleTypeDef hi2c1; // TODO: How do we handle this if I2C controller is changed?
+#define I2C hi2c1
 
 HTS_Cal * hts221_init () {
 	//Returns NULL if not able to init object - remember to check after calling this function
@@ -27,10 +27,9 @@ HTS_Cal * hts221_init () {
 	/* === Set HTS221 to wake mode === */
 	buf[0] = HTS_CTRL_REG1_PD | HTS_CTRL_REG1_BUD;
 
-//	ret = HAL_I2C_Master_Transmit(&hi2c1, (HTS_ADDR << 1), buf, 2, HAL_MAX_DELAY);
-	ret = HAL_I2C_Mem_Write(&hi2c1, (HTS_ADDR << 1), HTS_CTRL_REG1, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+//	ret = HAL_I2C_Master_Transmit(&I2C, (HTS_ADDR << 1), buf, 2, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG1, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return NULL;
 	}
 	else  {
@@ -38,95 +37,82 @@ HTS_Cal * hts221_init () {
 		//Temp
 
 		// buf[0] = T0_degC_x8
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T0_degC_x8, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T0_degC_x8, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[1] = T1_degC_x8
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T1_degC_x8, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T1_degC_x8, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[2] = T1_T0_msb
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T1_T0_msb, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T1_T0_msb, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[3] = HTS_CAL_T0_OUT_L
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 3, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 3, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[4] = HTS_CAL_T0_OUT_H
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 4, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 4, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[5] = HTS_CAL_T1_OUT_L
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T1_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 5, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T1_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 5, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[6] = HTS_CAL_T1_OUT_H
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_T1_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 6, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_T1_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 6, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		//Humidity
 
 		// buf[7] = HTS_CAL_H0_T0_OUT_L
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H0_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 7, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H0_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 7, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[8] = HTS_CAL_H0_T0_OUT_H
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H0_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 8, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H0_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 8, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[9] = HTS_CAL_H1_T0_OUT_L
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H1_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 9, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H1_T0_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 9, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[10] = HTS_CAL_H1_T0_OUT_H
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H1_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 10, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H1_T0_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 10, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[11] = HTS_CAL_H0_rH_x2
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H0_rH_x2, I2C_MEMADD_SIZE_8BIT, buf + 11, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H0_rH_x2, I2C_MEMADD_SIZE_8BIT, buf + 11, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
 		// buf[12] = HTS_CAL_H1_rH_x2
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_CAL_H1_rH_x2, I2C_MEMADD_SIZE_8BIT, buf + 12, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CAL_H1_rH_x2, I2C_MEMADD_SIZE_8BIT, buf + 12, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
 			return NULL;
 		}
 
@@ -179,9 +165,9 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 
 	/* === Start a temperature reading === */
 	buf[0] = HTS_CTRL_REG2_ONE_SHOT;
-	ret = HAL_I2C_Mem_Write(&hi2c1, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
+		return TEMP_ERROR;
 	}
 
 
@@ -191,29 +177,26 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 	// Try three times for temp data to be ready
 	for (int i = 0; i < 3; ++i) {
 		// buf[0] = HTS_STATUS_REG
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_STATUS_REG, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_STATUS_REG, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
+			return TEMP_ERROR;
 		}
 		if (buf[0] & 1){
 			// new temp. data ready
 			break;
 		}
-		//TODO - HAL_WAIT?
 		return TEMP_ERROR;
 	}
 
 	// buf[1] = HTS_TEMP_OUT_L
-	ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_TEMP_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_TEMP_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return TEMP_ERROR;
 	}
 
 	// buf[2] = HTS_TEMP_OUT_H
-	ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_TEMP_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_TEMP_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return TEMP_ERROR;
 	}
 
@@ -253,9 +236,8 @@ int hts221_get_humid(HTS_Cal * hts_cal_data){
 
 	/* === Start a humidity reading === */
 	buf[0] = HTS_CTRL_REG2_ONE_SHOT;
-	ret = HAL_I2C_Mem_Write(&hi2c1, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return HUMID_ERROR;
 	}
 
@@ -266,29 +248,26 @@ int hts221_get_humid(HTS_Cal * hts_cal_data){
 	// Try three times for temp data to be ready
 	for (int i = 0; i < 3; ++i) {
 		// buf[0] = HTS_STATUS_REG
-		ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_STATUS_REG, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_STATUS_REG, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			// TODO: error handling
+			return HUMID_ERROR;
 		}
 		if (buf[0] & 2){
 			// new humid. data ready
 			break;
 		}
-		//TODO - HAL_WAIT?
 		return HUMID_ERROR;
 	}
 
 	// buf[1] = HTS_HUMIDITY_OUT_L
-	ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_HUMIDITY_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_HUMIDITY_OUT_L, I2C_MEMADD_SIZE_8BIT, buf + 1, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return HUMID_ERROR;
 	}
 
 	// buf[2] = HTS_HUMIDITY_OUT_H
-	ret = HAL_I2C_Mem_Read(&hi2c1, (HTS_ADDR << 1), HTS_HUMIDITY_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_HUMIDITY_OUT_H, I2C_MEMADD_SIZE_8BIT, buf + 2, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
-		// TODO: error handling
 		return HUMID_ERROR;
 	}
 

@@ -32,6 +32,10 @@
 /* === FUNCTION DECLARATIONS === */
 int bq_init();
 
+int BQ27441_setCapacity(uint16_t capacity);
+int BQ27441_setDesignEnergy(uint16_t energy);
+int BQ27441_setTerminateVoltage(uint16_t voltage);
+int BQ27441_setTaperRate(uint16_t rate);
 int BQ27441_writeExtendedData(uint8_t classID, uint8_t offset, uint8_t * data, uint8_t len);
 HAL_StatusTypeDef BQ27441_blockDataControl(void);
 HAL_StatusTypeDef BQ27441_blockDataClass(uint8_t id);
