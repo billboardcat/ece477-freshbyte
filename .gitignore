@@ -1,12 +1,7 @@
 
 .DS_Store
 .metadata/
-Drivers/
-.settings
-*/.settings/*
 ece477-hts221demo/.settings/language.settings.xml
-*/.mxproject
-*/.project
 */language.settings.xml
 .idea
 */*.o
