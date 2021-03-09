@@ -6,7 +6,7 @@ stm32f0xx_hal.c:222:26:HAL_InitTick	24	static
 stm32f0xx_hal.c:281:13:HAL_IncTick	8	static
 stm32f0xx_hal.c:292:17:HAL_GetTick	8	static
 stm32f0xx_hal.c:301:10:HAL_GetTickPrio	8	static
-stm32f0xx_hal.c:310:19:HAL_SetTickFreq	32	static
+stm32f0xx_hal.c:310:19:HAL_SetTickFreq	40	static
 stm32f0xx_hal.c:342:21:HAL_GetTickFreq	8	static
 stm32f0xx_hal.c:358:13:HAL_Delay	24	static
 stm32f0xx_hal.c:384:13:HAL_SuspendTick	8	static

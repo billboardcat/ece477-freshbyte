@@ -1,5 +1,5 @@
 stm32f0xx_hal_flash.c:167:19:HAL_FLASH_Program	48	static
-stm32f0xx_hal_flash.c:239:19:HAL_FLASH_Program_IT	40	static
+stm32f0xx_hal_flash.c:239:19:HAL_FLASH_Program_IT	32	static
 stm32f0xx_hal_flash.c:285:6:HAL_FLASH_IRQHandler	24	static
 stm32f0xx_hal_flash.c:428:13:HAL_FLASH_EndOfOperationCallback	16	static
 stm32f0xx_hal_flash.c:446:13:HAL_FLASH_OperationErrorCallback	16	static

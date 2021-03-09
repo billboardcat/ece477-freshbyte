@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -28,6 +29,12 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
 BUILD_ARTIFACT_NAME := spi_display_hx8357
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
@@ -54,22 +61,22 @@ all: main-build
 main-build: spi_display_hx8357.elf secondary-outputs
 
 # Tool invocations
-spi_display_hx8357.elf: $(OBJS) $(USER_OBJS) /Users/jimmysung/STM32CubeIDE/workspace_1.5.1/spi_display_hx8357/STM32F091RCTX_FLASH.ld
+spi_display_hx8357.elf: $(OBJS) $(USER_OBJS) /Users/jimmysung/STM32CubeIDE/workspace_1.5.1/spi_display_hx8357/STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-gcc -o "spi_display_hx8357.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/spi_display_hx8357/STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="spi_display_hx8357.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-spi_display_hx8357.list: $(EXECUTABLES)
+spi_display_hx8357.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "spi_display_hx8357.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-spi_display_hx8357.bin: $(EXECUTABLES)
+spi_display_hx8357.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "spi_display_hx8357.bin"
 	@echo 'Finished building: $@'
 	@echo ' '

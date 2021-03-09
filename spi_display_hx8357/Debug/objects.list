@@ -1,3 +1,4 @@
+"Core/Src/glcdfont.o"
 "Core/Src/gpio.o"
 "Core/Src/hx8357.o"
 "Core/Src/main.o"
@@ -7,7 +8,6 @@
 "Core/Src/syscalls.o"
 "Core/Src/sysmem.o"
 "Core/Src/system_stm32f0xx.o"
-"Core/Src/usart.o"
 "Core/Startup/startup_stm32f091rctx.o"
 "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o"
 "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o"
@@ -26,5 +26,3 @@
 "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi_ex.o"
 "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o"
 "Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o"
-"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.o"
-"Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.o"

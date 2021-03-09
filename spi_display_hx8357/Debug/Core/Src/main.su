@@ -1,4 +1,5 @@
-main.c:70:5:main	8	static
-main.c:122:6:SystemClock_Config	112	static
-main.c:163:6:rectanglesDemo	16	static
-main.c:195:6:Error_Handler	8	static,ignoring_inline_asm
+main.c:71:5:main	8	static
+main.c:142:6:SystemClock_Config	88	static
+main.c:174:6:writeDemo	16	static
+main.c:188:6:rectanglesDemo	16	static
+main.c:220:6:Error_Handler	8	static,ignoring_inline_asm

@@ -9,6 +9,7 @@
 #define INC_HX8357_H_
 
 #include "stm32f0xx_hal.h"
+#include <stdbool.h>
 
 #define HX8357D 0xD ///< Our internal const for D type
 #define HX8357B 0xB ///< Our internal const for B type
@@ -83,6 +84,15 @@
 #define HX8357B_SETGAMMA 0xC8        ///< Set Gamma
 #define HX8357B_SETPANELRELATED 0xE9 ///< Set panel related
 
+// Display rotation support
+#define MADCTL_MY  0x80 ///< Bottom to top
+#define MADCTL_MX  0x40 ///< Right to left
+#define MADCTL_MV  0x20 ///< Reverse Mode
+#define MADCTL_ML  0x10 ///< LCD refresh Bottom to top
+#define MADCTL_RGB 0x00 ///< Red-Green-Blue pixel order
+#define MADCTL_BGR 0x08 ///< Blue-Green-Red pixel order
+#define MADCTL_MH  0x04 ///< LCD refresh right to left
+
 // Plan is to move this to GFX header (with different prefix), though
 // defines will be kept here for existing code that might be referencing
 // them. Some additional ones are in the ILI9341 lib -- add all in GFX!
@@ -100,7 +110,7 @@
 void hx8357_disp_init(void);
 void hx8357_disp_reset(void);
 void hx8357_writeCommand(uint8_t cmd);
-void hx8357_disp_invert(unsigned char invert);
+void hx8357_disp_invert(bool invert);
 void hx8357_disp_setAddrWindow(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h);
 void hx8357_disp_setRotation(uint8_t m);
 
@@ -110,13 +120,33 @@ void hx8357_writeColor(uint16_t color, uint32_t len);
 // void hx8357_writeColor666(uint32_t color, uint32_t len);
 void hx8357_writeFillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 // void hx8357_writeFillRect666(int16_t x, int16_t y, int16_t w, int16_t h, uint32_t color);
-void hx8357_writeHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
-void hx8357_writeVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
-void hx8357_writePixle(int16_t x, int16_t y, uint16_t color);
+void hx8357_writeHLine(int16_t x, int16_t y, int16_t len, uint16_t color);
+void hx8357_writeVLine(int16_t x, int16_t y, int16_t len, uint16_t color);
+void hx8357_writePixel(int16_t x, int16_t y, uint16_t color);
 //uint8_t hx8357_readcommand8(uint8_t command, uint8_t index);
 uint16_t hx8357_color565(uint8_t red, uint8_t green, uint8_t blue);
+
+
+/* ADAFRUIT GFX FUNCTIONS */
 void hx8357_drawRGBBitmap(int16_t x, int16_t y, uint16_t *pcolors, int16_t w, int16_t h);
+void hx8357_fillDisplay(uint16_t color);
+void hx8357_drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size);
+void hx8357_write(uint8_t c);
+void hx8357_setCursor(uint16_t x, uint16_t y);
+uint16_t hx8357_getCursorX(void);
+uint16_t hx8357_getCursorY(void);
+void hx8357_setTextSize(uint8_t s);
+void hx8357_setTextColor(uint16_t color);
+void hx8357_setTextBGColor(uint16_t color);
+void hx8357_setTextWrap(bool w);
+void hx8357_setMarginX(uint8_t m);
 
 
+/* Print.cpp FUNCTIONS */
+void printWrite(const char *str);
+void printChar(char c);
+void printString(const char str[]);
+void printUnsigned(unsigned long n, uint8_t base);
+void printFloat(double number, uint8_t digits);
 
 #endif /* INC_HX8357_H_ */
