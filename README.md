@@ -12,7 +12,7 @@ and notify the user if the conditions are out of specification as well as how mu
 Users will input the type of food through the use of a display and buttons. The display will be used to notify users of when a certain
 threshold of longevity has been reached.
 
-## Project Specific Success Criteria
+### Project Specific Success Criteria
 - [ ] An ability to read pressure sensor data to determine if food is in the box.
 - [ ] An ability to transmit data to external device for analysis over a WiFi connection.
 - [ ] An ability to read battery charge level data through I2C using a PMIC.
