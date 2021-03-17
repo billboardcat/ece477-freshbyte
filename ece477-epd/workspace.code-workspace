@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "../../Arduino/libraries/Adafruit_EPD"
+		},
+		{
+			"path": "../../Arduino/libraries/Adafruit_GFX_Library"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"__bit_reference": "cpp",
+			"__hash_table": "cpp",
+			"__split_buffer": "cpp",
+			"algorithm": "cpp",
+			"array": "cpp",
+			"functional": "cpp",
+			"initializer_list": "cpp",
+			"iterator": "cpp",
+			"locale": "cpp",
+			"string": "cpp",
+			"string_view": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp"
+		}
+	}
+}
