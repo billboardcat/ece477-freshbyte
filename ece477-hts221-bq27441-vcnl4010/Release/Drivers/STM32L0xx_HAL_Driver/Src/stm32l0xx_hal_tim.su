@@ -3,7 +3,7 @@ stm32l0xx_hal_tim.c:6295:13:TIM_OC1_SetConfig	12	static
 stm32l0xx_hal_tim.c:6342:13:TIM_OC2_SetConfig	12	static
 stm32l0xx_hal_tim.c:6616:13:TIM_TI1_SetConfig	20	static
 stm32l0xx_hal_tim.c:6940:13:TIM_CCxChannelCmd	8	static
-stm32l0xx_hal_tim.c:6485:26:TIM_SlaveTimer_SetConfig	12	static
+stm32l0xx_hal_tim.c:6485:26:TIM_SlaveTimer_SetConfig	16	static
 stm32l0xx_hal_tim.c:371:13:HAL_TIM_Base_MspInit	0	static
 stm32l0xx_hal_tim.c:269:19:HAL_TIM_Base_Init	16	static
 stm32l0xx_hal_tim.c:386:13:HAL_TIM_Base_MspDeInit	0	static
@@ -56,11 +56,11 @@ stm32l0xx_hal_tim.c:2961:13:HAL_TIM_Encoder_MspInit	0	static
 stm32l0xx_hal_tim.c:2804:19:HAL_TIM_Encoder_Init	32	static
 stm32l0xx_hal_tim.c:2976:13:HAL_TIM_Encoder_MspDeInit	0	static
 stm32l0xx_hal_tim.c:2918:19:HAL_TIM_Encoder_DeInit	16	static
-stm32l0xx_hal_tim.c:2996:19:HAL_TIM_Encoder_Start	16	static
+stm32l0xx_hal_tim.c:2996:19:HAL_TIM_Encoder_Start	12	static
 stm32l0xx_hal_tim.c:3080:19:HAL_TIM_Encoder_Stop	8	static
-stm32l0xx_hal_tim.c:3137:19:HAL_TIM_Encoder_Start_IT	16	static
+stm32l0xx_hal_tim.c:3137:19:HAL_TIM_Encoder_Start_IT	12	static
 stm32l0xx_hal_tim.c:3227:19:HAL_TIM_Encoder_Stop_IT	8	static
-stm32l0xx_hal_tim.c:3289:19:HAL_TIM_Encoder_Start_DMA	32	static
+stm32l0xx_hal_tim.c:3289:19:HAL_TIM_Encoder_Start_DMA	24	static
 stm32l0xx_hal_tim.c:3483:19:HAL_TIM_Encoder_Stop_DMA	16	static
 stm32l0xx_hal_tim.c:3745:19:HAL_TIM_OC_ConfigChannel	24	static
 stm32l0xx_hal_tim.c:3821:19:HAL_TIM_IC_ConfigChannel	32	static
@@ -78,7 +78,7 @@ stm32l0xx_hal_tim.c:4882:19:HAL_TIM_ConfigClockSource	20	static
 stm32l0xx_hal_tim.c:5034:19:HAL_TIM_ConfigTI1Input	0	static
 stm32l0xx_hal_tim.c:5066:19:HAL_TIM_SlaveConfigSynchro	24	static
 stm32l0xx_hal_tim.c:5106:19:HAL_TIM_SlaveConfigSynchro_IT	24	static
-stm32l0xx_hal_tim.c:5149:10:HAL_TIM_ReadCapturedValue	4	static
+stm32l0xx_hal_tim.c:5149:10:HAL_TIM_ReadCapturedValue	0	static
 stm32l0xx_hal_tim.c:5233:13:HAL_TIM_PeriodElapsedCallback	0	static
 stm32l0xx_hal_tim.c:6178:13:TIM_DMAPeriodElapsedCplt	8	static
 stm32l0xx_hal_tim.c:5248:13:HAL_TIM_PeriodElapsedHalfCpltCallback	0	static

@@ -20,7 +20,7 @@
 
 
 /* === Battery Capacity == */
-#define BAT_CAP_MAX 2500 //2500mah rated battery capacity
+#define BAT_CAP_MAX 4400 //4400mah rated battery capacity
 
 
 /* === I2C ADDRESS == */

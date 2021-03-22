@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -28,49 +29,55 @@ endif
 
 -include ../makefile.defs
 
-BUILD_ARTIFACT_NAME := ece477-hts221demo
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := ece477-hts221-bq27441-vcnl4010
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-ece477-hts221demo.elf \
+ece477-hts221-bq27441-vcnl4010.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-ece477-hts221demo.list \
+ece477-hts221-bq27441-vcnl4010.list \
 
 OBJCOPY_BIN += \
-ece477-hts221demo.bin \
+ece477-hts221-bq27441-vcnl4010.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: ece477-hts221demo.elf secondary-outputs
+main-build: ece477-hts221-bq27441-vcnl4010.elf secondary-outputs
 
 # Tool invocations
-ece477-hts221demo.elf: $(OBJS) $(USER_OBJS) /Users/jimmysung/Documents/ece477-freshbyte/ece477-hts221demo/STM32L053C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "ece477-hts221demo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/jimmysung/Documents/ece477-freshbyte/ece477-hts221demo/STM32L053C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-hts221demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ece477-hts221-bq27441-vcnl4010.elf: $(OBJS) $(USER_OBJS) /Users/pacmanpark/Library/Mobile\ Documents/com~apple~CloudDocs/School/PU/ECE\ 477/Cube\ Workspace/ece477-freshbyte/ece477-hts221-bq27441-vcnl4010/STM32L053C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ece477-hts221-bq27441-vcnl4010.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-hts221-bq27441-vcnl4010/STM32L053C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-hts221-bq27441-vcnl4010.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-ece477-hts221demo.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "ece477-hts221demo.list"
+ece477-hts221-bq27441-vcnl4010.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "ece477-hts221-bq27441-vcnl4010.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-ece477-hts221demo.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "ece477-hts221demo.bin"
+ece477-hts221-bq27441-vcnl4010.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "ece477-hts221-bq27441-vcnl4010.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

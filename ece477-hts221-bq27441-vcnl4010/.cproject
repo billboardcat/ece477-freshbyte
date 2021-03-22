@@ -339,6 +339,20 @@
         	
     </storageModule>
     	
-    <storageModule moduleId="refreshScope"/>
+    <storageModule moduleId="refreshScope" versionNumber="2">
+        		
+        <configuration configurationName="Debug">
+            			
+            <resource resourceType="PROJECT" workspacePath="/ece477-hts221-bq27441-vcnl4010"/>
+            		
+        </configuration>
+        		
+        <configuration configurationName="Release">
+            			
+            <resource resourceType="PROJECT" workspacePath="/ece477-hts221-bq27441-vcnl4010"/>
+            		
+        </configuration>
+        	
+    </storageModule>
     
 </cproject>

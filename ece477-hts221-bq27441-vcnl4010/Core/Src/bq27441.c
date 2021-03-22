@@ -32,7 +32,7 @@ int bq_init(){
 		Design Energy should be set to be Design Capacity × 3.7 if using the bq27441-G1A or Design
 		Capacity × 3.8 if using the bq27441-G1B
 	*/
-	if (BQ27441_setDesignEnergy((uint16_t) ((float) BAT_CAP_MAX * 3.7)) != BAT_INIT_SUCCESS) return BAT_INIT_FAIL;
+//	if (BQ27441_setDesignEnergy((uint16_t) ((float) BAT_CAP_MAX * 3.7)) != BAT_INIT_SUCCESS) return BAT_INIT_FAIL;
 
 	/* === Set BQ Termination Voltage === */
 	/*

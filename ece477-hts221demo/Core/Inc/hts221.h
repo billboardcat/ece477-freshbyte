@@ -52,7 +52,7 @@ extern "C" {
 
 /* === REGISTER ADDRESS BITS === */
 // Let's just add the ones that we'll actually be using to keep it clean
-#define HTS_CTRL_REG1_PD 		(0x80)
+#define HTS_CTRL_REG1_PD 		(0x1 << 7)
 #define HTS_CTRL_REG1_BUD		(0x1 << 2)
 #define HTS_CTRL_REG2_ONE_SHOT	0x1
 
