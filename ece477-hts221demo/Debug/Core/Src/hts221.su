@@ -1,0 +1,5 @@
+hts221.c:18:11:hts221_init	80	static
+hts221.c:155:5:hts221_get_temp	72	static
+hts221.c:220:5:hts221_calc_temp	32	static
+hts221.c:229:5:hts221_get_humid	64	static
+hts221.c:286:5:hts221_calc_humid	32	static

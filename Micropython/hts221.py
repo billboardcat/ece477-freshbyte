@@ -62,7 +62,7 @@ class HTS:
         # TODO - signed?
         b_data = self.i2c.readfrom_mem(main_addr, sub_addr, num_bytes)
         # print("Addr: " + str(sub_addr))
-        nt("Read: " + str(b_data))
+        # print("Read: " + str(b_data))
         if signed:
             ret_int = ustruct.unpack("<h", b_data)[0]
             # print("Signed Ret Int: " + str(ret_int))

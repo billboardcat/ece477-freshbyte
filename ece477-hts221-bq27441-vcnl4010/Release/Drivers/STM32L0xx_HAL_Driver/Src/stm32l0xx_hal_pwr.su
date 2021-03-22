@@ -6,8 +6,8 @@ stm32l0xx_hal_pwr.c:399:6:HAL_PWR_EnablePVD	0	static
 stm32l0xx_hal_pwr.c:409:6:HAL_PWR_DisablePVD	0	static
 stm32l0xx_hal_pwr.c:425:6:HAL_PWR_EnableWakeUpPin	0	static
 stm32l0xx_hal_pwr.c:442:6:HAL_PWR_DisableWakeUpPin	0	static
-stm32l0xx_hal_pwr.c:465:6:HAL_PWR_EnterSLEEPMode	16	static,ignoring_inline_asm
-stm32l0xx_hal_pwr.c:546:6:HAL_PWR_EnterSTOPMode	16	static,ignoring_inline_asm
+stm32l0xx_hal_pwr.c:465:6:HAL_PWR_EnterSLEEPMode	20	static,ignoring_inline_asm
+stm32l0xx_hal_pwr.c:546:6:HAL_PWR_EnterSTOPMode	20	static,ignoring_inline_asm
 stm32l0xx_hal_pwr.c:615:6:HAL_PWR_EnterSTANDBYMode	0	static,ignoring_inline_asm
 stm32l0xx_hal_pwr.c:639:6:HAL_PWR_EnableSleepOnExit	0	static
 stm32l0xx_hal_pwr.c:652:6:HAL_PWR_DisableSleepOnExit	0	static

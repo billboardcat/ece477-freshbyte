@@ -18,11 +18,48 @@
 
 #define I2C hi2c1
 
+int hts221_reboot(){
+
+	HAL_StatusTypeDef ret;	// I2C return status
+	uint8_t buf[1];			// read buffer
+
+	/* === Reboot HTS221 === */
+
+	//read register
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	if (ret != HAL_OK) {
+		return HTS_REBOOT_FAIL;
+	}
+
+	//write boot bit
+	buf[0] |= HTS_CTRL_REG2_BOOT;
+	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	if (ret != HAL_OK) {
+		return HTS_REBOOT_FAIL;
+	}
+
+	//wait for device to restart + clear boot bit
+	do{
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		if (ret != HAL_OK) {
+			return HTS_REBOOT_FAIL;
+		}
+	} while (buf[0] & HTS_CTRL_REG2_BOOT);
+
+//	printf("Rebooted\n");
+
+	return HTS_REBOOT_SUCCESS;
+
+}
+
 HTS_Cal * hts221_init () {
 	//Returns NULL if not able to init object - remember to check after calling this function
 
 	HAL_StatusTypeDef ret;	// I2C return status
 	uint8_t buf[13];			// read buffer
+
+
+	hts221_reboot();
 
 	/* === Set HTS221 to wake mode === */
 	buf[0] = HTS_CTRL_REG1_PD | HTS_CTRL_REG1_BUD;
@@ -164,11 +201,24 @@ int hts221_get_temp(char unit, HTS_Cal * hts_cal_data){
 	int temp_adj;			// calibrated temperature value
 
 	/* === Start a temperature reading === */
-	buf[0] = HTS_CTRL_REG2_ONE_SHOT;
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	if (ret != HAL_OK) {
+		return TEMP_ERROR;
+	}
+
+	buf[0] |= HTS_CTRL_REG2_ONE_SHOT;
 	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
 		return TEMP_ERROR;
 	}
+
+	// wait for one shot bit to clear by the hts
+	do{
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		if (ret != HAL_OK) {
+			return TEMP_ERROR;
+		}
+	} while (buf[0] & HTS_CTRL_REG2_ONE_SHOT);
 
 
 	/* === Read in temperature data === */
@@ -235,11 +285,24 @@ int hts221_get_humid(HTS_Cal * hts_cal_data){
 	int humid_adj;			// calibrated temperature value
 
 	/* === Start a humidity reading === */
-	buf[0] = HTS_CTRL_REG2_ONE_SHOT;
+	ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+	if (ret != HAL_OK) {
+		return HUMID_ERROR;
+	}
+
+	buf[0] |= HTS_CTRL_REG2_ONE_SHOT;
 	ret = HAL_I2C_Mem_Write(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
 	if (ret != HAL_OK) {
 		return HUMID_ERROR;
 	}
+
+	// wait for one shot bit to clear by the hts
+	do{
+		ret = HAL_I2C_Mem_Read(&I2C, (HTS_ADDR << 1), HTS_CTRL_REG2, I2C_MEMADD_SIZE_8BIT, buf, 1, HAL_MAX_DELAY);
+		if (ret != HAL_OK) {
+			return HUMID_ERROR;
+		}
+	} while (buf[0] & HTS_CTRL_REG2_ONE_SHOT);
 
 
 	/* === Read in humidity data === */
@@ -287,3 +350,4 @@ int hts221_calc_humid(int16_t H_OUT, HTS_Cal * hts_cal_data){
 	return humid_adj;
 
 }
+
