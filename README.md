@@ -16,7 +16,7 @@ threshold of longevity has been reached.
 - [ ] An ability to read pressure sensor data to determine if food is in the box.
 - [ ] An ability to transmit data to external device for analysis over a WiFi connection.
 - [ ] An ability to read battery charge level data through I2C using a PMIC.
-- [ ] ability to show environmental conditions on the display.
+- [ ] An ability to show environmental conditions on the display.
 - [ ] An ability to wake the display using a proximity sensor.
 
 ## About the repository structure
