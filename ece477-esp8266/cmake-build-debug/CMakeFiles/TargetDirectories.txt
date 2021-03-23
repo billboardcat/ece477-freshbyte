@@ -1,0 +1,3 @@
+/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-esp8266/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-esp8266/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-esp8266/cmake-build-debug/CMakeFiles/ece477-esp8266.elf.dir
