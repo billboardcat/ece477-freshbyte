@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "serial_print.h"
+#include "at_commands.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,7 +99,13 @@ int main(void)
     serial_select(WIFI);
     serial_println("AT");
     HAL_Delay(50);
-    serial_printf("AT\n");
+//    serial_printf("AT\n");
+    if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
+      // try again
+    }
+    if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
+      // try again
+    }
     serial_select(DEBUG_PRINT);
     serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
 

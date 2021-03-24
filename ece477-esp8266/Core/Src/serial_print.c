@@ -121,7 +121,11 @@ void serial_printf(char format[], ...) {
 			case 'x': 
                 i = va_arg(arg,unsigned int); //Fetch Hexadecimal representation
                 serial_print(convert(i, 16));
-                break; 
+                break;
+
+      case '%':
+                serial_print("%");
+                break;
 		}	
 	} 
 
