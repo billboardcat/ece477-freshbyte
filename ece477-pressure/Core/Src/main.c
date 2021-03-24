@@ -44,7 +44,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-ADC_HandleTypeDef hadc1;
 
 /* USER CODE END PV */
 
@@ -94,24 +93,37 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint16_t raw = 0;
+  uint16_t pressure = 0;
+  uint16_t methane = 0;
+  //uint16_t check = 0;
 
-  HAL_ADC_Start(&hadc1);
-  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-  raw = HAL_ADC_GetValue(&hadc1);
-  HAL_ADC_Stop(&hadc1);
-
-  HAL_ADC_Start(&hadc1);
-  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-  raw = HAL_ADC_GetValue(&hadc1);
-  HAL_ADC_Stop(&hadc1);
   while(1){
-	  /* USER CODE END WHILE */
+	  ADC1->CHSELR = ADC_CHSELR_CHSEL0;
+	  HAL_ADC_Start(&hadc);
+	  HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
+	  pressure = HAL_ADC_GetValue(&hadc);
+	  HAL_ADC_Stop(&hadc);
 
-	  /*USER CODE BEGIN 3 */
+	  //if(HAL_ADC_Start(&hadc1) == HAL_OK){
+		  //check = 1;
+	  //}
+	  //if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY) == HAL_OK){
+	      //raw = HAL_ADC_GetValue(&hadc1);
+	  //}
+
+	  ADC1->CHSELR = ADC_CHSELR_CHSEL2;
+	  HAL_ADC_Start(&hadc);
+	  HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
+	  methane = HAL_ADC_GetValue(&hadc);
+	  HAL_ADC_Stop(&hadc);
+
+
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   }
-  /*USER CODE END 3 */
-
+  /* USER CODE END 3 */
+}
 
 /**
   * @brief System Clock Configuration
