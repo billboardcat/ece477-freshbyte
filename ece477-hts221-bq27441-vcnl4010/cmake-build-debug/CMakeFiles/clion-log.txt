@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-i2c-integrated-nucleo"
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-hts221-bq27441-vcnl4010"
 -- The C compiler identification is unknown
 -- The CXX compiler identification is unknown
 -- The ASM compiler identification is unknown
@@ -41,5 +41,5 @@ CMake Error at CMakeLists.txt:17 (project):
 
 -- Warning: Did not find file Compiler/-ASM
 -- Configuring incomplete, errors occurred!
-See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-i2c-integrated-nucleo/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-i2c-integrated-nucleo/cmake-build-debug/CMakeFiles/CMakeError.log".
+See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-hts221-bq27441-vcnl4010/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-hts221-bq27441-vcnl4010/cmake-build-debug/CMakeFiles/CMakeError.log".

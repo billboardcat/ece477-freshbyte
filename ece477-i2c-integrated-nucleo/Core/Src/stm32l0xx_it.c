@@ -51,6 +51,7 @@
 
 extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
+extern int state;
 
 /* USER CODE END PV */
 
@@ -151,6 +152,22 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles EXTI line 2 and line 3 interrupts.
+  */
+void EXTI2_3_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI2_3_IRQn 0 */
+
+  /* USER CODE END EXTI2_3_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
+  /* USER CODE BEGIN EXTI2_3_IRQn 1 */
+  VCNL4010_ack_ISR();
+  state = 1;
+//  serial_printf("state = %d\n", state);
+  /* USER CODE END EXTI2_3_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM6 global interrupt and DAC1/DAC2 underrun error interrupts.
   */
 void TIM6_DAC_IRQHandler(void)
@@ -162,6 +179,11 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
   if (hts_cal_data != NULL){
+
+    // TODO - delete this
+    VCNL4010_read8(VCNL4010_INTSTAT);
+    VCNL4010_read8(VCNL4010_INTCONTROL);
+
 	  uint16_t proximity = VCNL4010_readProximity();
 	  serial_printf("Proximity Reading is \t\t\t%d\r\n", proximity);
 

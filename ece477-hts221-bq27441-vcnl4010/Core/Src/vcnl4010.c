@@ -18,6 +18,48 @@
 
 /**************************************************************************/
 /*!
+    @brief  Enable threshold interrupt and set the threshold values
+*/
+/**************************************************************************/
+
+void VCNL4010_enable_Interrupt() {
+  VCNL4010_ack_ISR();
+  //Set INT_THRES_EN
+  uint8_t temp = VCNL4010_read8(VCNL4010_INTCONTROL);
+  temp &= 0xf0; //clear first 4 bits
+  temp |= 0x2; //set INT_THRES_EN bit
+  VCNL4010_write8(VCNL4010_INTCONTROL, temp);
+
+  //set low threshold - not really using... so set to 0.
+  VCNL4010_write16(VCNL4010_LOWTHRESHOLD, 0);
+
+  //set high threshold
+  VCNL4010_write16(VCNL4010_HITHRESHOLD, 30000);
+
+}
+
+/**************************************************************************/
+/*!
+    @brief  Clear Interrupt Status Register
+*/
+/**************************************************************************/
+
+void VCNL4010_ack_ISR() {
+  //Set INT_THRES_EN
+  uint8_t temp = VCNL4010_read8(VCNL4010_INTSTAT);
+  temp &= 0xf0; //clear first 4 bits
+  VCNL4010_write8(VCNL4010_INTCONTROL, temp);
+
+  //set low threshold - not really using... so set to 0.
+  VCNL4010_write16(VCNL4010_LOWTHRESHOLD, 0);
+
+  //set high threshold
+  VCNL4010_write16(VCNL4010_HITHRESHOLD, 30000);
+
+}
+
+/**************************************************************************/
+/*!
     @brief  Set the LED current.
     @param  current_10mA  Can be any value from 0 to 20, each number represents
    10 mA, so if you set it to 5, its 50mA. Minimum is 0 (0 mA, off), max is 20
@@ -108,6 +150,17 @@ uint16_t VCNL4010_readAmbient(void) {
 HAL_StatusTypeDef VCNL4010_write8(uint8_t subAddress, uint8_t data)
 {
 	return HAL_I2C_Mem_Write(&I2C, (VCNL4010_I2CADDR_DEFAULT << 1), subAddress, I2C_MEMADD_SIZE_8BIT, &data, 1, HAL_MAX_DELAY);
+
+}
+
+HAL_StatusTypeDef VCNL4010_write16(uint8_t subAddress, uint16_t data)
+{
+
+  uint8_t temp[2];
+  temp[0] = (uint8_t) 0xFF & (data >> 8); //high byte is stored first
+  temp[1] = (uint8_t) (0xFF & data);      //low byte is stored second
+
+  return HAL_I2C_Mem_Write(&I2C, (VCNL4010_I2CADDR_DEFAULT << 1), subAddress, I2C_MEMADD_SIZE_8BIT, temp, 2, HAL_MAX_DELAY);
 
 }
 

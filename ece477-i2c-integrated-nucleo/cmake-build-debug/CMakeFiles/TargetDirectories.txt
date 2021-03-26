@@ -1,3 +1,0 @@
-/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir

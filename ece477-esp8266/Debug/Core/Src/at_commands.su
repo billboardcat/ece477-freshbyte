@@ -1,2 +1,0 @@
-at_commands.c:8:5:setup_wifi	16	static
-at_commands.c:21:5:sent_freshbyte_data	40	static

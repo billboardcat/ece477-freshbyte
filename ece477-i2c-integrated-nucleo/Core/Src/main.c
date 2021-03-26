@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "hts221.h"
 #include "bq27441.h"
+#include "vcnl4010.h"
 #include "serial_print.h"
 /* USER CODE END Includes */
 
@@ -50,6 +51,9 @@
 /* USER CODE BEGIN PV */
 HTS_Cal * hts_cal_data;
 int bq_init_ret;
+
+//TODO - make this an enum? for battery state?
+int state = 0;
 
 /* USER CODE END PV */
 
@@ -103,9 +107,12 @@ int main(void)
 
   serial_clear();
   serial_println("Hello world\n\n");
+//  serial_printf("state = %d\n", state);
+
 
   hts_cal_data = hts221_init();
   bq_init_ret = bq_init();
+  VCNL4010_enable_Interrupt();
 
   HAL_TIM_Base_Start_IT(&htim6);
 
