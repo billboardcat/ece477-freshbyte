@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ece477-i2c-integrated-nucleo"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ece477-i2c-integrated-nucleo.elf">
+				<Option output="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/ece477-i2c-integrated-nucleo.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32L053xx"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Device/ST/STM32L0xx/Include"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1/arm-none-eabi"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1/backward"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/include"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/include-fixed"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 ece477-i2c-integrated-nucleo.elf"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ece477-i2c-integrated-nucleo.elf/fast">
+				<Option output="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/ece477-i2c-integrated-nucleo.elf" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDEBUG"/>
+					<Add option="-DUSE_HAL_DRIVER"/>
+					<Add option="-DSTM32L053xx"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Device/ST/STM32L0xx/Include"/>
+					<Add directory="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1/arm-none-eabi"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include/c++/10.2.1/backward"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/include"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/include-fixed"/>
+					<Add directory="/Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 ece477-i2c-integrated-nucleo.elf/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/BQ27441_Definitions.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/bq27441.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/gpio.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/hts221.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/i2c.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/main.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/serial_print.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/stm32l0xx_hal_conf.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/stm32l0xx_it.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/tim.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/usart.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Inc/vcnl4010.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/bq27441.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/gpio.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/hts221.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/i2c.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/main.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/serial_print.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/stm32l0xx_hal_msp.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/stm32l0xx_it.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/syscalls.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/sysmem.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/system_stm32l0xx.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/tim.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/usart.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Src/vcnl4010.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Core/Startup/startup_stm32l053r8tx.s">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l053xx.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_armcc.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_armclang.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_compiler.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_gcc.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_iccarm.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/cmsis_version.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_armv8mbl.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_armv8mml.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm0.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm0plus.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm1.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm23.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm3.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm33.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm4.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_cm7.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_sc000.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/core_sc300.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/mpu_armv7.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/mpu_armv8.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/CMSIS/Include/tz_context.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_exti.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/STM32L053R8TX_FLASH.ld">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/STM32CubeIDE/workspace_1.5.1/ece477-i2c-integrated-nucleo/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
