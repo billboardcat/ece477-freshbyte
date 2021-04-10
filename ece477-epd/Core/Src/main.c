@@ -139,14 +139,14 @@ int main(void)
     serial_println("Done!\n");
 
     /*** BITMAP ***/
-    serial_printf("Drawing bitmap to buffer... ");
-    draw_bitmap(0, 0, apple, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
-    serial_println("Done!");
-
-    serial_printf("Manually writing buffer to the display (for color)... ");
-    epd_powerUp();
-    write_RAM_to_epd(buffer1, buffer1_size, 1, false);
-    serial_println("Done!");
+//    serial_printf("Drawing bitmap to buffer... ");
+//    draw_bitmap(0, 0, apple, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
+//    serial_println("Done!");
+//
+//    serial_printf("Manually writing buffer to the display (for color)... ");
+//    epd_powerUp();
+//    write_RAM_to_epd(buffer1, buffer1_size, 1, false);
+//    serial_println("Done!");
 
     serial_printf("Clearing display buffers... ");
     clear_buffer();
@@ -165,14 +165,14 @@ int main(void)
     set_cursor(2,2);
     serial_println("Done!");
 
-	serial_printf("Printing to buffer... ");
-	char hello[] = "Hello world,\n\n      I'm FreshByte!";
-	printString(hello);
-    serial_println("Done!");
-
-	serial_printf("Writing buffer to the display... ");
-	display(false);
-    serial_println("Done!\n");
+//	serial_printf("Printing to buffer... ");
+//	char hello[] = "Hello world,\n\n      I'm FreshByte!";
+//	printString(hello);
+//    serial_println("Done!");
+//
+//	serial_printf("Writing buffer to the display... ");
+//	display(false);
+//    serial_println("Done!\n");
 
     serial_printf("Initial testing sequence done!\n\n");
 
@@ -183,33 +183,50 @@ int main(void)
     write_RAM_to_epd(buffer1, buffer1_size, 1, false);
     serial_println("Done!\n");
 
-    /*** MINI INTEGRATION ***/
-    serial_println("Starting Proximity Demo...\n");
-    set_text_scale(0);
+    serial_println("Printing random information to display\n");
+    set_text_scale(2);
     set_x_margin(2);
-    set_y_margin(2);
-    set_cursor(2,2);
+	set_y_margin(2);
+	set_cursor(2,2);
 
+	printString("4/10/2021, 12:00 PM\n");
+	printString("Battery: 90%\n");
+	printString("Temperature: 72 F\n");
+	printString("Rel. Humidity: 35%\n");
+	printString("Methane: 115 ppm\n\n");
+	printString("Food: Banana\n");
+	printString("Time Elapsed: 2 days\n");
+	printString("Est. Days Left: 7 days\n");
+
+	display(false);
+
+    /*** MINI INTEGRATION ***/
+//    serial_println("Starting Proximity Demo...\n");
+//    set_text_scale(0);
+//    set_x_margin(2);
+//    set_y_margin(2);
+//    set_cursor(2,2);
+//
 //    serial_printf("cursor: (%d, %d)\nmargin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
-
-    printString("Initializing proximity sensor...\n");
-    VCNL4010_setLEDcurrent(2);
+//
+//    printString("Initializing proximity sensor...\n");
+//    VCNL4010_setLEDcurrent(2);
 //    display(false);
 
 //    serial_printf("cursor: (%d, %d)\nmargin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
 
-    printString("-- IR LED Current: 20 mA\n");
+//    printString("-- IR LED Current: 20 mA\n");
+//    display(false);
+
+//    serial_printf("cursor: (%d, %d)\nmargin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
+//
+//    VCNL4010_setFrequency(VCNL4010_3_90625);
+//    printString("-- PROX Frequency: ~4 meas/sec\n\n");
 //    display(false);
 
 //    serial_printf("cursor: (%d, %d)\nmargin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
 
-    VCNL4010_setFrequency(VCNL4010_3_90625);
-    printString("-- PROX Frequency: ~4 meas/sec\n\n");
-    display(false);
-
-//    serial_printf("cursor: (%d, %d)\nmargin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
-
-    uint16_t temp;
+//    uint16_t temp;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -217,19 +234,19 @@ int main(void)
     while (1) {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
-    temp = VCNL4010_readAmbient();
-    serial_printf("AMBIENT (RAW): %d\n", temp);
-    printString("AMBIENT (RAW): ");
-    printUnsigned(temp, 10);
+//    temp = VCNL4010_readAmbient();
+//    serial_printf("AMBIENT (RAW): %d\n", temp);
+//    printString("AMBIENT (RAW): ");
+//    printUnsigned(temp, 10);
 
 //    serial_printf("Cursor: (%d, %d), Margin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
 
-    temp = VCNL4010_readProximity();
-    serial_printf("PROX (RAW): %d\n", temp);
-    printString("\nPROX (RAW): ");
-    printUnsigned(temp, 10);
-    printChar('\n');
-    display(false);
+//    temp = VCNL4010_readProximity();
+//    serial_printf("PROX (RAW): %d\n", temp);
+//    printString("\nPROX (RAW): ");
+//    printUnsigned(temp, 10);
+//    printChar('\n');
+//    display(false);
 //    serial_printf("Cursor: (%d, %d), Margin: %d\n\n", get_x_cursor(), get_y_cursor(), get_x_margin());
     }
   /* USER CODE END 3 */
