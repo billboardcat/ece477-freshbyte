@@ -22,6 +22,7 @@
 #include "adc.h"
 #include "gpio.h"
 #include "math.h"
+#include "unistd.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -95,29 +96,35 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   // code source: https://thestempedia.com/tutorials/interfacing-mq-4-gas-sensor-evive/
-  uint16_t methane = 0;
+  uint16_t methane;
+  int total = 0;
   float average;
   float voltage;
-  float rs_air;
+  float rs_air, rs_gas;
   float r0;
   float ratio;
   float m = -0.318;
   float b = 1.133;
+  int i;
 
-  HAL_ADC_Start(&hadc);
-  for(int i = 0; i < 500; i++)
+  for(i = 0; i < 500; i++)
   {
-	  HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
-	  methane += HAL_ADC_GetValue(&hadc);
+	  HAL_ADC_Start(&hadc);
+	  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
+	  methane = HAL_ADC_GetValue(&hadc);
+	  total += methane;
+	  HAL_ADC_Stop(&hadc);
+	  //sleep(1);
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
   }
-  HAL_ADC_Stop(&hadc);
 
-  average = methane / 500.0;
+
+  average = total / 500.0;
   voltage = average * (5.0 / 1023.0);
   rs_air = ((5.0 * 10.0) / voltage) - 10.0;
   r0 = rs_air / 4.4;
+  //serial_println("r0: %d", (int)r0);
 
   HAL_ADC_Start(&hadc);
   HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
@@ -130,7 +137,7 @@ int main(void)
 
   double ppm_log = (log10(ratio) - b) / m;     //Get ppm value in linear scale according to the the ratio value
   double ppm = pow(10, ppm_log);
-  printf("ppm: %d", (int)ppm);
+  //serial_println("ppm: %d", (int)ppm);
 
   /* USER CODE END 3 */
 }
