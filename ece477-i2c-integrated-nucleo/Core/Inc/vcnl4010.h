@@ -13,6 +13,9 @@
 
 #include "stm32l0xx_hal.h"
 
+#define VCNL4010_MAX_SENSOR_RDY_WAIT 100 ///number of HAL_Delay(1)'s on sensor read
+#define VCNL4010_FAIL 0xFFFF
+
 #define VCNL4010_I2CADDR_DEFAULT 0x13 ///< I2C address of the sensor
 
 /** Registers */
@@ -51,6 +54,9 @@ typedef enum {
 #define VCNL4010_AMBIENTREADY                                                  \
   0x40 ///< Read-only - Value = 1 when ambient light measurement data is
        ///< available
+#define VCNL4010_INT_THRES_EN 0x2
+#define VCNL4010_SELFTIMED_EN 0x1
+#define VCNL4010_PERIOD_PROX_EN 0x2
 
 /** Functions */
 void VCNL4010_setLEDcurrent(uint8_t current_10mA);
