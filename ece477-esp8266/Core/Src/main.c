@@ -110,12 +110,13 @@ int main(void)
     // try again
   }
 
-  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
-    serial_println("Error! Predicted Days");
-  }
 
   unsigned char * prediction_days = malloc(sizeof(char) * 15);
   prediction_days = receive_prediction(prediction_days);
+
+  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
+      serial_println("Error! Predicted Days");
+    }
 
   if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
     serial_println("Error! Printing string");

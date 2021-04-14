@@ -44,7 +44,6 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
 
 unsigned char * receive_prediction(unsigned char * prediction){
   //TODO - make this for the real dataset!
-  //  unsigned char size[5] = "test";
 
   serial_select(WIFI);
   serial_println("AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=17iTAwn0O4Kueubf5SyqEkfCmubj06RWgf51PDx4hfe0&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1");
@@ -90,7 +89,7 @@ unsigned char * extract_prediction(unsigned char * str, unsigned char * predicti
   if(flag==0)
   {
       //printf("Substring NOT found");
-    return -1;
+    return 0;
   }
 
   p1 += sizeof(sub) - 1; //add length of substring to now point to start of number
