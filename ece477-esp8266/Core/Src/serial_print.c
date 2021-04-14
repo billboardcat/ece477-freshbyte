@@ -68,6 +68,10 @@ void serial_putc(char c) {
     HAL_UART_Transmit(&serial_line, (unsigned char*) &c, 1, HAL_MAX_DELAY);
 }
 
+void serial_receive(char * str, int length) {
+  HAL_UART_Receive_DMA(&serial_line, str, length);
+}
+
 /*!
     @brief a version of printf implmented from http://www.firmcodes.com/write-printf-function-c/
 */

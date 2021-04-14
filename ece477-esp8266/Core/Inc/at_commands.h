@@ -6,5 +6,7 @@
 
 int setup_wifi(char * ssid, char * password);
 int sent_freshbyte_data(int temp_F, int humid, int methane);
+unsigned char * receive_prediction(unsigned char * prediction);
+unsigned char *  extract_prediction(unsigned char * str, unsigned char * prediction);
 
 #endif //ECE477_ESP8266_AT_COMMANDS_H
