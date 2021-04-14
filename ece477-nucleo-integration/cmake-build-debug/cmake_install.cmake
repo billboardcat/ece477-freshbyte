@@ -1,4 +1,4 @@
-# Install script for directory: /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration
+# Install script for directory: /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

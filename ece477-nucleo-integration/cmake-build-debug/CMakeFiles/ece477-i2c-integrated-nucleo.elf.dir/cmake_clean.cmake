@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/adc.c.obj"
   "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/bq27441.c.obj"
+  "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.obj"
   "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd.c.obj"
   "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd_gfx.c.obj"
   "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/glcdfont.c.obj"

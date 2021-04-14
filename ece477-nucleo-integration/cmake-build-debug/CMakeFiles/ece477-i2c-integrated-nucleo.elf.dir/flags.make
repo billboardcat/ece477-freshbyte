@@ -7,11 +7,11 @@ ASM_FLAGS = -g   -mcpu=cortex-m0 -mthumb -mthumb-interwork -ffunction-sections -
 
 ASM_DEFINES = -DDEBUG -DSTM32L053xx -DUSE_HAL_DRIVER
 
-ASM_INCLUDES = -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Core/Inc -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/CMSIS/Include 
+ASM_INCLUDES = -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Inc -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include 
 
 C_FLAGS = -g   -mcpu=cortex-m0 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g -std=gnu11
 
 C_DEFINES = -DDEBUG -DSTM32L053xx -DUSE_HAL_DRIVER
 
-C_INCLUDES = -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Core/Inc -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include -I/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/Drivers/CMSIS/Include 
+C_INCLUDES = -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Inc -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include -I/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include 
 

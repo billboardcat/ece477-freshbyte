@@ -68,10 +68,10 @@ RM = "/Users/jimmysung/Library/Application Support/JetBrains/Toolbox/apps/CLion/
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration
+CMAKE_SOURCE_DIR = /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug/CMakeFiles /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -196,6 +196,33 @@ Core/Src/bq27441.s: Core/Src/bq27441.c.s
 Core/Src/bq27441.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/bq27441.c.s
 .PHONY : Core/Src/bq27441.c.s
+
+Core/Src/dma.obj: Core/Src/dma.c.obj
+
+.PHONY : Core/Src/dma.obj
+
+# target to build an object file
+Core/Src/dma.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.obj
+.PHONY : Core/Src/dma.c.obj
+
+Core/Src/dma.i: Core/Src/dma.c.i
+
+.PHONY : Core/Src/dma.i
+
+# target to preprocess a source file
+Core/Src/dma.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.i
+.PHONY : Core/Src/dma.c.i
+
+Core/Src/dma.s: Core/Src/dma.c.s
+
+.PHONY : Core/Src/dma.s
+
+# target to generate assembly for a file
+Core/Src/dma.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.s
+.PHONY : Core/Src/dma.c.s
 
 Core/Src/epd.obj: Core/Src/epd.c.obj
 
@@ -1274,6 +1301,9 @@ help:
 	@echo "... Core/Src/bq27441.obj"
 	@echo "... Core/Src/bq27441.i"
 	@echo "... Core/Src/bq27441.s"
+	@echo "... Core/Src/dma.obj"
+	@echo "... Core/Src/dma.i"
+	@echo "... Core/Src/dma.s"
 	@echo "... Core/Src/epd.obj"
 	@echo "... Core/Src/epd.i"
 	@echo "... Core/Src/epd.s"

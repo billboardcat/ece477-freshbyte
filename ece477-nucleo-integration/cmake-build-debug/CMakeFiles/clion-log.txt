@@ -1,4 +1,4 @@
-"/Users/jimmysung/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7148.70/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration
+"/Users/jimmysung/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7148.70/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration
 -- The C compiler identification is GNU 10.2.1
 -- The CXX compiler identification is GNU 10.2.1
 -- The ASM compiler identification is GNU
@@ -18,4 +18,4 @@
 -- Minimal optimization, debug info included
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/cmake-build-debug
+-- Build files have been written to: /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug

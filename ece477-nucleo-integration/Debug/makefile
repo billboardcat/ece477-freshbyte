@@ -61,8 +61,8 @@ all: main-build
 main-build: ece477-nucleo-integration.elf secondary-outputs
 
 # Tool invocations
-ece477-nucleo-integration.elf: $(OBJS) $(USER_OBJS) /Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ece477-nucleo-integration.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/jimmysung/STM32CubeIDE/new_fucking_workspace/ece477-nucleo-integration/STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-nucleo-integration.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ece477-nucleo-integration.elf: $(OBJS) $(USER_OBJS) /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ece477-nucleo-integration.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-nucleo-integration.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
