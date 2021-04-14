@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
@@ -46,7 +47,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+unsigned char UART1_rxBuffer[600] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,26 +89,43 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 
-    serial_select(DEBUG_PRINT);
-    serial_clear();
-    serial_println("Hello world, this is a test of the new serial print functions!");
-    serial_select(WIFI);
-    serial_println("AT");
-    HAL_Delay(50);
+  serial_select(DEBUG_PRINT);
+  serial_clear();
+  serial_println("Hello world, this is a test of the new serial print functions!");
+  serial_select(WIFI);
+  serial_println("AT");
+  HAL_Delay(50);
 //    serial_printf("AT\n");
-    if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
-      // try again
-    }
-    if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
-      // try again
-    }
-    serial_select(DEBUG_PRINT);
-    serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
+  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
+    // try again
+  }
+  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
+    // try again
+  }
+
+  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
+    serial_println("Error! Predicted Days");
+  }
+
+  unsigned char * prediction_days = malloc(sizeof(char) * 15);
+  prediction_days = receive_prediction(prediction_days);
+
+  if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
+    serial_println("Error! Printing string");
+  }
+
+  serial_select(DEBUG_PRINT);
+  serial_clear();
+  serial_printf("Predicted Days: ");
+  serial_println(prediction_days);
+  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
 
   /* USER CODE END 2 */
 
@@ -172,6 +190,12 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+//  HAL_UART_Transmit(&huart2, UART1_rxBuffer, 600, 100);
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
+}
 
 /* USER CODE END 4 */
 
