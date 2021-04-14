@@ -1,0 +1,11 @@
+vcnl4010.c:25:6:VCNL4010_enable_Interrupt	24	static
+vcnl4010.c:53:6:VCNL4010_ack_ISR	24	static
+vcnl4010.c:70:6:VCNL4010_setLEDcurrent	16	static
+vcnl4010.c:84:9:VCNL4010_getLEDcurrent	8	static
+vcnl4010.c:97:6:VCNL4010_setFrequency	16	static
+vcnl4010.c:108:10:VCNL4010_readProximity	32	static
+vcnl4010.c:146:10:VCNL4010_readAmbient	24	static
+vcnl4010.c:166:19:VCNL4010_write8	32	static
+vcnl4010.c:172:19:VCNL4010_write16	40	static
+vcnl4010.c:183:9:VCNL4010_read8	48	static
+vcnl4010.c:190:10:VCNL4010_read16	48	static

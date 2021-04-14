@@ -23,11 +23,11 @@
 /**************************************************************************/
 
 void VCNL4010_enable_Interrupt() {
-  VCNL4010_ack_ISR();
+  VCNL4010_setLEDcurrent(20);
   //Set INT_THRES_EN
   uint8_t temp = VCNL4010_read8(VCNL4010_INTCONTROL);
   temp &= 0xf0; //clear first 4 bits
-  temp |= 0x2; //set INT_THRES_EN bit
+  temp |= VCNL4010_INT_THRES_EN; //set INT_THRES_EN bit
   VCNL4010_write8(VCNL4010_INTCONTROL, temp);
 
   //set low threshold - not really using... so set to 0.
@@ -35,6 +35,12 @@ void VCNL4010_enable_Interrupt() {
 
   //set high threshold
   VCNL4010_write16(VCNL4010_HITHRESHOLD, 2500);
+
+  //set proximity reading to be continuous
+  temp = VCNL4010_read8(VCNL4010_COMMAND);
+  temp |= VCNL4010_SELFTIMED_EN;
+  temp |= VCNL4010_PERIOD_PROX_EN;
+  VCNL4010_write8(VCNL4010_COMMAND, temp);
 
 }
 
@@ -47,8 +53,9 @@ void VCNL4010_enable_Interrupt() {
 void VCNL4010_ack_ISR() {
   //Set INT_THRES_EN
   uint8_t temp = VCNL4010_read8(VCNL4010_INTSTAT);
-  temp &= 0xfc; //clear first 2 bits
+  temp |= 0x0f; //clear 4 interrupt bits by writing 1???
   VCNL4010_write8(VCNL4010_INTSTAT, temp);
+
 }
 
 /**************************************************************************/
@@ -95,49 +102,65 @@ void VCNL4010_setFrequency(vcnl4010_freq freq) {
 /*!
     @brief  Get proximity measurement
     @return Raw 16-bit reading value, will vary with LED current, unit-less!
-    TODO - Fix infinite loop, add timeout!
 */
 /**************************************************************************/
 
 uint16_t VCNL4010_readProximity(void) {
   uint8_t i = VCNL4010_read8(VCNL4010_INTSTAT);
-  i &= ~0x80;
+  uint32_t attempts = 0;
+  i &= ~0x08;
   VCNL4010_write8(VCNL4010_INTSTAT, i);
 
-  VCNL4010_write8(VCNL4010_COMMAND, VCNL4010_MEASUREPROXIMITY);
-  while (1) {
+  uint8_t temp = VCNL4010_read8(VCNL4010_COMMAND);
+  //start one shot prox. reading
+  temp |= VCNL4010_MEASUREPROXIMITY;
+  //turn off continuous measurment
+  temp &= ~(VCNL4010_SELFTIMED_EN | VCNL4010_PERIOD_PROX_EN);
+  VCNL4010_write8(VCNL4010_COMMAND, temp);
+  while (attempts < VCNL4010_MAX_SENSOR_RDY_WAIT) {
     // Serial.println(read8(VCNL4010_INTSTAT), HEX);
     uint8_t result = VCNL4010_read8(VCNL4010_COMMAND);
     // Serial.print("Ready = 0x"); Serial.println(result, HEX);
     if (result & VCNL4010_PROXIMITYREADY) {
-      return VCNL4010_read16(VCNL4010_PROXIMITYDATA);
+      uint16_t retval = VCNL4010_read16(VCNL4010_PROXIMITYDATA);
+
+      //turn on continuous measurement
+      temp |= (VCNL4010_SELFTIMED_EN | VCNL4010_PERIOD_PROX_EN);
+      VCNL4010_write8(VCNL4010_COMMAND, temp);
+
+      return retval;
     }
-//    delay(1);
+    HAL_Delay(1);
+    attempts++;
   }
+  return VCNL4010_FAIL;
 }
 
 /**************************************************************************/
 /*!
     @brief  Get ambient light measurement
     @return Raw 16-bit reading value, unit-less!
-    TODO - Fix infinite loop, add timeout!
 */
 /**************************************************************************/
 
 uint16_t VCNL4010_readAmbient(void) {
+  uint32_t attempts = 0;
   uint8_t i = VCNL4010_read8(VCNL4010_INTSTAT);
   i &= ~0x40;
   VCNL4010_write8(VCNL4010_INTSTAT, i);
 
   VCNL4010_write8(VCNL4010_COMMAND, VCNL4010_MEASUREAMBIENT);
-  while (1) {
+  while (attempts < VCNL4010_MAX_SENSOR_RDY_WAIT) {
     // Serial.println(read8(VCNL4010_INTSTAT), HEX);
     uint8_t result = VCNL4010_read8(VCNL4010_COMMAND);
     // Serial.print("Ready = 0x"); Serial.println(result, HEX);
     if (result & VCNL4010_AMBIENTREADY) {
       return VCNL4010_read16(VCNL4010_AMBIENTDATA);
     }
+    HAL_Delay(1);
+    attempts++;
   }
+  return VCNL4010_FAIL;
 }
 
 HAL_StatusTypeDef VCNL4010_write8(uint8_t subAddress, uint8_t data)

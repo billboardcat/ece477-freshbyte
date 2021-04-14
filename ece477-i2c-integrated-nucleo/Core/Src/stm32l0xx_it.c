@@ -161,6 +161,7 @@ void EXTI2_3_IRQHandler(void)
   /* USER CODE END EXTI2_3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_3_IRQn 1 */
+  serial_println("\nEXTI Interrupt\n");
   VCNL4010_ack_ISR();
   state = 1;
 //  serial_printf("state = %d\n", state);
@@ -179,42 +180,40 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
   if (hts_cal_data != NULL){
-
-    // TODO - delete this
-    VCNL4010_read8(VCNL4010_INTSTAT);
-    VCNL4010_read8(VCNL4010_INTCONTROL);
-
-	  uint16_t proximity = VCNL4010_readProximity();
-	  serial_printf("Proximity Reading is \t\t\t%d\r\n", proximity);
-
+	  //temp
 	  int temp = hts221_get_temp('C', hts_cal_data);
 	  if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
 	  else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
-
+	  //humid
 	  int humid = hts221_get_humid(hts_cal_data);
 	  if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
 	  else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid,37);
-
-	  uint16_t voltage = BQ27441_voltage();
-	  uint16_t soc = BQ27441_soc(FILTERED);
-	  uint16_t current = BQ27441_current(AVG);
-	  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
-	  uint16_t cap_max = BQ27441_capacity(DESIGN);
-	  int16_t power = BQ27441_power(); //average draw
-	  uint16_t soh = BQ27441_soh(PERCENT);
-	  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
-	  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
-
-	  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
-	  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
-	  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
-	  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
-	  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
-	  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
-	  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
-	  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
-	  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
   }
+
+  	  //Prox.
+//  	  uint16_t proximity = VCNL4010_readProximity();
+//  	  serial_printf("Proximity Reading is \t\t\t%d\r\n", proximity);
+
+  	  //Battery Baby Sitter
+  	  uint16_t voltage = BQ27441_voltage();
+  	  uint16_t soc = BQ27441_soc(FILTERED);
+  	  uint16_t current = BQ27441_current(AVG);
+  	  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
+  	  uint16_t cap_max = BQ27441_capacity(DESIGN);
+  	  int16_t power = BQ27441_power(); //average draw
+  	  uint16_t soh = BQ27441_soh(PERCENT);
+  	  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
+  	  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
+
+  	  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
+  	  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
+  	  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
+  	  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
+  	  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
+  	  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
+  	  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
+  	  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
+  	  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }

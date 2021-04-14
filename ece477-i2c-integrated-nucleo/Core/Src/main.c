@@ -110,7 +110,7 @@ int main(void)
 //  serial_printf("state = %d\n", state);
 
 
-  hts_cal_data = hts221_init();
+//  hts_cal_data = hts221_init();
   bq_init_ret = bq_init();
   VCNL4010_enable_Interrupt();
 
