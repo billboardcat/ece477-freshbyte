@@ -1,7 +1,0 @@
-serial_print.c:11:7:convert	24	static
-serial_print.c:30:8:strlen	16	static
-serial_print.c:35:6:serial_clear	16	static
-serial_print.c:40:6:serial_print	16	static
-serial_print.c:44:6:serial_println	24	static
-serial_print.c:50:6:serial_putc	16	static
-serial_print.c:57:6:serial_printf	32	static
