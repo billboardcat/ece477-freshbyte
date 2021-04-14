@@ -194,8 +194,29 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char* fruit;
   while (1)
   {
+	  if(HAL_GPIO_ReadPin(GPIOA, BTN_1) == GPIO_PIN_SET)
+	  {
+	  fruit = "apple";
+	  }
+	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_2) == GPIO_PIN_SET)
+	  {
+	  fruit = "banana";
+	  }
+	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_3) == GPIO_PIN_SET)
+	  {
+	  fruit = "lemon";
+	  }
+	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_4) == GPIO_PIN_SET)
+	  {
+	  fruit = "mango";
+	  }
+	  else
+	  {
+	  // do nothing
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -62,6 +62,14 @@ void Error_Handler(void);
 #define EPD_DC_GPIO_Port GPIOC
 #define SRAM_CS_Pin GPIO_PIN_9
 #define SRAM_CS_GPIO_Port GPIOA
+#define BTN_4_Pin GPIO_PIN_10
+#define BTN_4_GPIO_Port GPIOA
+#define BTN_3_Pin GPIO_PIN_11
+#define BTN_3_GPIO_Port GPIOA
+#define BTN_2_Pin GPIO_PIN_12
+#define BTN_2_GPIO_Port GPIOA
+#define BTN_1_Pin GPIO_PIN_13
+#define BTN_1_GPIO_Port GPIOA
 #define GREEN_LED_Pin GPIO_PIN_4
 #define GREEN_LED_GPIO_Port GPIOB
 #define RED_LED_Pin GPIO_PIN_5
