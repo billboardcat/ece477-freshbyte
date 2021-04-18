@@ -56,6 +56,8 @@ extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
 extern int state;
 
+uint8_t button_history[] = {0, 0, 0, 0};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,6 +73,7 @@ extern int state;
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_adc;
 extern ADC_HandleTypeDef hadc;
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 /* USER CODE BEGIN EV */
 extern uint32_t * adc_readings;
@@ -85,7 +88,7 @@ extern uint32_t * adc_readings;
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-
+    serial_println("NMI_Handler: something's not being handled right!");
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
   while (1)
@@ -100,7 +103,7 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-
+    serial_println("HardFault_Handler: hard fault occurred!!!");
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
@@ -252,6 +255,70 @@ void ADC1_COMP_IRQHandler(void)
   /* USER CODE BEGIN ADC1_COMP_IRQn 1 */
 
   /* USER CODE END ADC1_COMP_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+    GPIOA->BSRR |= GPIO_BSRR_BS_8;
+
+//    serial_printf("GPIOA_IDR = 0x%x\n", GPIOA->IDR);
+//    for (int i = 0; i < 4; i++) {
+//        serial_printf("button_history[%d] = 0x%x\n", i, button_history[i]);
+//    }
+
+//    serial_println(" ");
+    if (GPIOA->IDR & GPIO_IDR_ID10_Msk) {
+        button_history[0] = (button_history[0] << 1) | 1;
+    } else {
+        button_history[0] = (button_history[0] >> 1);
+    }
+
+    if (GPIOA->IDR & GPIO_IDR_ID11_Msk) {
+        button_history[1] = (button_history[1] << 1) | 1;
+    } else {
+        button_history[1] = (button_history[1] >> 1);
+    }
+
+    if (GPIOA->IDR & GPIO_IDR_ID12_Msk) {
+        button_history[2] = (button_history[2] << 1) | 1;
+    } else {
+        button_history[2] = (button_history[2] >> 1);
+    }
+
+    if (GPIOA->IDR & GPIO_IDR_ID13_Msk) {
+        button_history[3] = (button_history[3] << 1) | 1;
+    } else {
+        button_history[3] = (button_history[3] >> 1);
+    }
+
+    GPIOA->BSRR |= GPIO_BSRR_BR_8;
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+    uint8_t pressed_mask = 0xFF;
+
+    if (button_history[0] == pressed_mask) {
+        serial_println("apple");
+    }
+
+    if (button_history[1] == pressed_mask) {
+        serial_println("banana");
+    }
+
+    if (button_history[2] == pressed_mask) {
+        serial_println("lemon");
+    }
+
+    if (button_history[3] == pressed_mask) {
+        serial_println("mango");
+    }
+  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**

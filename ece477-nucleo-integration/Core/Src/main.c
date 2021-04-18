@@ -168,6 +168,7 @@ int main(void)
   MX_TIM6_Init();
   MX_SPI1_Init();
   MX_ADC_Init();
+  MX_TIM2_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -176,47 +177,27 @@ int main(void)
   serial_clear();
   serial_println("Hello world\n");
 
-  serial_printf("Initializing I2C peripherals... ");
-  hts_cal_data = hts221_init();
-  bq_init_ret = bq_init();
-  VCNL4010_setLEDcurrent(5);
-  VCNL4010_enable_Interrupt();
-  serial_println("Done!");
+//  serial_printf("Initializing I2C peripherals... ");
+//  hts_cal_data = hts221_init();
+//  bq_init_ret = bq_init();
+//  VCNL4010_setLEDcurrent(5);
+//  VCNL4010_enable_Interrupt();
+//  serial_println("Done!");
 
 //  display_setup();
 
-  HAL_TIM_Base_Start_IT(&htim6);
+//  HAL_TIM_Base_Start_IT(&htim6);
+    HAL_TIM_Base_Start_IT(&htim2);
 
 //  HAL_ADC_Start(&hadc);
-  HAL_ADC_Start_DMA(&hadc, adc_readings, 2);
+//  HAL_ADC_Start_DMA(&hadc, adc_readings, 2);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char* fruit;
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(GPIOA, BTN_1) == GPIO_PIN_SET)
-	  {
-	  fruit = "apple";
-	  }
-	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_2) == GPIO_PIN_SET)
-	  {
-	  fruit = "banana";
-	  }
-	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_3) == GPIO_PIN_SET)
-	  {
-	  fruit = "lemon";
-	  }
-	  else if(HAL_GPIO_ReadPin(GPIOA, BTN_4) == GPIO_PIN_SET)
-	  {
-	  fruit = "mango";
-	  }
-	  else
-	  {
-	  // do nothing
-	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -282,6 +263,9 @@ static void MX_NVIC_Init(void)
   /* TIM6_DAC_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+  /* TIM2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM2_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

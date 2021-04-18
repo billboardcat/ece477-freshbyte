@@ -225,4 +225,3 @@ ProjectManager.LibraryCopy=1
 PA3.GPIO_Label=ADC_TOUCH_Y
 PB1.GPIOParameters=GPIO_Label
 PA7.Signal=SPI1_MOSI
-isbadioc=false
