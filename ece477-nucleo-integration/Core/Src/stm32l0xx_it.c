@@ -199,18 +199,18 @@ void EXTI2_3_IRQHandler(void)
       printString(" \n");
   }
 
-//    uint16_t voltage = BQ27441_voltage();
-//    uint16_t soc = BQ27441_soc(FILTERED);
-//    uint16_t current = BQ27441_current(AVG);
-//    uint16_t cap_remaining = BQ27441_capacity(REMAIN);
-//    uint16_t cap_max = BQ27441_capacity(DESIGN);
-//    int16_t power = BQ27441_power(); //average draw
-//    uint16_t soh = BQ27441_soh(PERCENT);
-//    uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
-//    uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
-//    serial_printf("Done!\n");
-//
-//    serial_printf("Printing readings... ");
+    uint16_t voltage = BQ27441_voltage();
+    uint16_t soc = BQ27441_soc(FILTERED);
+    uint16_t current = BQ27441_current(AVG);
+    uint16_t cap_remaining = BQ27441_capacity(REMAIN);
+    uint16_t cap_max = BQ27441_capacity(DESIGN);
+    int16_t power = BQ27441_power(); //average draw
+    uint16_t soh = BQ27441_soh(PERCENT);
+    uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
+    uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
+    serial_printf("Done!\n");
+
+    serial_printf("Printing readings... ");
 //    printString("CHARGE: "); printUnsigned(soc, 10); printString(" / 100\n");
 //    printString("BATT V: "); printUnsigned(voltage, 10); printString(" mV\n");
 //    printString("CURR: "); printUnsigned(current, 10); printString(" mA\n");
@@ -220,7 +220,7 @@ void EXTI2_3_IRQHandler(void)
 //    printString("HEALTH: "); printUnsigned(soh, 10); printString("\n");
 //    printString("BATT TEMP: "); printUnsigned(temp_bat, 10); printString(" K \n");
 //    printString("IC TEMP: "); printUnsigned(temp_bq_IC, 10); printString(" K \n");
-//    serial_printf("Done!\n");
+    serial_printf("Done!\n");
 
     serial_printf("Updating display... ");
 //    display(false);
@@ -272,11 +272,13 @@ void TIM2_IRQHandler(void)
 //    }
 
 //    serial_println(" ");
-    if (GPIOA->IDR & GPIO_IDR_ID10_Msk) {
-        button_history[0] = (button_history[0] << 1) | 1;
-    } else {
-        button_history[0] = (button_history[0] >> 1);
-    }
+
+//    TODO - need to renable this for buttons
+//    if (GPIOA->IDR & GPIO_IDR_ID10_Msk) {
+//        button_history[0] = (button_history[0] << 1) | 1;
+//    } else {
+//        button_history[0] = (button_history[0] >> 1);
+//    }
 
     if (GPIOA->IDR & GPIO_IDR_ID11_Msk) {
         button_history[1] = (button_history[1] << 1) | 1;

@@ -35,6 +35,7 @@
 #include "serial_print.h"
 #include "epd.h"
 #include "epd_gfx.h"
+#include "at_commands.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +55,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+unsigned char UART1_rxBuffer[600] = {0};
+
 HTS_Cal * hts_cal_data;
 int bq_init_ret;
 
@@ -169,20 +172,82 @@ int main(void)
   MX_SPI1_Init();
   MX_ADC_Init();
   MX_TIM2_Init();
+  MX_USART1_UART_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
-  serial_clear();
-  serial_println("Hello world\n");
+  //Start Receive Buffer From ESP 8266
+//  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
+//
+//  serial_clear();
+//  serial_select(DEBUG_PRINT);
+//  serial_println("Hello world\n");
+//
+//  serial_select(DEBUG_PRINT);
+//  serial_clear();
+//  serial_println("Hello world, this is a test of the new serial print functions!");
+//  serial_select(WIFI);
+//  serial_println("AT");
+//  HAL_Delay(50);
+////    serial_printf("AT\n");
+//  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
+//    // try again
+//  }
+//  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
+//    // try again
+//  }
+//
+//
+//  unsigned char * prediction_days = malloc(sizeof(char) * 15);
+//  prediction_days = receive_prediction(prediction_days);
+//
+//  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
+//    serial_println("Error! Predicted Days");
+//  }
+//
+//  if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
+//    serial_println("Error! Printing string");
+//  }
+//
+//  serial_select(DEBUG_PRINT);
+//  serial_clear();
+//  serial_printf("Predicted Days: ");
+//  serial_printf("%s\n", prediction_days);
+//  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
 
-//  serial_printf("Initializing I2C peripherals... ");
-//  hts_cal_data = hts221_init();
-//  bq_init_ret = bq_init();
-//  VCNL4010_setLEDcurrent(5);
-//  VCNL4010_enable_Interrupt();
-//  serial_println("Done!");
+
+  // I2C Peripherals
+  serial_select(DEBUG_PRINT);
+  serial_clear();
+
+  serial_printf("Initializing I2C peripherals... ");
+  hts_cal_data = hts221_init();
+  bq_init_ret = bq_init();
+  VCNL4010_setLEDcurrent(5);
+  VCNL4010_enable_Interrupt();
+  serial_println("Done!");
+
+  uint16_t voltage = BQ27441_voltage();
+  uint16_t soc = BQ27441_soc(FILTERED);
+  uint16_t current = BQ27441_current(AVG);
+  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
+  uint16_t cap_max = BQ27441_capacity(DESIGN);
+  int16_t power = BQ27441_power(); //average draw
+  uint16_t soh = BQ27441_soh(PERCENT);
+  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
+  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
+
+  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
+  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
+  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
+  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
+  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
+  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
+  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
+  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
+  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n", temp_bq_IC);
 
 //  display_setup();
 
@@ -245,7 +310,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_USART2
+                              |RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
@@ -269,6 +336,11 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+  //once buffer is full - restart
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
+}
+
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc) {
     serial_printf("Buffer is half full!\n");
 //    HAL_DMA_IRQHandler(&hdma_adc);

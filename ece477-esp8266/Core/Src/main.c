@@ -194,7 +194,7 @@ void SystemClock_Config(void)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-//  HAL_UART_Transmit(&huart2, UART1_rxBuffer, 600, 100);
+  //once buffer is full - restart
   HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 }
 
