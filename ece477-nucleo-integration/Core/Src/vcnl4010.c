@@ -18,6 +18,21 @@
 
 /**************************************************************************/
 /*!
+    @brief  Disable threshold interrupt and set the threshold values
+*/
+/**************************************************************************/
+
+void VCNL4010_disable_Interrupt() {
+  VCNL4010_ack_ISR();
+  //Unset INT_THRES_EN
+  uint8_t temp = VCNL4010_read8(VCNL4010_INTCONTROL);
+  temp &= 0xf0; //clear first 4 bits - clear all interrupt bits
+  VCNL4010_write8(VCNL4010_INTCONTROL, temp);
+
+}
+
+/**************************************************************************/
+/*!
     @brief  Enable threshold interrupt and set the threshold values
 */
 /**************************************************************************/
@@ -34,7 +49,7 @@ void VCNL4010_enable_Interrupt() {
   VCNL4010_write16(VCNL4010_LOWTHRESHOLD, 0);
 
 //  uint16_t threshold = ((22000 & 0xFF00) >> 8) | ((22000 & 0xFF) << 8);
-    uint16_t threshold = 2500;
+    uint16_t threshold = 2300;
 
   //set high threshold
     VCNL4010_write16(VCNL4010_HITHRESHOLD, threshold);

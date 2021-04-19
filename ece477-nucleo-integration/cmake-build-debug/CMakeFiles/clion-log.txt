@@ -1,45 +1,19 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-nucleo-integration"
--- The C compiler identification is unknown
--- The CXX compiler identification is unknown
--- The ASM compiler identification is unknown
--- Found assembler: arm-none-eabi-gcc
-CMake Error at CMakeLists.txt:17 (project):
-  The CMAKE_C_COMPILER:
-
-    arm-none-eabi-gcc
-
-  is not a full path and was not found in the PATH.
-
-  Tell CMake where to find the compiler by setting either the environment
-  variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the full path to
-  the compiler, or to the compiler name if it is in the PATH.
-
-
-CMake Error at CMakeLists.txt:17 (project):
-  The CMAKE_CXX_COMPILER:
-
-    arm-none-eabi-g++
-
-  is not a full path and was not found in the PATH.
-
-  Tell CMake where to find the compiler by setting either the environment
-  variable "CXX" or the CMake cache entry CMAKE_CXX_COMPILER to the full path
-  to the compiler, or to the compiler name if it is in the PATH.
-
-
-CMake Error at CMakeLists.txt:17 (project):
-  The CMAKE_ASM_COMPILER:
-
-    arm-none-eabi-gcc
-
-  is not a full path and was not found in the PATH.
-
-  Tell CMake where to find the compiler by setting either the environment
-  variable "ASM" or the CMake cache entry CMAKE_ASM_COMPILER to the full path
-  to the compiler, or to the compiler name if it is in the PATH.
-
-
--- Warning: Did not find file Compiler/-ASM
--- Configuring incomplete, errors occurred!
-See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-See also "/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/CMakeError.log".
+"/Users/jimmysung/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+-- The ASM compiler identification is GNU
+-- Found assembler: /Applications/ARM/bin/arm-none-eabi-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/ARM/bin/arm-none-eabi-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/ARM/bin/arm-none-eabi-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Minimal optimization, debug info included
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug

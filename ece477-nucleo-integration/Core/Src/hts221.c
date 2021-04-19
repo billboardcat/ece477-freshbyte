@@ -46,7 +46,7 @@ int hts221_reboot() {
         }
     } while (buf[0] & HTS_CTRL_REG2_BOOT);
 
-	serial_println("Rebooted\n");
+//	serial_println("Rebooted\n");
 
     return HTS_REBOOT_SUCCESS;
 

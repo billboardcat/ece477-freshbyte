@@ -1,0 +1,3 @@
+/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/cmake-build-debug/CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir

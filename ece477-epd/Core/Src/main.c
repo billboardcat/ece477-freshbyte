@@ -139,14 +139,15 @@ int main(void)
     serial_println("Done!\n");
 
     /*** BITMAP ***/
-//    serial_printf("Drawing bitmap to buffer... ");
-//    draw_bitmap(0, 0, apple, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
-//    serial_println("Done!");
-//
-//    serial_printf("Manually writing buffer to the display (for color)... ");
-//    epd_powerUp();
-//    write_RAM_to_epd(buffer1, buffer1_size, 1, false);
-//    serial_println("Done!");
+    serial_printf("Drawing bitmap to buffer... ");
+    draw_bitmap(0, 0, apple, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
+    serial_println("Done!");
+
+    serial_printf("Manually writing buffer to the display (for color)... ");
+    epd_powerUp();
+    write_RAM_to_epd(buffer1, buffer1_size, 1, false);
+    display(false);
+    serial_println("Done!");
 
     serial_printf("Clearing display buffers... ");
     clear_buffer();

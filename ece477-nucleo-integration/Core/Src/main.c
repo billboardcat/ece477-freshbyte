@@ -36,6 +36,7 @@
 #include "epd.h"
 #include "epd_gfx.h"
 #include "at_commands.h"
+#include "main_gui.c"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,8 +65,6 @@ int bq_init_ret;
 int state = 0;
 uint32_t adc_readings[] = {0, 0};
 
-extern uint8_t *buffer1;
-extern uint32_t buffer1_size;
 extern DMA_HandleTypeDef hdma_adc;
 
 /* USER CODE END PV */
@@ -93,14 +92,13 @@ void display_setup() {
   epd_powerUp();
   write_RAM_to_epd(buffer1, buffer1_size, 1, false);
   display(false);
+  serial_println("Done!");
+
+  serial_printf("Drawing bitmap to buffer... ");
+  draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
+  display(false);
   serial_println("Done!\n");
 
-  set_text_scale(0);
-  set_x_margin(2);
-  set_y_margin(2);
-  set_cursor(2,2);
-  printString("Initializing Peripherals...");
-  display(false);
 }
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
@@ -179,56 +177,63 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   //Start Receive Buffer From ESP 8266
-//  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
-//
-//  serial_clear();
-//  serial_select(DEBUG_PRINT);
-//  serial_println("Hello world\n");
-//
-//  serial_select(DEBUG_PRINT);
-//  serial_clear();
-//  serial_println("Hello world, this is a test of the new serial print functions!");
-//  serial_select(WIFI);
-//  serial_println("AT");
-//  HAL_Delay(50);
-////    serial_printf("AT\n");
-//  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
-//    // try again
-//  }
-//  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
-//    // try again
-//  }
-//
-//
-//  unsigned char * prediction_days = malloc(sizeof(char) * 15);
-//  prediction_days = receive_prediction(prediction_days);
-//
-//  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
-//    serial_println("Error! Predicted Days");
-//  }
-//
-//  if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
-//    serial_println("Error! Printing string");
-//  }
-//
-//  serial_select(DEBUG_PRINT);
-//  serial_clear();
-//  serial_printf("Predicted Days: ");
-//  serial_printf("%s\n", prediction_days);
-//  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
+  /*
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 
+  serial_clear();
+  serial_select(DEBUG_PRINT);
+  serial_println("Hello world\n");
 
-  // I2C Peripherals
   serial_select(DEBUG_PRINT);
   serial_clear();
+  serial_println("Hello world, this is a test of the new serial print functions!");
+  serial_select(WIFI);
+
+//    serial_printf("AT\n");
+  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
+    // try again
+  }
+  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
+    // try again
+  }
+
+
+  unsigned char * prediction_days = malloc(sizeof(char) * 15);
+  prediction_days = receive_prediction(prediction_days);
+
+  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
+    serial_println("Error! Predicted Days");
+  }
+
+  if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
+    serial_println("Error! Printing string");
+  }
+
+  serial_select(DEBUG_PRINT);
+  serial_clear();
+  serial_printf("Predicted Days: ");
+  serial_printf("%s\n", prediction_days);
+  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
+*/
+
+  // Clear the serial debug terminal
+  serial_select(DEBUG_PRINT);
+  serial_clear();
+  epd_init(false);
+
+  // Disable prox interrupt while refreshing display
+  VCNL4010_disable_Interrupt();
+
+//  display_setup();
 
   serial_printf("Initializing I2C peripherals... ");
   hts_cal_data = hts221_init();
-  bq_init_ret = bq_init();
-  VCNL4010_setLEDcurrent(5);
+//  bq_init_ret = bq_init();
+  VCNL4010_setLEDcurrent(20);
   VCNL4010_enable_Interrupt();
   serial_println("Done!");
 
+  /*
   uint16_t voltage = BQ27441_voltage();
   uint16_t soc = BQ27441_soc(FILTERED);
   uint16_t current = BQ27441_current(AVG);
@@ -248,11 +253,10 @@ int main(void)
   serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
   serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
   serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n", temp_bq_IC);
+   */
 
-//  display_setup();
-
-//  HAL_TIM_Base_Start_IT(&htim6);
-    HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim6);
+  HAL_TIM_Base_Start_IT(&htim2);
 
 //  HAL_ADC_Start(&hadc);
 //  HAL_ADC_Start_DMA(&hadc, adc_readings, 2);

@@ -65,6 +65,7 @@ uint8_t VCNL4010_read8(uint8_t subAddress);
 uint16_t VCNL4010_read16(uint8_t subAddress);
 
 void VCNL4010_enable_Interrupt();
+void VCNL4010_disable_Interrupt();
 void VCNL4010_ack_ISR();
 
 #endif /* SRC_VCNL4010_H_ */

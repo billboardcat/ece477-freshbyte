@@ -99,9 +99,10 @@ unsigned char * extract_prediction(unsigned char * str, unsigned char * predicti
   //hack for now ...
   //TODO fix this
   p2 = p1;
-  while (*p2 != ']'){
+  while (*p2 != '.'){
     p2++;
   }
+  p2++; //go one character after the decimal point
   int prediction_str_len = p2 - p1;
   strncpy(prediction, p1, prediction_str_len);
 

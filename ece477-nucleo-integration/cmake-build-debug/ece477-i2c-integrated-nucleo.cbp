@@ -105,6 +105,9 @@
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Inc/adc.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Inc/at_commands.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Inc/bq27441.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
@@ -154,6 +157,9 @@
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Src/adc.c">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Src/at_commands.c">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Core/Src/bq27441.c">
@@ -225,46 +231,91 @@
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/.DS_Store">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l053xx 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l053xx.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_armcc 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_armcc.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_armclang 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_armclang.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_compiler 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_compiler.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_gcc 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_gcc.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_iccarm 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_iccarm.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_version 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/cmsis_version.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_armv8mbl 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_armv8mbl.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_armv8mml 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_armv8mml.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm0 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm0.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm0plus 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm0plus.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm1 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm1.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm23 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm23.h">
@@ -276,10 +327,19 @@
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm33.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm4 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm4.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm7 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_cm7.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_sc000 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/core_sc000.h">
@@ -291,7 +351,13 @@
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/mpu_armv7.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/mpu_armv8 2.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/mpu_armv8.h">
+			<Option target="ece477-i2c-integrated-nucleo.elf"/>
+		</Unit>
+		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/tz_context 2.h">
 			<Option target="ece477-i2c-integrated-nucleo.elf"/>
 		</Unit>
 		<Unit filename="/Users/jimmysung/Documents/ece477-freshbyte/ece477-nucleo-integration/Drivers/CMSIS/Include/tz_context.h">

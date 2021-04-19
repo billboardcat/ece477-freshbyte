@@ -31,6 +31,7 @@
 #include "epd_gfx.h"
 #include "epd.h"
 #include "adc.h"
+#include "at_commands.h"
 
 /* USER CODE END Includes */
 
@@ -62,7 +63,7 @@ uint8_t button_history[] = {0, 0, 0, 0};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-
+void display_readings(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -77,6 +78,8 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 /* USER CODE BEGIN EV */
 extern uint32_t * adc_readings;
+//extern uint8_t *buffer1;
+//extern uint32_t buffer1_size;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -166,38 +169,37 @@ void EXTI2_3_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI2_3_IRQn 0 */
 
-  /* USER CODE END EXTI2_3_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
-  /* USER CODE BEGIN EXTI2_3_IRQn 1 */
-  serial_printf("==EXTI2 - PROX INT==\n");
-  VCNL4010_ack_ISR();
-  state = 1;
+    //Prox. Sensor Interrupt
 
-  serial_printf("Getting readings... ");
-  set_cursor(2,2);
-  printString("EXTI2_3_IRQHandler: PROX INT TRIG'D\n");
-  uint16_t proximity = VCNL4010_readProximity();
-  printString("PROX (RAW): "); printUnsigned(proximity, 10); printString("\n");
+    serial_printf("==EXTI2 - PROX INT==\n");
+    VCNL4010_ack_ISR();
+    state = 1;
 
-  int temp = hts221_get_temp('C', hts_cal_data);
-  if (temp == TEMP_ERROR) {
-      printString("ERR READING TEMP\n");
-  }
-  else {
-      printString("TEMP: ");
-      printUnsigned(temp, 10);
-      printString(" deg C\n");
-  }
+    serial_printf("Getting readings... ");
+    set_cursor(2,2);
+    printString("EXTI2_3_IRQHandler: PROX INT TRIG'D\n");
+    uint16_t proximity = VCNL4010_readProximity();
+    printString("PROX (RAW): "); printUnsigned(proximity, 10); printString("\n");
 
-  int humid = hts221_get_humid(hts_cal_data);
-  if (humid == HUMID_ERROR) {
-      printString("ERR READING RH\n");
-  }
-  else {
-      printString("RH: ");
-      printUnsigned(humid, 10);
-      printString(" \n");
-  }
+    int temp = hts221_get_temp('C', hts_cal_data);
+    if (temp == TEMP_ERROR) {
+        printString("ERR READING TEMP\n");
+    }
+    else {
+        printString("TEMP: ");
+        printUnsigned(temp, 10);
+        printString(" deg C\n");
+    }
+
+    int humid = hts221_get_humid(hts_cal_data);
+    if (humid == HUMID_ERROR) {
+        printString("ERR READING RH\n");
+    }
+    else {
+        printString("RH: ");
+        printUnsigned(humid, 10);
+        printString(" \n");
+    }
 
     uint16_t voltage = BQ27441_voltage();
     uint16_t soc = BQ27441_soc(FILTERED);
@@ -225,6 +227,10 @@ void EXTI2_3_IRQHandler(void)
     serial_printf("Updating display... ");
 //    display(false);
     serial_printf("Done!\n\n");
+
+  /* USER CODE END EXTI2_3_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
+  /* USER CODE BEGIN EXTI2_3_IRQn 1 */
 
   /* USER CODE END EXTI2_3_IRQn 1 */
 }
@@ -280,46 +286,46 @@ void TIM2_IRQHandler(void)
 //        button_history[0] = (button_history[0] >> 1);
 //    }
 
-    if (GPIOA->IDR & GPIO_IDR_ID11_Msk) {
-        button_history[1] = (button_history[1] << 1) | 1;
-    } else {
-        button_history[1] = (button_history[1] >> 1);
-    }
-
-    if (GPIOA->IDR & GPIO_IDR_ID12_Msk) {
-        button_history[2] = (button_history[2] << 1) | 1;
-    } else {
-        button_history[2] = (button_history[2] >> 1);
-    }
-
-    if (GPIOA->IDR & GPIO_IDR_ID13_Msk) {
-        button_history[3] = (button_history[3] << 1) | 1;
-    } else {
-        button_history[3] = (button_history[3] >> 1);
-    }
-
-    GPIOA->BSRR |= GPIO_BSRR_BR_8;
+//    if (GPIOA->IDR & GPIO_IDR_ID11_Msk) {
+//        button_history[1] = (button_history[1] << 1) | 1;
+//    } else {
+//        button_history[1] = (button_history[1] >> 1);
+//    }
+//
+//    if (GPIOA->IDR & GPIO_IDR_ID12_Msk) {
+//        button_history[2] = (button_history[2] << 1) | 1;
+//    } else {
+//        button_history[2] = (button_history[2] >> 1);
+//    }
+//
+//    if (GPIOA->IDR & GPIO_IDR_ID13_Msk) {
+//        button_history[3] = (button_history[3] << 1) | 1;
+//    } else {
+//        button_history[3] = (button_history[3] >> 1);
+//    }
+//
+//    GPIOA->BSRR |= GPIO_BSRR_BR_8;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
-    uint8_t pressed_mask = 0xFF;
-
-    if (button_history[0] == pressed_mask) {
-        serial_println("apple");
-    }
-
-    if (button_history[1] == pressed_mask) {
-        serial_println("banana");
-    }
-
-    if (button_history[2] == pressed_mask) {
-        serial_println("lemon");
-    }
-
-    if (button_history[3] == pressed_mask) {
-        serial_println("mango");
-    }
+//    uint8_t pressed_mask = 0xFF;
+//
+//    if (button_history[0] == pressed_mask) {
+//        serial_println("apple");
+//    }
+//
+//    if (button_history[1] == pressed_mask) {
+//        serial_println("banana");
+//    }
+//
+//    if (button_history[2] == pressed_mask) {
+//        serial_println("lemon");
+//    }
+//
+//    if (button_history[3] == pressed_mask) {
+//        serial_println("mango");
+//    }
   /* USER CODE END TIM2_IRQn 1 */
 }
 
@@ -329,71 +335,105 @@ void TIM2_IRQHandler(void)
 void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
+  // Timer 6 should gather new sensor readings, upload these data to the cloud via Wi-Fi, pull the updated prediction, and update the display.
+
+  // Turn on the 5V power to the methane and Wi-Fi peripherals
+  HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_SET);
+  HAL_Delay(5000);
 
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
-//  if (hts_cal_data != NULL){
-//
-//    // TODO - delete this
-//    VCNL4010_read8(VCNL4010_INTSTAT);
-//    VCNL4010_read8(VCNL4010_INTCONTROL);
-//
-    uint16_t proximity = VCNL4010_readProximity();
-    serial_printf("Proximity Reading is \t\t\t%d (0x%x)\r\n", proximity, proximity);
+  // Gather sensor data
+  uint16_t proximity = VCNL4010_readProximity();
+  serial_printf("Proximity Reading is \t\t\t%d (0x%x)\r\n", proximity, proximity);
 
-    int temp = hts221_get_temp('C', hts_cal_data);
+  int temp = -200;
+  int humid = -1;
+  if (hts_cal_data != NULL) {
+    temp = hts221_get_temp('F', hts_cal_data);
     if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
     else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 
-    int humid = hts221_get_humid(hts_cal_data);
+    humid = hts221_get_humid(hts_cal_data);
     if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
-    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n\n", humid,37);
+    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n\n", humid, 37);
+  } else {
+    serial_printf("Temp/RH sensor initialization has failed.\n Please power cycle system to attemp reinitialization.\n");
+  }
 
-
-    ADC_Select_CH1();
-    HAL_Delay(500);
-    HAL_ADC_Start(&hadc);
-    HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
-//    uint32_t adc_value = HAL_ADC_GetValue(&hadc);
-    uint32_t adc_value = adc_readings[1] & 0xFFFF;
-    serial_printf("RAW Methane is \t\t\t\t%d\n", adc_value);
-
-    HAL_ADC_Stop(&hadc);
-    ADC_Select_CH0();
-    HAL_Delay(500);
-    HAL_ADC_Start(&hadc);
-    HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
-//    adc_value = HAL_ADC_GetValue(&hadc);
-    adc_value = adc_readings[0] & 0xFFFF;
-    serial_printf("RAW Pressure is \t\t\t%d\n\n", adc_value);
-
-//	  uint16_t voltage = BQ27441_voltage();
-//	  uint16_t soc = BQ27441_soc(FILTERED);
-//	  uint16_t current = BQ27441_current(AVG);
-//	  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
-//	  uint16_t cap_max = BQ27441_capacity(DESIGN);
-//	  int16_t power = BQ27441_power(); //average draw
-//	  uint16_t soh = BQ27441_soh(PERCENT);
-//	  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
-//	  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
+//  uint16_t voltage = BQ27441_voltage();
+//  uint16_t soc = BQ27441_soc(FILTERED);
+//  uint16_t current = BQ27441_current(AVG);
+//  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
+//  uint16_t cap_max = BQ27441_capacity(DESIGN);
+//  int16_t power = BQ27441_power(); //average draw
+//  uint16_t soh = BQ27441_soh(PERCENT);
+//  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
+//  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
 //
-//	  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
-//	  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
-//	  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
-//	  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
-//	  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
-//	  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
-//	  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
-//	  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
-//	  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
-//  }
+//  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
+//  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
+//  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
+//  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
+//  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
+//  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
+//  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
+//  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
+//  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
+
+  // TODO: Add ADC reading for methane sensor
+
+  // Send sensor data to cloud
+  serial_select(WIFI);
+  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
+    // TODO: error handling
+  }
+  if (sent_freshbyte_data(temp, humid, 50000) == AT_FAIL){
+    // TODO: error handling
+  }
+
+  // Disable the 5V regulator
+  HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_RESET);
+  HAL_Delay(5000);
+  serial_select(DEBUG_PRINT);
+  serial_println("Interrupt done!");
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
+void display_readings() {
+  serial_select(DEBUG_PRINT);
+  serial_printf("Clearing display buffers...\n");
+  clear_buffer();
 
+  serial_printf("Powering up display...\n");
+  epd_powerUp();
+
+  serial_printf("Writing to B/W buffer...\n");
+  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
+
+  serial_printf("Writing to R buffer...\n");
+  write_RAM_to_epd(buffer1, buffer1_size, 1, false);
+
+  serial_println("Printing random information to display\n");
+  set_text_scale(2);
+  set_x_margin(1);
+  set_y_margin(1);
+  set_cursor(1,1);
+
+  printString("4/10/2021, 12:00 PM\n");
+  printString("Battery: 90%\n");
+  printString("Temperature: 72 F\n");
+  printString("Rel. Humidity: 35%\n");
+  printString("Methane: 115 ppm\n\n");
+  printString("Food: Banana\n");
+  printString("Time Elapsed: 2 days\n");
+  printString("Est. Days Left: 7 days\n");
+
+  display(true);
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
