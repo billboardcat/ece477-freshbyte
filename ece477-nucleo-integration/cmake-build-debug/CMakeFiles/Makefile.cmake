@@ -119,5 +119,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/DependInfo.cmake"
+  "CMakeFiles/ece477-nucleo-integration.elf.dir/DependInfo.cmake"
   )

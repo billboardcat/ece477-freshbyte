@@ -130,17 +130,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ece477-i2c-integrated-nucleo.elf
+# Target rules for targets named ece477-nucleo-integration.elf
 
 # Build rule for target.
-ece477-i2c-integrated-nucleo.elf: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ece477-i2c-integrated-nucleo.elf
-.PHONY : ece477-i2c-integrated-nucleo.elf
+ece477-nucleo-integration.elf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ece477-nucleo-integration.elf
+.PHONY : ece477-nucleo-integration.elf
 
 # fast build rule for target.
-ece477-i2c-integrated-nucleo.elf/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build
-.PHONY : ece477-i2c-integrated-nucleo.elf/fast
+ece477-nucleo-integration.elf/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/build
+.PHONY : ece477-nucleo-integration.elf/fast
 
 Core/Src/adc.obj: Core/Src/adc.c.obj
 
@@ -148,7 +148,7 @@ Core/Src/adc.obj: Core/Src/adc.c.obj
 
 # target to build an object file
 Core/Src/adc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/adc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/adc.c.obj
 .PHONY : Core/Src/adc.c.obj
 
 Core/Src/adc.i: Core/Src/adc.c.i
@@ -157,7 +157,7 @@ Core/Src/adc.i: Core/Src/adc.c.i
 
 # target to preprocess a source file
 Core/Src/adc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/adc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/adc.c.i
 .PHONY : Core/Src/adc.c.i
 
 Core/Src/adc.s: Core/Src/adc.c.s
@@ -166,7 +166,7 @@ Core/Src/adc.s: Core/Src/adc.c.s
 
 # target to generate assembly for a file
 Core/Src/adc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/adc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/adc.c.s
 .PHONY : Core/Src/adc.c.s
 
 Core/Src/at_commands.obj: Core/Src/at_commands.c.obj
@@ -175,7 +175,7 @@ Core/Src/at_commands.obj: Core/Src/at_commands.c.obj
 
 # target to build an object file
 Core/Src/at_commands.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/at_commands.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/at_commands.c.obj
 .PHONY : Core/Src/at_commands.c.obj
 
 Core/Src/at_commands.i: Core/Src/at_commands.c.i
@@ -184,7 +184,7 @@ Core/Src/at_commands.i: Core/Src/at_commands.c.i
 
 # target to preprocess a source file
 Core/Src/at_commands.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/at_commands.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/at_commands.c.i
 .PHONY : Core/Src/at_commands.c.i
 
 Core/Src/at_commands.s: Core/Src/at_commands.c.s
@@ -193,7 +193,7 @@ Core/Src/at_commands.s: Core/Src/at_commands.c.s
 
 # target to generate assembly for a file
 Core/Src/at_commands.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/at_commands.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/at_commands.c.s
 .PHONY : Core/Src/at_commands.c.s
 
 Core/Src/bq27441.obj: Core/Src/bq27441.c.obj
@@ -202,7 +202,7 @@ Core/Src/bq27441.obj: Core/Src/bq27441.c.obj
 
 # target to build an object file
 Core/Src/bq27441.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/bq27441.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/bq27441.c.obj
 .PHONY : Core/Src/bq27441.c.obj
 
 Core/Src/bq27441.i: Core/Src/bq27441.c.i
@@ -211,7 +211,7 @@ Core/Src/bq27441.i: Core/Src/bq27441.c.i
 
 # target to preprocess a source file
 Core/Src/bq27441.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/bq27441.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/bq27441.c.i
 .PHONY : Core/Src/bq27441.c.i
 
 Core/Src/bq27441.s: Core/Src/bq27441.c.s
@@ -220,7 +220,7 @@ Core/Src/bq27441.s: Core/Src/bq27441.c.s
 
 # target to generate assembly for a file
 Core/Src/bq27441.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/bq27441.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/bq27441.c.s
 .PHONY : Core/Src/bq27441.c.s
 
 Core/Src/dma.obj: Core/Src/dma.c.obj
@@ -229,7 +229,7 @@ Core/Src/dma.obj: Core/Src/dma.c.obj
 
 # target to build an object file
 Core/Src/dma.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/dma.c.obj
 .PHONY : Core/Src/dma.c.obj
 
 Core/Src/dma.i: Core/Src/dma.c.i
@@ -238,7 +238,7 @@ Core/Src/dma.i: Core/Src/dma.c.i
 
 # target to preprocess a source file
 Core/Src/dma.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/dma.c.i
 .PHONY : Core/Src/dma.c.i
 
 Core/Src/dma.s: Core/Src/dma.c.s
@@ -247,7 +247,7 @@ Core/Src/dma.s: Core/Src/dma.c.s
 
 # target to generate assembly for a file
 Core/Src/dma.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/dma.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/dma.c.s
 .PHONY : Core/Src/dma.c.s
 
 Core/Src/epd.obj: Core/Src/epd.c.obj
@@ -256,7 +256,7 @@ Core/Src/epd.obj: Core/Src/epd.c.obj
 
 # target to build an object file
 Core/Src/epd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd.c.obj
 .PHONY : Core/Src/epd.c.obj
 
 Core/Src/epd.i: Core/Src/epd.c.i
@@ -265,7 +265,7 @@ Core/Src/epd.i: Core/Src/epd.c.i
 
 # target to preprocess a source file
 Core/Src/epd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd.c.i
 .PHONY : Core/Src/epd.c.i
 
 Core/Src/epd.s: Core/Src/epd.c.s
@@ -274,7 +274,7 @@ Core/Src/epd.s: Core/Src/epd.c.s
 
 # target to generate assembly for a file
 Core/Src/epd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd.c.s
 .PHONY : Core/Src/epd.c.s
 
 Core/Src/epd_gfx.obj: Core/Src/epd_gfx.c.obj
@@ -283,7 +283,7 @@ Core/Src/epd_gfx.obj: Core/Src/epd_gfx.c.obj
 
 # target to build an object file
 Core/Src/epd_gfx.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd_gfx.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd_gfx.c.obj
 .PHONY : Core/Src/epd_gfx.c.obj
 
 Core/Src/epd_gfx.i: Core/Src/epd_gfx.c.i
@@ -292,7 +292,7 @@ Core/Src/epd_gfx.i: Core/Src/epd_gfx.c.i
 
 # target to preprocess a source file
 Core/Src/epd_gfx.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd_gfx.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd_gfx.c.i
 .PHONY : Core/Src/epd_gfx.c.i
 
 Core/Src/epd_gfx.s: Core/Src/epd_gfx.c.s
@@ -301,7 +301,7 @@ Core/Src/epd_gfx.s: Core/Src/epd_gfx.c.s
 
 # target to generate assembly for a file
 Core/Src/epd_gfx.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/epd_gfx.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/epd_gfx.c.s
 .PHONY : Core/Src/epd_gfx.c.s
 
 Core/Src/glcdfont.obj: Core/Src/glcdfont.c.obj
@@ -310,7 +310,7 @@ Core/Src/glcdfont.obj: Core/Src/glcdfont.c.obj
 
 # target to build an object file
 Core/Src/glcdfont.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/glcdfont.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/glcdfont.c.obj
 .PHONY : Core/Src/glcdfont.c.obj
 
 Core/Src/glcdfont.i: Core/Src/glcdfont.c.i
@@ -319,7 +319,7 @@ Core/Src/glcdfont.i: Core/Src/glcdfont.c.i
 
 # target to preprocess a source file
 Core/Src/glcdfont.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/glcdfont.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/glcdfont.c.i
 .PHONY : Core/Src/glcdfont.c.i
 
 Core/Src/glcdfont.s: Core/Src/glcdfont.c.s
@@ -328,7 +328,7 @@ Core/Src/glcdfont.s: Core/Src/glcdfont.c.s
 
 # target to generate assembly for a file
 Core/Src/glcdfont.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/glcdfont.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/glcdfont.c.s
 .PHONY : Core/Src/glcdfont.c.s
 
 Core/Src/gpio.obj: Core/Src/gpio.c.obj
@@ -337,7 +337,7 @@ Core/Src/gpio.obj: Core/Src/gpio.c.obj
 
 # target to build an object file
 Core/Src/gpio.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/gpio.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/gpio.c.obj
 .PHONY : Core/Src/gpio.c.obj
 
 Core/Src/gpio.i: Core/Src/gpio.c.i
@@ -346,7 +346,7 @@ Core/Src/gpio.i: Core/Src/gpio.c.i
 
 # target to preprocess a source file
 Core/Src/gpio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/gpio.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/gpio.c.i
 .PHONY : Core/Src/gpio.c.i
 
 Core/Src/gpio.s: Core/Src/gpio.c.s
@@ -355,7 +355,7 @@ Core/Src/gpio.s: Core/Src/gpio.c.s
 
 # target to generate assembly for a file
 Core/Src/gpio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/gpio.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/gpio.c.s
 .PHONY : Core/Src/gpio.c.s
 
 Core/Src/hts221.obj: Core/Src/hts221.c.obj
@@ -364,7 +364,7 @@ Core/Src/hts221.obj: Core/Src/hts221.c.obj
 
 # target to build an object file
 Core/Src/hts221.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/hts221.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/hts221.c.obj
 .PHONY : Core/Src/hts221.c.obj
 
 Core/Src/hts221.i: Core/Src/hts221.c.i
@@ -373,7 +373,7 @@ Core/Src/hts221.i: Core/Src/hts221.c.i
 
 # target to preprocess a source file
 Core/Src/hts221.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/hts221.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/hts221.c.i
 .PHONY : Core/Src/hts221.c.i
 
 Core/Src/hts221.s: Core/Src/hts221.c.s
@@ -382,7 +382,7 @@ Core/Src/hts221.s: Core/Src/hts221.c.s
 
 # target to generate assembly for a file
 Core/Src/hts221.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/hts221.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/hts221.c.s
 .PHONY : Core/Src/hts221.c.s
 
 Core/Src/i2c.obj: Core/Src/i2c.c.obj
@@ -391,7 +391,7 @@ Core/Src/i2c.obj: Core/Src/i2c.c.obj
 
 # target to build an object file
 Core/Src/i2c.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/i2c.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/i2c.c.obj
 .PHONY : Core/Src/i2c.c.obj
 
 Core/Src/i2c.i: Core/Src/i2c.c.i
@@ -400,7 +400,7 @@ Core/Src/i2c.i: Core/Src/i2c.c.i
 
 # target to preprocess a source file
 Core/Src/i2c.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/i2c.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/i2c.c.i
 .PHONY : Core/Src/i2c.c.i
 
 Core/Src/i2c.s: Core/Src/i2c.c.s
@@ -409,7 +409,7 @@ Core/Src/i2c.s: Core/Src/i2c.c.s
 
 # target to generate assembly for a file
 Core/Src/i2c.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/i2c.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/i2c.c.s
 .PHONY : Core/Src/i2c.c.s
 
 Core/Src/main.obj: Core/Src/main.c.obj
@@ -418,7 +418,7 @@ Core/Src/main.obj: Core/Src/main.c.obj
 
 # target to build an object file
 Core/Src/main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/main.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main.c.obj
 .PHONY : Core/Src/main.c.obj
 
 Core/Src/main.i: Core/Src/main.c.i
@@ -427,7 +427,7 @@ Core/Src/main.i: Core/Src/main.c.i
 
 # target to preprocess a source file
 Core/Src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main.c.i
 .PHONY : Core/Src/main.c.i
 
 Core/Src/main.s: Core/Src/main.c.s
@@ -436,8 +436,35 @@ Core/Src/main.s: Core/Src/main.c.s
 
 # target to generate assembly for a file
 Core/Src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main.c.s
 .PHONY : Core/Src/main.c.s
+
+Core/Src/main_gui.obj: Core/Src/main_gui.c.obj
+
+.PHONY : Core/Src/main_gui.obj
+
+# target to build an object file
+Core/Src/main_gui.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main_gui.c.obj
+.PHONY : Core/Src/main_gui.c.obj
+
+Core/Src/main_gui.i: Core/Src/main_gui.c.i
+
+.PHONY : Core/Src/main_gui.i
+
+# target to preprocess a source file
+Core/Src/main_gui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main_gui.c.i
+.PHONY : Core/Src/main_gui.c.i
+
+Core/Src/main_gui.s: Core/Src/main_gui.c.s
+
+.PHONY : Core/Src/main_gui.s
+
+# target to generate assembly for a file
+Core/Src/main_gui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/main_gui.c.s
+.PHONY : Core/Src/main_gui.c.s
 
 Core/Src/serial_print.obj: Core/Src/serial_print.c.obj
 
@@ -445,7 +472,7 @@ Core/Src/serial_print.obj: Core/Src/serial_print.c.obj
 
 # target to build an object file
 Core/Src/serial_print.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/serial_print.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/serial_print.c.obj
 .PHONY : Core/Src/serial_print.c.obj
 
 Core/Src/serial_print.i: Core/Src/serial_print.c.i
@@ -454,7 +481,7 @@ Core/Src/serial_print.i: Core/Src/serial_print.c.i
 
 # target to preprocess a source file
 Core/Src/serial_print.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/serial_print.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/serial_print.c.i
 .PHONY : Core/Src/serial_print.c.i
 
 Core/Src/serial_print.s: Core/Src/serial_print.c.s
@@ -463,7 +490,7 @@ Core/Src/serial_print.s: Core/Src/serial_print.c.s
 
 # target to generate assembly for a file
 Core/Src/serial_print.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/serial_print.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/serial_print.c.s
 .PHONY : Core/Src/serial_print.c.s
 
 Core/Src/spi.obj: Core/Src/spi.c.obj
@@ -472,7 +499,7 @@ Core/Src/spi.obj: Core/Src/spi.c.obj
 
 # target to build an object file
 Core/Src/spi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/spi.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/spi.c.obj
 .PHONY : Core/Src/spi.c.obj
 
 Core/Src/spi.i: Core/Src/spi.c.i
@@ -481,7 +508,7 @@ Core/Src/spi.i: Core/Src/spi.c.i
 
 # target to preprocess a source file
 Core/Src/spi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/spi.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/spi.c.i
 .PHONY : Core/Src/spi.c.i
 
 Core/Src/spi.s: Core/Src/spi.c.s
@@ -490,7 +517,7 @@ Core/Src/spi.s: Core/Src/spi.c.s
 
 # target to generate assembly for a file
 Core/Src/spi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/spi.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/spi.c.s
 .PHONY : Core/Src/spi.c.s
 
 Core/Src/sram.obj: Core/Src/sram.c.obj
@@ -499,7 +526,7 @@ Core/Src/sram.obj: Core/Src/sram.c.obj
 
 # target to build an object file
 Core/Src/sram.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sram.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sram.c.obj
 .PHONY : Core/Src/sram.c.obj
 
 Core/Src/sram.i: Core/Src/sram.c.i
@@ -508,7 +535,7 @@ Core/Src/sram.i: Core/Src/sram.c.i
 
 # target to preprocess a source file
 Core/Src/sram.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sram.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sram.c.i
 .PHONY : Core/Src/sram.c.i
 
 Core/Src/sram.s: Core/Src/sram.c.s
@@ -517,7 +544,7 @@ Core/Src/sram.s: Core/Src/sram.c.s
 
 # target to generate assembly for a file
 Core/Src/sram.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sram.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sram.c.s
 .PHONY : Core/Src/sram.c.s
 
 Core/Src/stm32l0xx_hal_msp.obj: Core/Src/stm32l0xx_hal_msp.c.obj
@@ -526,7 +553,7 @@ Core/Src/stm32l0xx_hal_msp.obj: Core/Src/stm32l0xx_hal_msp.c.obj
 
 # target to build an object file
 Core/Src/stm32l0xx_hal_msp.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_hal_msp.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_hal_msp.c.obj
 .PHONY : Core/Src/stm32l0xx_hal_msp.c.obj
 
 Core/Src/stm32l0xx_hal_msp.i: Core/Src/stm32l0xx_hal_msp.c.i
@@ -535,7 +562,7 @@ Core/Src/stm32l0xx_hal_msp.i: Core/Src/stm32l0xx_hal_msp.c.i
 
 # target to preprocess a source file
 Core/Src/stm32l0xx_hal_msp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_hal_msp.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_hal_msp.c.i
 .PHONY : Core/Src/stm32l0xx_hal_msp.c.i
 
 Core/Src/stm32l0xx_hal_msp.s: Core/Src/stm32l0xx_hal_msp.c.s
@@ -544,7 +571,7 @@ Core/Src/stm32l0xx_hal_msp.s: Core/Src/stm32l0xx_hal_msp.c.s
 
 # target to generate assembly for a file
 Core/Src/stm32l0xx_hal_msp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_hal_msp.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_hal_msp.c.s
 .PHONY : Core/Src/stm32l0xx_hal_msp.c.s
 
 Core/Src/stm32l0xx_it.obj: Core/Src/stm32l0xx_it.c.obj
@@ -553,7 +580,7 @@ Core/Src/stm32l0xx_it.obj: Core/Src/stm32l0xx_it.c.obj
 
 # target to build an object file
 Core/Src/stm32l0xx_it.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_it.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_it.c.obj
 .PHONY : Core/Src/stm32l0xx_it.c.obj
 
 Core/Src/stm32l0xx_it.i: Core/Src/stm32l0xx_it.c.i
@@ -562,7 +589,7 @@ Core/Src/stm32l0xx_it.i: Core/Src/stm32l0xx_it.c.i
 
 # target to preprocess a source file
 Core/Src/stm32l0xx_it.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_it.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_it.c.i
 .PHONY : Core/Src/stm32l0xx_it.c.i
 
 Core/Src/stm32l0xx_it.s: Core/Src/stm32l0xx_it.c.s
@@ -571,7 +598,7 @@ Core/Src/stm32l0xx_it.s: Core/Src/stm32l0xx_it.c.s
 
 # target to generate assembly for a file
 Core/Src/stm32l0xx_it.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/stm32l0xx_it.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/stm32l0xx_it.c.s
 .PHONY : Core/Src/stm32l0xx_it.c.s
 
 Core/Src/syscalls.obj: Core/Src/syscalls.c.obj
@@ -580,7 +607,7 @@ Core/Src/syscalls.obj: Core/Src/syscalls.c.obj
 
 # target to build an object file
 Core/Src/syscalls.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/syscalls.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/syscalls.c.obj
 .PHONY : Core/Src/syscalls.c.obj
 
 Core/Src/syscalls.i: Core/Src/syscalls.c.i
@@ -589,7 +616,7 @@ Core/Src/syscalls.i: Core/Src/syscalls.c.i
 
 # target to preprocess a source file
 Core/Src/syscalls.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/syscalls.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/syscalls.c.i
 .PHONY : Core/Src/syscalls.c.i
 
 Core/Src/syscalls.s: Core/Src/syscalls.c.s
@@ -598,7 +625,7 @@ Core/Src/syscalls.s: Core/Src/syscalls.c.s
 
 # target to generate assembly for a file
 Core/Src/syscalls.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/syscalls.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/syscalls.c.s
 .PHONY : Core/Src/syscalls.c.s
 
 Core/Src/sysmem.obj: Core/Src/sysmem.c.obj
@@ -607,7 +634,7 @@ Core/Src/sysmem.obj: Core/Src/sysmem.c.obj
 
 # target to build an object file
 Core/Src/sysmem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sysmem.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sysmem.c.obj
 .PHONY : Core/Src/sysmem.c.obj
 
 Core/Src/sysmem.i: Core/Src/sysmem.c.i
@@ -616,7 +643,7 @@ Core/Src/sysmem.i: Core/Src/sysmem.c.i
 
 # target to preprocess a source file
 Core/Src/sysmem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sysmem.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sysmem.c.i
 .PHONY : Core/Src/sysmem.c.i
 
 Core/Src/sysmem.s: Core/Src/sysmem.c.s
@@ -625,7 +652,7 @@ Core/Src/sysmem.s: Core/Src/sysmem.c.s
 
 # target to generate assembly for a file
 Core/Src/sysmem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/sysmem.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/sysmem.c.s
 .PHONY : Core/Src/sysmem.c.s
 
 Core/Src/system_stm32l0xx.obj: Core/Src/system_stm32l0xx.c.obj
@@ -634,7 +661,7 @@ Core/Src/system_stm32l0xx.obj: Core/Src/system_stm32l0xx.c.obj
 
 # target to build an object file
 Core/Src/system_stm32l0xx.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/system_stm32l0xx.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/system_stm32l0xx.c.obj
 .PHONY : Core/Src/system_stm32l0xx.c.obj
 
 Core/Src/system_stm32l0xx.i: Core/Src/system_stm32l0xx.c.i
@@ -643,7 +670,7 @@ Core/Src/system_stm32l0xx.i: Core/Src/system_stm32l0xx.c.i
 
 # target to preprocess a source file
 Core/Src/system_stm32l0xx.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/system_stm32l0xx.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/system_stm32l0xx.c.i
 .PHONY : Core/Src/system_stm32l0xx.c.i
 
 Core/Src/system_stm32l0xx.s: Core/Src/system_stm32l0xx.c.s
@@ -652,7 +679,7 @@ Core/Src/system_stm32l0xx.s: Core/Src/system_stm32l0xx.c.s
 
 # target to generate assembly for a file
 Core/Src/system_stm32l0xx.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/system_stm32l0xx.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/system_stm32l0xx.c.s
 .PHONY : Core/Src/system_stm32l0xx.c.s
 
 Core/Src/tim.obj: Core/Src/tim.c.obj
@@ -661,7 +688,7 @@ Core/Src/tim.obj: Core/Src/tim.c.obj
 
 # target to build an object file
 Core/Src/tim.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/tim.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/tim.c.obj
 .PHONY : Core/Src/tim.c.obj
 
 Core/Src/tim.i: Core/Src/tim.c.i
@@ -670,7 +697,7 @@ Core/Src/tim.i: Core/Src/tim.c.i
 
 # target to preprocess a source file
 Core/Src/tim.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/tim.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/tim.c.i
 .PHONY : Core/Src/tim.c.i
 
 Core/Src/tim.s: Core/Src/tim.c.s
@@ -679,7 +706,7 @@ Core/Src/tim.s: Core/Src/tim.c.s
 
 # target to generate assembly for a file
 Core/Src/tim.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/tim.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/tim.c.s
 .PHONY : Core/Src/tim.c.s
 
 Core/Src/usart.obj: Core/Src/usart.c.obj
@@ -688,7 +715,7 @@ Core/Src/usart.obj: Core/Src/usart.c.obj
 
 # target to build an object file
 Core/Src/usart.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/usart.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/usart.c.obj
 .PHONY : Core/Src/usart.c.obj
 
 Core/Src/usart.i: Core/Src/usart.c.i
@@ -697,7 +724,7 @@ Core/Src/usart.i: Core/Src/usart.c.i
 
 # target to preprocess a source file
 Core/Src/usart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/usart.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/usart.c.i
 .PHONY : Core/Src/usart.c.i
 
 Core/Src/usart.s: Core/Src/usart.c.s
@@ -706,7 +733,7 @@ Core/Src/usart.s: Core/Src/usart.c.s
 
 # target to generate assembly for a file
 Core/Src/usart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/usart.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/usart.c.s
 .PHONY : Core/Src/usart.c.s
 
 Core/Src/vcnl4010.obj: Core/Src/vcnl4010.c.obj
@@ -715,7 +742,7 @@ Core/Src/vcnl4010.obj: Core/Src/vcnl4010.c.obj
 
 # target to build an object file
 Core/Src/vcnl4010.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/vcnl4010.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/vcnl4010.c.obj
 .PHONY : Core/Src/vcnl4010.c.obj
 
 Core/Src/vcnl4010.i: Core/Src/vcnl4010.c.i
@@ -724,7 +751,7 @@ Core/Src/vcnl4010.i: Core/Src/vcnl4010.c.i
 
 # target to preprocess a source file
 Core/Src/vcnl4010.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/vcnl4010.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/vcnl4010.c.i
 .PHONY : Core/Src/vcnl4010.c.i
 
 Core/Src/vcnl4010.s: Core/Src/vcnl4010.c.s
@@ -733,7 +760,7 @@ Core/Src/vcnl4010.s: Core/Src/vcnl4010.c.s
 
 # target to generate assembly for a file
 Core/Src/vcnl4010.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Src/vcnl4010.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Src/vcnl4010.c.s
 .PHONY : Core/Src/vcnl4010.c.s
 
 Core/Startup/startup_stm32l053r8tx.obj: Core/Startup/startup_stm32l053r8tx.s.obj
@@ -742,7 +769,7 @@ Core/Startup/startup_stm32l053r8tx.obj: Core/Startup/startup_stm32l053r8tx.s.obj
 
 # target to build an object file
 Core/Startup/startup_stm32l053r8tx.s.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Core/Startup/startup_stm32l053r8tx.s.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Core/Startup/startup_stm32l053r8tx.s.obj
 .PHONY : Core/Startup/startup_stm32l053r8tx.s.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj
@@ -751,7 +778,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.obj: Drivers/STM32L0xx_HAL_Driver
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.i
@@ -760,7 +787,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.i: Drivers/STM32L0xx_HAL_Driver/S
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.s
@@ -769,7 +796,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.s: Drivers/STM32L0xx_HAL_Driver/S
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.obj
@@ -778,7 +805,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.i
@@ -787,7 +814,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.s
@@ -796,7 +823,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.obj
@@ -805,7 +832,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.i
@@ -814,7 +841,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.s
@@ -823,7 +850,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj
@@ -832,7 +859,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.i
@@ -841,7 +868,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.s
@@ -850,7 +877,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.obj
@@ -859,7 +886,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.i
@@ -868,7 +895,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.s
@@ -877,7 +904,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.obj
@@ -886,7 +913,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.obj: Drivers/STM32L0xx_HAL_D
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.i
@@ -895,7 +922,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.i: Drivers/STM32L0xx_HAL_Dri
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.s
@@ -904,7 +931,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.s: Drivers/STM32L0xx_HAL_Dri
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_exti.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.obj
@@ -913,7 +940,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.obj: Drivers/STM32L0xx_HAL_
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.i
@@ -922,7 +949,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.i: Drivers/STM32L0xx_HAL_Dr
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.s
@@ -931,7 +958,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.s: Drivers/STM32L0xx_HAL_Dr
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.obj
@@ -940,7 +967,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.obj: Drivers/STM32L0xx_H
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.i
@@ -949,7 +976,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.i: Drivers/STM32L0xx_HAL
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.s
@@ -958,7 +985,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.s: Drivers/STM32L0xx_HAL
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.obj
@@ -967,7 +994,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.obj: Drivers/STM32L
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.i
@@ -976,7 +1003,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.i: Drivers/STM32L0x
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.s
@@ -985,7 +1012,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.s: Drivers/STM32L0x
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.obj
@@ -994,7 +1021,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.obj: Drivers/STM32L0xx_HAL_D
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.i
@@ -1003,7 +1030,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.i: Drivers/STM32L0xx_HAL_Dri
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.s
@@ -1012,7 +1039,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.s: Drivers/STM32L0xx_HAL_Dri
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.obj
@@ -1021,7 +1048,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.i
@@ -1030,7 +1057,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.s
@@ -1039,7 +1066,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.obj
@@ -1048,7 +1075,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.i
@@ -1057,7 +1084,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.s
@@ -1066,7 +1093,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.obj
@@ -1075,7 +1102,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.i
@@ -1084,7 +1111,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.s
@@ -1093,7 +1120,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.obj
@@ -1102,7 +1129,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.i
@@ -1111,7 +1138,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.s
@@ -1120,7 +1147,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.obj
@@ -1129,7 +1156,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.i
@@ -1138,7 +1165,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.s
@@ -1147,7 +1174,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.obj
@@ -1156,7 +1183,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.i
@@ -1165,7 +1192,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.s
@@ -1174,7 +1201,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.obj
@@ -1183,7 +1210,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.i
@@ -1192,7 +1219,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.s
@@ -1201,7 +1228,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.obj
@@ -1210,7 +1237,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.obj: Drivers/STM32L0xx_HAL_Dr
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.i
@@ -1219,7 +1246,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.i: Drivers/STM32L0xx_HAL_Driv
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.s
@@ -1228,7 +1255,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.s: Drivers/STM32L0xx_HAL_Driv
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.obj
@@ -1237,7 +1264,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.obj: Drivers/STM32L0xx_HAL
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.i
@@ -1246,7 +1273,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.i: Drivers/STM32L0xx_HAL_D
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.s
@@ -1255,7 +1282,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.s: Drivers/STM32L0xx_HAL_D
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.obj
@@ -1264,7 +1291,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.obj: Drivers/STM32L0xx_HAL_D
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.i
@@ -1273,7 +1300,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.i: Drivers/STM32L0xx_HAL_Dri
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.s
@@ -1282,7 +1309,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.s: Drivers/STM32L0xx_HAL_Dri
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c.s
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.obj: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.obj
@@ -1291,7 +1318,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.obj: Drivers/STM32L0xx_HA
 
 # target to build an object file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.obj
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.obj
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.i: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.i
@@ -1300,7 +1327,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.i: Drivers/STM32L0xx_HAL_
 
 # target to preprocess a source file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.i
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.i
 
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.s: Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.s
@@ -1309,7 +1336,7 @@ Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.s: Drivers/STM32L0xx_HAL_
 
 # target to generate assembly for a file
 Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/build.make CMakeFiles/ece477-i2c-integrated-nucleo.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ece477-nucleo-integration.elf.dir/build.make CMakeFiles/ece477-nucleo-integration.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.s
 .PHONY : Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c.s
 
 # Help Target
@@ -1320,7 +1347,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... ece477-i2c-integrated-nucleo.elf"
+	@echo "... ece477-nucleo-integration.elf"
 	@echo "... Core/Src/adc.obj"
 	@echo "... Core/Src/adc.i"
 	@echo "... Core/Src/adc.s"
@@ -1354,6 +1381,9 @@ help:
 	@echo "... Core/Src/main.obj"
 	@echo "... Core/Src/main.i"
 	@echo "... Core/Src/main.s"
+	@echo "... Core/Src/main_gui.obj"
+	@echo "... Core/Src/main_gui.i"
+	@echo "... Core/Src/main_gui.s"
 	@echo "... Core/Src/serial_print.obj"
 	@echo "... Core/Src/serial_print.i"
 	@echo "... Core/Src/serial_print.s"
