@@ -351,6 +351,7 @@ void TIM6_DAC_IRQHandler(void)
 
   int temp = -200;
   int humid = -1;
+  int methane = -1;
   if (hts_cal_data != NULL) {
     temp = hts221_get_temp('F', hts_cal_data);
     if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
@@ -364,7 +365,7 @@ void TIM6_DAC_IRQHandler(void)
   }
 
 //  uint16_t voltage = BQ27441_voltage();
-//  uint16_t soc = BQ27441_soc(FILTERED);
+  uint16_t soc = BQ27441_soc(FILTERED);
 //  uint16_t current = BQ27441_current(AVG);
 //  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
 //  uint16_t cap_max = BQ27441_capacity(DESIGN);
@@ -383,14 +384,20 @@ void TIM6_DAC_IRQHandler(void)
 //  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
 //  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
 
-  // TODO: Add ADC reading for methane sensor
+  // TODO: Add ADC reading for methane sensor - fix
+  HAL_ADC_Start(&hadc);
+  HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
+  methane = HAL_ADC_GetValue(&hadc);
+  HAL_ADC_Stop(&hadc);
+
+  serial_printf("Methane: %d\n", methane);
 
   // Send sensor data to cloud
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
     // TODO: error handling
   }
-  if (sent_freshbyte_data(temp, humid, 50000) == AT_FAIL){
+  if (sent_freshbyte_data(temp, humid, methane) == AT_FAIL){
     // TODO: error handling
   }
 
@@ -400,11 +407,24 @@ void TIM6_DAC_IRQHandler(void)
   serial_select(DEBUG_PRINT);
   serial_println("Interrupt done!");
 
+  //get prediction
+//  int prediction = get_prediction();
+
+  //TODO:
+  display_readings(soc, temp, humid, methane);
+
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
-void display_readings() {
+void display_readings(int battery, int temp, int humid, int methane_raw, int prediction_days) {
+
+  //use string or use
+
+  int methane_ppm = methane_raw;
+  // TODO: get ppm methane value for display
+  //  int methane_ppm = ADC_calc_ppm(methane_raw);
+
   serial_select(DEBUG_PRINT);
   serial_printf("Clearing display buffers...\n");
   clear_buffer();
@@ -425,13 +445,15 @@ void display_readings() {
   set_cursor(1,1);
 
   printString("4/10/2021, 12:00 PM\n");
-  printString("Battery: 90%\n");
-  printString("Temperature: 72 F\n");
-  printString("Rel. Humidity: 35%\n");
-  printString("Methane: 115 ppm\n\n");
+  printString("Battery: %d%\n", battery);
+  printString("Temperature: %d F\n", temp);
+  printString("Rel. Humidity: %d%\n", humid);
+  printString("Methane: 115 ppm\n\n", methane_ppm);
+  // TODO: save food selection
   printString("Food: Banana\n");
+  // TODO: get time elapsed from RTC
   printString("Time Elapsed: 2 days\n");
-  printString("Est. Days Left: 7 days\n");
+  printString("Est. Days Left: %d days\n", prediction_days);
 
   display(true);
 }

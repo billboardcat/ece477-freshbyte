@@ -35,7 +35,7 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
   serial_printf("AT+HTTPCLIENT=3,0,\"http://maker.ifttt.com/trigger/ece477/"
                 "with/key/cRY9n1jJnl-fCLuPYsZZ-8\",\"maker.ifttt.com\",\""
                 "/trigger/ece477/with/key/cRY9n1jJnl-fCLuPYsZZ-8\",1,\""
-                "value1=%d%%7C%%7C%%7C%dF&value2=%d%%25&value3=%d\"\n", session_id, temp_F, humid, methane);
+                "value1=%d&value2=%d&value3=%d%%7C%%7C%%7C%d\"\n", temp_F, humid, methane, session_id);
   HAL_Delay(2000);
   session_id++;
 
@@ -102,7 +102,6 @@ unsigned char * extract_prediction(unsigned char * str, unsigned char * predicti
   while (*p2 != '.'){
     p2++;
   }
-  p2++; //go one character after the decimal point
   int prediction_str_len = p2 - p1;
   strncpy(prediction, p1, prediction_str_len);
 
