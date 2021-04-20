@@ -7,6 +7,7 @@
 int session_id = 1;
 
 extern unsigned char UART1_rxBuffer[600];
+extern unsigned char prediction_str[2];
 
 
 //Todo check if busy before sending
@@ -42,7 +43,7 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
   return AT_SUCCESS;
 }
 
-unsigned char * receive_prediction(unsigned char * prediction){
+unsigned char * receive_prediction(){
   //TODO - make this for the real dataset!
 
   serial_select(WIFI);
@@ -50,12 +51,14 @@ unsigned char * receive_prediction(unsigned char * prediction){
   serial_println("AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=1wP-fJqQEgVEwBICx2EHh9-tfq526fHGmL53x4p5_quc&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1");
   HAL_Delay(5000);
 
-  return extract_prediction(UART1_rxBuffer, prediction);
+  return extract_prediction();
 }
 
-unsigned char * extract_prediction(unsigned char * str, unsigned char * prediction){
+unsigned char * extract_prediction(){
 
-  unsigned char sub[] = "ction\":[";
+  unsigned char * prediction = prediction_str;
+  unsigned char * str = UART1_rxBuffer;
+  unsigned char sub[] = "cyevm\":[";
 
   unsigned char *p1, *p2, *p3;
   int i=0,j=0,flag=0;

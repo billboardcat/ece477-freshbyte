@@ -76,6 +76,7 @@ extern DMA_HandleTypeDef hdma_adc;
 extern ADC_HandleTypeDef hadc;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
+extern DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN EV */
 extern uint32_t * adc_readings;
 //extern uint8_t *buffer1;
@@ -250,6 +251,20 @@ void DMA1_Channel1_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA1 channel 2 and channel 3 interrupts.
+  */
+void DMA1_Channel2_3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel2_3_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel2_3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart1_rx);
+  /* USER CODE BEGIN DMA1_Channel2_3_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel2_3_IRQn 1 */
+}
+
+/**
   * @brief This function handles ADC, COMP1 and COMP2 interrupts (COMP interrupts through EXTI lines 21 and 22).
   */
 void ADC1_COMP_IRQHandler(void)
@@ -411,7 +426,7 @@ void TIM6_DAC_IRQHandler(void)
 //  int prediction = get_prediction();
 
   //TODO: get prediction int
-  display_readings(soc, temp, humid, methane, 10);
+//  display_readings(soc, temp, humid, methane, 115);
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
@@ -444,16 +459,16 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
   set_y_margin(1);
   set_cursor(1,1);
 
-//  printString("4/10/2021, 12:00 PM\n");
-//  printString("Battery: %d%\n", battery);
-//  printString("Temperature: %d F\n", temp);
-//  printString("Rel. Humidity: %d%\n", humid);
-//  printString("Methane: 115 ppm\n\n", methane_ppm);
-//  // TODO: save food selection
-//  printString("Food: Banana\n");
-//  // TODO: get time elapsed from RTC
-//  printString("Time Elapsed: 2 days\n");
-//  printString("Est. Days Left: %d days\n", prediction_days);
+  printString("4/10/2021, 12:00 PM\n");
+  printString("Battery: "); printFloat(battery, 0); printString("%\n");
+  printString("Temperature: "); printFloat(temp, 0); printString(" F\n");
+  printString("Rel. Humidity: "); printFloat(humid, 0); printString("%\n");
+  printString("Methane: "); printFloat(methane_ppm, 0); printString(" ppm\n\n");
+  // TODO: save food selection
+  printString("Food: Banana\n");
+  // TODO: get time elapsed from RTC
+  printString("Time Elapsed: 2 days\n");
+  printString("Est. Days Left: "); printFloat(prediction_days, 0); printString(" days\n");
 
   display(true);
 }

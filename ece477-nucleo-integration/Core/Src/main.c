@@ -65,6 +65,8 @@ int bq_init_ret;
 int state = 0;
 uint32_t adc_readings[] = {0, 0};
 
+unsigned char prediction_str[2];
+
 extern DMA_HandleTypeDef hdma_adc;
 
 /* USER CODE END PV */
@@ -177,44 +179,32 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   //Start Receive Buffer From ESP 8266
-  /*
   HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 
-  serial_clear();
-  serial_select(DEBUG_PRINT);
-  serial_println("Hello world\n");
-
+  //WIFI Test
   serial_select(DEBUG_PRINT);
   serial_clear();
   serial_println("Hello world, this is a test of the new serial print functions!");
   serial_select(WIFI);
-
-//    serial_printf("AT\n");
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
     // try again
   }
   if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
     // try again
   }
-
-
-  unsigned char * prediction_days = malloc(sizeof(char) * 15);
-  prediction_days = receive_prediction(prediction_days);
-
+  receive_prediction(prediction_str);
   if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
     serial_println("Error! Predicted Days");
   }
-
-  if (HAL_UART_Transmit(&huart2, prediction_days, sizeof(prediction_days), 100)!= HAL_OK){
+  if (HAL_UART_Transmit(&huart2, prediction_str, sizeof(prediction_str), 100)!= HAL_OK){
     serial_println("Error! Printing string");
   }
-
   serial_select(DEBUG_PRINT);
   serial_clear();
   serial_printf("Predicted Days: ");
-  serial_printf("%s\n", prediction_days);
+  serial_printf("%s\n", prediction_str);
   serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
-*/
+
 
   // Clear the serial debug terminal
   serial_select(DEBUG_PRINT);
@@ -228,32 +218,10 @@ int main(void)
 
   serial_printf("Initializing I2C peripherals... ");
   hts_cal_data = hts221_init();
-//  bq_init_ret = bq_init();
+  bq_init_ret = bq_init();
   VCNL4010_setLEDcurrent(20);
   VCNL4010_enable_Interrupt();
   serial_println("Done!");
-
-  /*
-  uint16_t voltage = BQ27441_voltage();
-  uint16_t soc = BQ27441_soc(FILTERED);
-  uint16_t current = BQ27441_current(AVG);
-  uint16_t cap_remaining = BQ27441_capacity(REMAIN);
-  uint16_t cap_max = BQ27441_capacity(DESIGN);
-  int16_t power = BQ27441_power(); //average draw
-  uint16_t soh = BQ27441_soh(PERCENT);
-  uint16_t temp_bat = BQ27441_temperature(BATTERY) / 10;
-  uint16_t temp_bq_IC = BQ27441_temperature(INTERNAL_TEMP) / 10;
-
-  serial_printf("State of Charge\t\t\t\t%d\t%%\r\n", soc);
-  serial_printf("Battery Voltage\t\t\t\t%d\tmV\r\n", voltage);
-  serial_printf("Current\t\t\t\t\t%d\tmA\r\n", current);
-  serial_printf("Max Capacity\t\t\t\t%d\tmAh\r\n", cap_max);
-  serial_printf("Remaining Capacity\t\t\t%d\tmAh\r\n", cap_remaining);
-  serial_printf("Ave power consumption\t\t\t%d\tmW\r\n", power);
-  serial_printf("Health\t\t\t\t\t%d\t%%\r\n", soh);
-  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
-  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n", temp_bq_IC);
-   */
 
   HAL_TIM_Base_Start_IT(&htim6);
   HAL_TIM_Base_Start_IT(&htim2);
