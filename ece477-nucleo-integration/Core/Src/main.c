@@ -261,12 +261,25 @@ int main(void)
 //  HAL_ADC_Start(&hadc);
 //  HAL_ADC_Start_DMA(&hadc, adc_readings, 2);
 
+  /*ADC_Select_CH0();
+  HAL_ADC_Start(&hadc);
+  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
+  uint16_t methane = HAL_ADC_GetValue(&hadc);
+
+
+  ADC_calc_r0(); // calculate r0 for methane
+  float meth = ADC_calc_ppm();
+  meth = ADC_calc_ppm();
+  meth = ADC_calc_ppm();
+  meth = ADC_calc_ppm();*/
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

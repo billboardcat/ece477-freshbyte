@@ -42,6 +42,8 @@ void MX_ADC_Init(void);
 /* USER CODE BEGIN Prototypes */
 void ADC_Select_CH0(void);
 void ADC_Select_CH1(void);
+void ADC_calc_r0(void);
+float ADC_calc_ppm(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

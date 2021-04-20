@@ -21,6 +21,8 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
+#include "math.h"
+float r0 = 0;
 
 /* USER CODE END 0 */
 
@@ -184,6 +186,56 @@ void ADC_Select_CH1(void) {
     {
         Error_Handler();
     }
+}
+
+void ADC_calc_r0(void) {
+  uint16_t methane;
+  int total = 0;
+  float average;
+  float voltage;
+  float rs_air;
+  int i;
+
+
+  for(i = 0; i < 500; i++)
+  {
+	  ADC_Select_CH0();
+	  HAL_ADC_Start(&hadc);
+	  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
+	  methane = HAL_ADC_GetValue(&hadc);
+	  total += methane;
+	  HAL_ADC_Stop(&hadc);
+  }
+
+  average = total / 500.0;
+  voltage = average * (5.0 / 1023.0);
+  rs_air = ((5.0 * 10.0) / voltage) - 10.0;
+  r0 = rs_air / 4.4;
+}
+
+float ADC_calc_ppm(void) {
+	uint16_t methane;
+	float voltage;
+	float rs_gas;
+	float ratio;
+	float m = -0.318;
+	float b = 1.133;
+	double ppm_log;
+	double ppm;
+
+	ADC_Select_CH0();
+	HAL_ADC_Start(&hadc);
+	HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
+	methane = HAL_ADC_GetValue(&hadc);    //Read analog values of sensor
+	HAL_ADC_Stop(&hadc);
+
+	voltage = methane * (5.0 / 1023.0);       //Convert analog values to voltage
+	rs_gas = ((5.0 * 10.0) / voltage) - 10.0;      //Get value of RS in a gas
+	ratio = rs_gas / r0;                          // Get ratio RS_gas/RS_air
+
+	ppm_log = (log10(ratio) - b) / m;     //Get ppm value in linear scale according to the the ratio value
+	ppm = pow(10, ppm_log);
+	return ppm;
 }
 /* USER CODE END 1 */
 
