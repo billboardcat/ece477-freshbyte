@@ -46,7 +46,8 @@ unsigned char * receive_prediction(unsigned char * prediction){
   //TODO - make this for the real dataset!
 
   serial_select(WIFI);
-  serial_println("AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=17iTAwn0O4Kueubf5SyqEkfCmubj06RWgf51PDx4hfe0&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1");
+  //TODO test this new one!
+  serial_println("AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=1wP-fJqQEgVEwBICx2EHh9-tfq526fHGmL53x4p5_quc&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1");
   HAL_Delay(5000);
 
   return extract_prediction(UART1_rxBuffer, prediction);
@@ -99,7 +100,7 @@ unsigned char * extract_prediction(unsigned char * str, unsigned char * predicti
   //hack for now ...
   //TODO fix this
   p2 = p1;
-  while (*p2 != '.'){
+  while (*p2 != ']'){
     p2++;
   }
   int prediction_str_len = p2 - p1;

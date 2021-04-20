@@ -56,6 +56,7 @@
 extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
 extern int state;
+extern char  prediction_days_str[2];
 
 uint8_t button_history[] = {0, 0, 0, 0};
 
@@ -63,7 +64,6 @@ uint8_t button_history[] = {0, 0, 0, 0};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-void display_readings(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -410,8 +410,8 @@ void TIM6_DAC_IRQHandler(void)
   //get prediction
 //  int prediction = get_prediction();
 
-  //TODO:
-  display_readings(soc, temp, humid, methane);
+  //TODO: get prediction int
+  display_readings(soc, temp, humid, methane, 10);
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
@@ -444,16 +444,16 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
   set_y_margin(1);
   set_cursor(1,1);
 
-  printString("4/10/2021, 12:00 PM\n");
-  printString("Battery: %d%\n", battery);
-  printString("Temperature: %d F\n", temp);
-  printString("Rel. Humidity: %d%\n", humid);
-  printString("Methane: 115 ppm\n\n", methane_ppm);
-  // TODO: save food selection
-  printString("Food: Banana\n");
-  // TODO: get time elapsed from RTC
-  printString("Time Elapsed: 2 days\n");
-  printString("Est. Days Left: %d days\n", prediction_days);
+//  printString("4/10/2021, 12:00 PM\n");
+//  printString("Battery: %d%\n", battery);
+//  printString("Temperature: %d F\n", temp);
+//  printString("Rel. Humidity: %d%\n", humid);
+//  printString("Methane: 115 ppm\n\n", methane_ppm);
+//  // TODO: save food selection
+//  printString("Food: Banana\n");
+//  // TODO: get time elapsed from RTC
+//  printString("Time Elapsed: 2 days\n");
+//  printString("Est. Days Left: %d days\n", prediction_days);
 
   display(true);
 }
