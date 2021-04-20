@@ -21,11 +21,13 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
+float r0 = 0;
 
 /* USER CODE END 0 */
 
 ADC_HandleTypeDef hadc;
 DMA_HandleTypeDef hdma_adc;
+
 
 /* ADC init function */
 void MX_ADC_Init(void)
@@ -184,6 +186,30 @@ void ADC_Select_CH1(void) {
     {
         Error_Handler();
     }
+}
+
+void ADC_calc_r0(void) {
+  uint16_t methane;
+  int total = 0;
+  float average;
+  float voltage;
+  float rs_air;
+  //float r0;
+  int i;
+
+  for(i = 0; i < 500; i++)
+  {
+	  HAL_ADC_Start(&hadc);
+	  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
+	  methane = HAL_ADC_GetValue(&hadc);
+	  total += methane;
+	  HAL_ADC_Stop(&hadc);
+  }
+
+  average = total / 500.0;
+  voltage = average * (5.0 / 1023.0);
+  rs_air = ((5.0 * 10.0) / voltage) - 10.0;
+  r0 = rs_air / 4.4;
 }
 /* USER CODE END 1 */
 
