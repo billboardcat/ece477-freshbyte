@@ -39,12 +39,21 @@ extern "C" {
 /* USER CODE BEGIN ET */
 enum system_state {
     WAITING,
+    MONITORING_SETUP,
     MONITORING
 };
 
 enum battery_state {
     HIGH,
     LOW
+};
+
+enum fruit_type {
+    NONE,
+    APPLE,
+    BANANA,
+    LIME,
+    MANGO
 };
 
 /* USER CODE END ET */

@@ -36,7 +36,7 @@
 #include "epd.h"
 #include "epd_gfx.h"
 #include "at_commands.h"
-#include "main_gui.c"
+//#include "main_gui.c"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,18 +56,20 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned char UART1_rxBuffer[200] = {0};
+
+unsigned char UART1_rxBuffer[20] = {0};
 HTS_Cal * hts_cal_data;
 int bq_init_ret;
 //TODO - make this an enum? for battery state?
 enum battery_state batteryState = LOW;
 enum system_state systemState = WAITING;
-uint32_t adc_readings[2], adc_dma_buffer[2];
+uint32_t adc_dma_buffer[9];
 unsigned char prediction_str[2];
 extern DMA_HandleTypeDef hdma_adc;
 bool food_present = false;
 extern uint32_t buffer1_size;
 extern uint8_t *buffer1;
+enum fruit_type fruit_selection = NONE;
 
 /* USER CODE END PV */
 
@@ -92,15 +94,15 @@ void display_setup() {
   serial_printf("Clearing display buffers... ");
   clear_buffer();
   epd_powerUp();
-  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
+//  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
   write_RAM_to_epd(buffer1, buffer1_size, 1, false);
-  display(false);
+//  display(false);
   serial_println("Done!");
 
-  serial_printf("Drawing bitmap to buffer... ");
-  draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
-  display(false);
-  serial_println("Done!\n");
+//  serial_printf("Drawing bitmap to buffer... ");
+//  draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
+//  display(false);
+//  serial_println("Done!\n");
 }
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
@@ -217,11 +219,12 @@ int main(void)
 //  VCNL4010_enable_Interrupt();
   serial_println("Done!");
 
-  if (HAL_ADC_Start_DMA(&hadc, adc_dma_buffer, 2) != HAL_OK) {
+  if (HAL_ADC_Start_DMA(&hadc, adc_dma_buffer, 9) != HAL_OK) {
     serial_println("!!! Failed to start ADC DMA");
   } else {
-    serial_println("ADC DMA Started");
+    serial_println("ADC DMA started OK");
   }
+  HAL_Delay(100);
 
 
   /* USER CODE END 2 */
@@ -234,13 +237,45 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     if (systemState == WAITING) {
-//      HAL_TIM_Base_Start_IT(&htim2); // Don't need this anymore, using physical debouncing
-      
+      serial_printf("ADC[0] = 0x%x\n", adc_dma_buffer[0]);
+      serial_printf("ADC[1] = 0x%x\n", adc_dma_buffer[1]);
+      serial_printf("ADC[8] = 0x%x\n", adc_dma_buffer[8]);
+      HAL_Delay(500);
+
+        while (adc_dma_buffer[8] > 3000); //wait
+        if (adc_dma_buffer[8] > 1500) {
+          // D
+          serial_println("D");
+          fruit_selection = MANGO;
+        }
+        else if (adc_dma_buffer[8] > 1000) {
+          // C
+          serial_println("C");
+          fruit_selection = LIME;
+        }
+        else if (adc_dma_buffer[8] > 500) {
+          // B
+          serial_println("B");
+          fruit_selection = BANANA;
+        }
+        else {
+          // A
+          serial_println("A");
+          fruit_selection = APPLE;
+        }
+
+        systemState = MONITORING_SETUP;
     }
-    else if (systemState == MONITORING) {
+
+    else if(systemState == MONITORING_SETUP){
       HAL_TIM_Base_Start_IT(&htim6);
       VCNL4010_setLEDcurrent(20);
       VCNL4010_enable_Interrupt();
+      systemState = MONITORING;
+    }
+
+    else if (systemState == MONITORING) {
+      while(1);
     }
   }
   /* USER CODE END 3 */
@@ -317,14 +352,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
   HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 }
 
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-  serial_print("*DMA* Updating ADC values... ");
-  for (int i =0; i<2; i++)
-  {
-    adc_readings[i] = adc_dma_buffer[i];  // store the values in adc[]
-  }
-  serial_println("Done!");
-}
+//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
+////  serial_print("*DMA* Updating ADC values... ");
+//  for (int i = 0; i < 9; i++)
+//  {
+//    adc_readings[i] = adc_dma_buffer[i];  // store the values in adc[]
+//  }
+////  serial_println("Done!");
+//}
 
 /* USER CODE END 4 */
 

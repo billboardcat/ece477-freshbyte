@@ -33,6 +33,8 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
 
   //TODO - define error
 
+  //TODO - define all these as consts
+
   serial_printf("AT+HTTPCLIENT=3,0,\"http://maker.ifttt.com/trigger/ece477/"
                 "with/key/cRY9n1jJnl-fCLuPYsZZ-8\",\"maker.ifttt.com\",\""
                 "/trigger/ece477/with/key/cRY9n1jJnl-fCLuPYsZZ-8\",1,\""
@@ -45,6 +47,8 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
 
 unsigned char * receive_prediction(){
   //TODO - make this for the real dataset!
+
+  //TODO - define all these as consts
 
   serial_select(WIFI);
   //TODO test this new one!

@@ -53,14 +53,6 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
-extern HTS_Cal * hts_cal_data;
-extern int bq_init_ret;
-extern enum battery_state batteryState;
-;
-extern char  prediction_days_str[2];
-
-uint8_t button_history[] = {0, 0, 0, 0};
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,13 +65,21 @@ uint8_t button_history[] = {0, 0, 0, 0};
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_adc;
 extern ADC_HandleTypeDef hadc;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN EV */
 
-extern uint32_t adc_readings[2], adc_dma_buffer[2];
+extern uint32_t buffer1_size;
+extern uint8_t *buffer1;
+extern HTS_Cal * hts_cal_data;
+extern int bq_init_ret;
+extern enum battery_state batteryState;
+extern char  prediction_days_str[2];
+extern uint32_t adc_dma_buffer[9];
+extern enum fruit_type fruit_selection;
 
 /* USER CODE END EV */
 
@@ -236,6 +236,20 @@ void EXTI2_3_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA1 channel 1 interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA1 channel 2 and channel 3 interrupts.
   */
 void DMA1_Channel2_3_IRQHandler(void)
@@ -354,7 +368,6 @@ void TIM6_DAC_IRQHandler(void)
 
   int temp = -200;
   int humid = -1;
-  int methane = -1;
   if (hts_cal_data != NULL) {
     temp = hts221_get_temp('F', hts_cal_data);
     if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
@@ -390,13 +403,14 @@ void TIM6_DAC_IRQHandler(void)
   serial_printf("Methane: %d\n", adc_dma_buffer[0]);
 
   // Send sensor data to cloud
-  serial_select(WIFI);
-  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
-    // TODO: error handling
-  }
-  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
-    // TODO: error handling
-  }
+  //TODO uncomment this after SMAT
+//  serial_select(WIFI);
+//  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
+//    // TODO: error handling
+//  }
+//  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
+//    // TODO: error handling
+//  }
 
   // Disable the 5V regulator
   batteryState = LOW;
@@ -409,7 +423,7 @@ void TIM6_DAC_IRQHandler(void)
 //  int prediction = get_prediction();
 
   //TODO: get prediction int
-//  display_readings(soc, temp, humid, methane, 115);
+  display_readings(soc, temp, humid, adc_dma_buffer[0], 5);
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
@@ -421,6 +435,7 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
 
   int methane_ppm = methane_raw;
   // TODO: get ppm methane value for display
+  // needs to init first
   //  int methane_ppm = ADC_calc_ppm(methane_raw);
 
   serial_select(DEBUG_PRINT);
@@ -446,11 +461,20 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
   printString("Battery: "); printFloat(battery, 0); printString("%\n");
   printString("Temperature: "); printFloat(temp, 0); printString(" F\n");
   printString("Rel. Humidity: "); printFloat(humid, 0); printString("%\n");
-  printString("Methane: "); printFloat(methane_ppm, 0); printString(" ppm\n\n");
+  printString("Methane: "); printFloat(methane_ppm, 0); printString(" \n\n");
+//  TODO: enable this when ppm
+//  printString(" ppm\n\n");
   // TODO: save food selection
-  printString("Food: Banana\n");
+  // TODO: fix this
+  switch (fruit_selection) {
+    case NONE: break;
+    case APPLE: printString("Food: Apple\n"); break;
+    case BANANA: printString("Food: Banana\n");break;
+    case LIME: printString("Food: Lemon\n"); break;
+    case MANGO: printString("Food: Mango\n"); break;
+  }
   // TODO: get time elapsed from RTC
-  printString("Time Elapsed: 2 days\n");
+  printString("Time Elapsed: 0 days\n");
   printString("Est. Days Left: "); printFloat(prediction_days, 0); printString(" days\n");
 
   display(true);
