@@ -131,6 +131,10 @@ HTS_Cal * hts221_init () {
         // init struct to store calibration data
         HTS_Cal * hts_cal_data = malloc(sizeof(HTS_Cal));
 
+        if(hts_cal_data == NULL){
+          return NULL;
+        }
+
         hts_cal_data->T0_OUT = T0_OUT;
         hts_cal_data->correction_factor = (float) (T1_degC_R33 - T0_degC_R32) / (T1_OUT - T0_OUT);
         hts_cal_data->offset = T0_degC_R32;

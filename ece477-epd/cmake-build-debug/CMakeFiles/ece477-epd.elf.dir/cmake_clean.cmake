@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ece477-epd.elf.dir/Core/Src/apple.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/epd.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/epd_gfx.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/glcdfont.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/gpio.c.obj"
+  "CMakeFiles/ece477-epd.elf.dir/Core/Src/i2c.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/main.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/serial_print.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/spi.c.obj"
@@ -13,6 +15,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/sysmem.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/system_stm32l0xx.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Src/usart.c.obj"
+  "CMakeFiles/ece477-epd.elf.dir/Core/Src/vcnl4010.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Core/Startup/startup_stm32l053r8tx.s.obj"
   "CMakeFiles/ece477-epd.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c.obj"
   "CMakeFiles/ece477-epd.elf.dir/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c.obj"

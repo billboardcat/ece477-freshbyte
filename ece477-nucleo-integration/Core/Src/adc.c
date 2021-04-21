@@ -38,6 +38,7 @@ void MX_ADC_Init(void)
   /* USER CODE END ADC_Init 0 */
 
   ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_AnalogWDGConfTypeDef AnalogWDGConfig = {0};
 
   /* USER CODE BEGIN ADC_Init 1 */
 
@@ -46,7 +47,7 @@ void MX_ADC_Init(void)
   */
   hadc.Instance = ADC1;
   hadc.Init.OversamplingMode = DISABLE;
-  hadc.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV64;
   hadc.Init.Resolution = ADC_RESOLUTION_12B;
   hadc.Init.SamplingTime = ADC_SAMPLETIME_160CYCLES_5;
   hadc.Init.ScanConvMode = ADC_SCAN_DIRECTION_FORWARD;
@@ -59,7 +60,7 @@ void MX_ADC_Init(void)
   hadc.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc.Init.LowPowerAutoWait = DISABLE;
-  hadc.Init.LowPowerFrequencyMode = DISABLE;
+  hadc.Init.LowPowerFrequencyMode = ENABLE;
   hadc.Init.LowPowerAutoPowerOff = DISABLE;
   if (HAL_ADC_Init(&hadc) != HAL_OK)
   {
@@ -77,6 +78,17 @@ void MX_ADC_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_1;
   if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure the analog watchdog
+  */
+  AnalogWDGConfig.WatchdogMode = ADC_ANALOGWATCHDOG_SINGLE_REG;
+  AnalogWDGConfig.Channel = ADC_CHANNEL_1;
+  AnalogWDGConfig.ITMode = ENABLE;
+  AnalogWDGConfig.HighThreshold = 2048;
+  AnalogWDGConfig.LowThreshold = 0;
+  if (HAL_ADC_AnalogWDGConfig(&hadc, &AnalogWDGConfig) != HAL_OK)
   {
     Error_Handler();
   }
@@ -105,7 +117,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     */
     GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* ADC1 DMA Init */
@@ -115,8 +127,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     hdma_adc.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_adc.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_adc.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_adc.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
-    hdma_adc.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_adc.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_adc.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
     hdma_adc.Init.Mode = DMA_CIRCULAR;
     hdma_adc.Init.Priority = DMA_PRIORITY_LOW;
     if (HAL_DMA_Init(&hdma_adc) != HAL_OK)
@@ -127,7 +139,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     __HAL_LINKDMA(adcHandle,DMA_Handle,hdma_adc);
 
     /* ADC1 interrupt Init */
-    HAL_NVIC_SetPriority(ADC1_COMP_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(ADC1_COMP_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(ADC1_COMP_IRQn);
   /* USER CODE BEGIN ADC1_MspInit 1 */
 
@@ -169,18 +181,6 @@ void ADC_Select_CH0(void) {
     ADC_ChannelConfTypeDef sConfig = {0};
 
     sConfig.Channel = ADC_CHANNEL_0;
-    sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
-    {
-        Error_Handler();
-    }
-}
-
-void ADC_Select_CH1(void) {
-    HAL_ADC_Stop(&hadc);
-    ADC_ChannelConfTypeDef sConfig = {0};
-
-    sConfig.Channel = ADC_CHANNEL_1;
     sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
     if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
     {

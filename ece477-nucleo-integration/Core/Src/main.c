@@ -56,18 +56,18 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned char UART1_rxBuffer[600] = {0};
-
+unsigned char UART1_rxBuffer[200] = {0};
 HTS_Cal * hts_cal_data;
 int bq_init_ret;
-
 //TODO - make this an enum? for battery state?
-int state = 0;
-uint32_t adc_readings[] = {0, 0};
-
+enum battery_state batteryState = LOW;
+enum system_state systemState = WAITING;
+uint32_t adc_readings[2], adc_dma_buffer[2];
 unsigned char prediction_str[2];
-
 extern DMA_HandleTypeDef hdma_adc;
+bool food_present = false;
+extern uint32_t buffer1_size;
+extern uint8_t *buffer1;
 
 /* USER CODE END PV */
 
@@ -92,6 +92,7 @@ void display_setup() {
   serial_printf("Clearing display buffers... ");
   clear_buffer();
   epd_powerUp();
+  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
   write_RAM_to_epd(buffer1, buffer1_size, 1, false);
   display(false);
   serial_println("Done!");
@@ -100,16 +101,10 @@ void display_setup() {
   draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
   display(false);
   serial_println("Done!\n");
-
 }
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
     serial_println("*** ADC WATCHDOG INTERRUPT ***");
-    HAL_Delay(500);
-    HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY);
-    uint32_t adc_value = HAL_ADC_GetValue(hadc);
-    serial_printf("ADC reading: %d\n", adc_value);
-    HAL_ADC_Stop(hadc);
 
     // Change the thresholds
     uint32_t curr_upper = (hadc->Instance->TR >> 16) & 0x00000FFF;
@@ -120,20 +115,13 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
         // change upper threshold to max so that it can't be triggered due to something sitting on the pressure sensor
         hadc->Instance->TR = (0x0FFF << 16);
         hadc->Instance->TR |= curr_upper;
-        HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_SET);
     } else {
         serial_println("Something was removed from me!");
         hadc->Instance->TR = (curr_lower << 16);
         hadc->Instance->TR &= ~(0x0000FFFF); // clear the lower threshold
-        HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
     }
 
-    serial_print("\n");
-
-    HAL_ADC_Start(hadc);
-
+    serial_println("*** END OF ADC WATCHDOG INTERRUPT ***\n");
 }
 /* USER CODE END 0 */
 
@@ -178,56 +166,63 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  // Disable prox interrupt while refreshing display
+  VCNL4010_disable_Interrupt();
+
   //Start Receive Buffer From ESP 8266
   HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 
   //WIFI Test
   serial_select(DEBUG_PRINT);
   serial_clear();
-  serial_println("Hello world, this is a test of the new serial print functions!");
+  serial_print("Setting up Wi-Fi... ");
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
     // try again
   }
-  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
-    // try again
-  }
-  receive_prediction(prediction_str);
-  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
-    serial_println("Error! Predicted Days");
-  }
-  if (HAL_UART_Transmit(&huart2, prediction_str, sizeof(prediction_str), 100)!= HAL_OK){
-    serial_println("Error! Printing string");
-  }
   serial_select(DEBUG_PRINT);
-  serial_clear();
-  serial_printf("Predicted Days: ");
-  serial_printf("%s\n", prediction_str);
-  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
+  serial_println("Done!");
+//  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
+//    // try again
+//  }
+//  receive_prediction(prediction_str);
+//  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
+//    serial_println("Error! Predicted Days");
+//  }
+//  if (HAL_UART_Transmit(&huart2, prediction_str, sizeof(prediction_str), 100)!= HAL_OK){
+//    serial_println("Error! Printing string");
+//  }
+//  serial_select(DEBUG_PRINT);
+//  serial_clear();
+//  serial_printf("Predicted Days: ");
+//  serial_printf("%s\n", prediction_str);
+//  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
 
+  // Test red and green LEDs
+  serial_print("Testing LEDs... ");
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_SET);
+  HAL_Delay(500);
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
+  serial_println("Done!");
 
-  // Clear the serial debug terminal
-  serial_select(DEBUG_PRINT);
-  serial_clear();
-  epd_init(false);
-
-  // Disable prox interrupt while refreshing display
-  VCNL4010_disable_Interrupt();
-
-//  display_setup();
+  // Setup display and I2C peripherals
+  display_setup();
 
   serial_printf("Initializing I2C peripherals... ");
   hts_cal_data = hts221_init();
   bq_init_ret = bq_init();
-  VCNL4010_setLEDcurrent(20);
-  VCNL4010_enable_Interrupt();
+//  VCNL4010_setLEDcurrent(20);
+//  VCNL4010_enable_Interrupt();
   serial_println("Done!");
 
-  HAL_TIM_Base_Start_IT(&htim6);
-  HAL_TIM_Base_Start_IT(&htim2);
+  if (HAL_ADC_Start_DMA(&hadc, adc_dma_buffer, 2) != HAL_OK) {
+    serial_println("!!! Failed to start ADC DMA");
+  } else {
+    serial_println("ADC DMA Started");
+  }
 
-//  HAL_ADC_Start(&hadc);
-//  HAL_ADC_Start_DMA(&hadc, adc_readings, 2);
 
   /* USER CODE END 2 */
 
@@ -238,6 +233,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    if (systemState == WAITING) {
+//      HAL_TIM_Base_Start_IT(&htim2); // Don't need this anymore, using physical debouncing
+      
+    }
+    else if (systemState == MONITORING) {
+      HAL_TIM_Base_Start_IT(&htim6);
+      VCNL4010_setLEDcurrent(20);
+      VCNL4010_enable_Interrupt();
+    }
   }
   /* USER CODE END 3 */
 }
@@ -300,7 +304,7 @@ void SystemClock_Config(void)
 static void MX_NVIC_Init(void)
 {
   /* TIM6_DAC_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
   /* TIM2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
@@ -313,13 +317,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
   HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
 }
 
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc) {
-    serial_printf("Buffer is half full!\n");
-//    HAL_DMA_IRQHandler(&hdma_adc);
-}
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-    serial_printf("Buffer is completely full!\n");
-//    HAL_DMA_IRQHandler(&hdma_adc);
+  serial_print("*DMA* Updating ADC values... ");
+  for (int i =0; i<2; i++)
+  {
+    adc_readings[i] = adc_dma_buffer[i];  // store the values in adc[]
+  }
+  serial_println("Done!");
 }
 
 /* USER CODE END 4 */

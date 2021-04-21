@@ -37,6 +37,15 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+enum system_state {
+    WAITING,
+    MONITORING
+};
+
+enum battery_state {
+    HIGH,
+    LOW
+};
 
 /* USER CODE END ET */
 

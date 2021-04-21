@@ -55,7 +55,8 @@
 
 extern HTS_Cal * hts_cal_data;
 extern int bq_init_ret;
-extern int state;
+extern enum battery_state batteryState;
+;
 extern char  prediction_days_str[2];
 
 uint8_t button_history[] = {0, 0, 0, 0};
@@ -72,15 +73,14 @@ uint8_t button_history[] = {0, 0, 0, 0};
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_adc;
 extern ADC_HandleTypeDef hadc;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN EV */
-extern uint32_t * adc_readings;
-//extern uint8_t *buffer1;
-//extern uint32_t buffer1_size;
+
+extern uint32_t adc_readings[2], adc_dma_buffer[2];
+
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -174,7 +174,6 @@ void EXTI2_3_IRQHandler(void)
 
     serial_printf("==EXTI2 - PROX INT==\n");
     VCNL4010_ack_ISR();
-    state = 1;
 
     serial_printf("Getting readings... ");
     set_cursor(2,2);
@@ -234,20 +233,6 @@ void EXTI2_3_IRQHandler(void)
   /* USER CODE BEGIN EXTI2_3_IRQn 1 */
 
   /* USER CODE END EXTI2_3_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 channel 1 interrupt.
-  */
-void DMA1_Channel1_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_adc);
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel1_IRQn 1 */
 }
 
 /**
@@ -352,7 +337,10 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
   // Timer 6 should gather new sensor readings, upload these data to the cloud via Wi-Fi, pull the updated prediction, and update the display.
 
+  serial_println("=== TIM6 Interrupt ===");
+
   // Turn on the 5V power to the methane and Wi-Fi peripherals
+  batteryState = HIGH;
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_SET);
   HAL_Delay(5000);
 
@@ -374,7 +362,7 @@ void TIM6_DAC_IRQHandler(void)
 
     humid = hts221_get_humid(hts_cal_data);
     if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
-    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n\n", humid, 37);
+    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
   } else {
     serial_printf("Temp/RH sensor initialization has failed.\n Please power cycle system to attemp reinitialization.\n");
   }
@@ -399,28 +387,23 @@ void TIM6_DAC_IRQHandler(void)
 //  serial_printf("Battery Pack Temp\t\t\t%d\tK\r\n", temp_bat);
 //  serial_printf("Current Bat IC Temp is\t\t\t%d\tK\r\n\n", temp_bq_IC);
 
-  // TODO: Add ADC reading for methane sensor - fix
-  HAL_ADC_Start(&hadc);
-  HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
-  methane = HAL_ADC_GetValue(&hadc);
-  HAL_ADC_Stop(&hadc);
-
-  serial_printf("Methane: %d\n", methane);
+  serial_printf("Methane: %d\n", adc_dma_buffer[0]);
 
   // Send sensor data to cloud
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
     // TODO: error handling
   }
-  if (sent_freshbyte_data(temp, humid, methane) == AT_FAIL){
+  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
     // TODO: error handling
   }
 
   // Disable the 5V regulator
+  batteryState = LOW;
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_RESET);
   HAL_Delay(5000);
   serial_select(DEBUG_PRINT);
-  serial_println("Interrupt done!");
+  serial_println("=== Interrupt done! === \n");
 
   //get prediction
 //  int prediction = get_prediction();
@@ -448,10 +431,10 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
   epd_powerUp();
 
   serial_printf("Writing to B/W buffer...\n");
-  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
+//  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
 
   serial_printf("Writing to R buffer...\n");
-  write_RAM_to_epd(buffer1, buffer1_size, 1, false);
+//  write_RAM_to_epd(buffer1, buffer1_size, 1, false);
 
   serial_println("Printing random information to display\n");
   set_text_scale(2);

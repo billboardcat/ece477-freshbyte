@@ -3,14 +3,14 @@
 #include "epd.h"
 #include "main.h"
 #include "spi.h"
+#include "sram.h"
 #include "serial_print.h"
 #include "stm32l0xx_hal.h"
-#include "sram.h"
 
 #define EPD_SPI     hspi1
 #define BUSY_WAIT   500
 #define REFRESH_WAIT 13000
-//#define EPD_USE_COLOR
+
 // Display parameters
 bool use_nrst = false;
 bool use_busy = false;
@@ -20,22 +20,22 @@ bool single_byte_tx = false;
 bool black_buffer_inverted = false;
 bool color_buffer_inverted = false;
 
-//uint32_t buffer1_size;
-//uint8_t *buffer1;
-//uint8_t *black_buffer;  // On-chip ram pointers for buffers
-//uint16_t buffer1_addr;
-//uint16_t black_buffer_addr; // Ext. sram address offsets for the color
-//
-//#ifdef EPD_USE_COLORS
-//uint32_t buffer2_size;
-//uint8_t *buffer2;
-//uint8_t *color_buffer; // On-chip ram pointers for buffers
-//uint16_t buffer2_addr;
-//uint16_t color_buffer_addr; // Ext. sram address offsets for the color
-//#endif
+uint32_t buffer1_size;
+uint8_t *buffer1;
+uint8_t *black_buffer;  // On-chip ram pointers for buffers
+uint16_t buffer1_addr;
+uint16_t black_buffer_addr; // Ext. sram address offsets for the color
+
+#ifdef EPD_USE_COLORS
+uint32_t buffer2_size;
+uint8_t *buffer2;
+uint8_t *color_buffer; // On-chip ram pointers for buffers
+uint16_t buffer2_addr;
+uint16_t color_buffer_addr; // Ext. sram address offsets for the color
+#endif
 
 uint8_t partials_since_last_full_update = 0;
-uint8_t rotation = 2;
+uint8_t rotation;
 uint8_t layer_colors[EPD_NUM_COLORS];
 const uint8_t *epd_init_code = NULL;
 uint16_t width;
@@ -245,18 +245,16 @@ void epd_powerUp() {
     HAL_Delay(200);
     const uint8_t *init_code = epd_init_code;
 
-    if (init_code != NULL) {
-      epd_commandList(init_code);
+    epd_commandList(init_code);
 
-      buf[0] = (EPD_HEIGHT >> 8) & 0xFF;
-      buf[1] = EPD_HEIGHT & 0xFF;
-      buf[2] = (EPD_WIDTH >> 8) & 0xFF;
-      buf[3] = EPD_WIDTH & 0xFF;
-      epd_pCommand(IL91874_RESOLUTION, buf, 4);
+    buf[0] = (EPD_HEIGHT >> 8) & 0xFF;
+    buf[1] = EPD_HEIGHT & 0xFF;
+    buf[2] = (EPD_WIDTH >> 8) & 0xFF;
+    buf[3] = EPD_WIDTH & 0xFF;
+    epd_pCommand(IL91874_RESOLUTION, buf, 4);
 
-      buf[0] = 0x00;
-      epd_pCommand(IL91874_PDRF, buf, 1);
-    }
+    buf[0] = 0x00;
+    epd_pCommand(IL91874_PDRF, buf, 1);
 }
 
 /*!
@@ -366,7 +364,15 @@ void epd_init(bool sram_enabled) {
         buffer1 = buffer2 = NULL;       // Set MCU RAM buffer pointers to NULL
     } else {                                        // Set up buffers for MCU RAM usage
         buffer1 = (uint8_t *) malloc(buffer1_size); // First buffer's address
+        if(buffer1 == NULL){
+          serial_println("Malloc fail in epd_init");
+          return;
+        }
         buffer2 = (uint8_t *) malloc(buffer2_size); // Second buffer's address
+        if(buffer2 == NULL){
+          serial_println("Malloc fail in epd_init");
+          return;
+        }
     }
 #else
     if (use_sram) {         // Set up the buffer for SRAM usage
@@ -374,6 +380,10 @@ void epd_init(bool sram_enabled) {
         buffer1 = NULL;     // Set MCU RAM buffer pointer to NULL
     } else {                                        // Set up buffer for MCU RAM usage
         buffer1 = (uint8_t *) malloc(buffer1_size); // The buffer's address
+        if(buffer1 == NULL){
+          serial_println("Malloc fail in epd_init");
+          return;
+        }
     }
 #endif
 

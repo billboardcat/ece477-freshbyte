@@ -34,20 +34,6 @@
 #define EPD_WIDTH 264
 #define EPD_HEIGHT 176
 
-uint32_t buffer1_size;
-uint8_t *buffer1;
-uint8_t *black_buffer;  // On-chip ram pointers for buffers
-uint16_t buffer1_addr;
-uint16_t black_buffer_addr; // Ext. sram address offsets for the color
-
-#ifdef EPD_USE_COLORS
-uint32_t buffer2_size;
-uint8_t *buffer2;
-uint8_t *color_buffer; // On-chip ram pointers for buffers
-uint16_t buffer2_addr;
-uint16_t color_buffer_addr; // Ext. sram address offsets for the color
-#endif
-
 #define EPD_CS_LOW  HAL_GPIO_WritePin(EPD_CS_GPIO_Port, EPD_CS_Pin, GPIO_PIN_RESET)
 #define EPD_CS_HIGH HAL_GPIO_WritePin(EPD_CS_GPIO_Port, EPD_CS_Pin, GPIO_PIN_SET)
 #define EPD_DC_LOW  HAL_GPIO_WritePin(EPD_DC_GPIO_Port, EPD_DC_Pin, GPIO_PIN_RESET)
