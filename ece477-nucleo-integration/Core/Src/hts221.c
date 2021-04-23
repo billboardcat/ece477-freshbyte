@@ -132,6 +132,7 @@ HTS_Cal * hts221_init () {
         HTS_Cal * hts_cal_data = malloc(sizeof(HTS_Cal));
 
         if(hts_cal_data == NULL){
+          serial_println("!!! HTS221 - malloc failure");
           return NULL;
         }
 

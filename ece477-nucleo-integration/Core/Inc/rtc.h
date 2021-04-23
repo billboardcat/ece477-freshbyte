@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    adc.h
+  * @file    rtc.h
   * @brief   This file contains all the function prototypes for
-  *          the adc.c file
+  *          the rtc.c file
   ******************************************************************************
   * @attention
   *
@@ -17,8 +17,8 @@
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ADC_H__
-#define __ADC_H__
+#ifndef __RTC_H__
+#define __RTC_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,29 +31,22 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern ADC_HandleTypeDef hadc;
+extern RTC_HandleTypeDef hrtc;
 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_ADC_Init(void);
+void MX_RTC_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void ADC_Select_CH0(void);
-void ADC_calc_r0(void);
-float ADC_calc_ppm(uint16_t);
-double ln(double x);
-double log10(double x);
-double pow(double x, double y);
-double fabs(double x);
-double exp(double x);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __ADC_H__ */
+#endif /* __RTC_H__ */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

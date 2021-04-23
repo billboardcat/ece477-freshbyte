@@ -22,6 +22,7 @@
 #include "adc.h"
 #include "dma.h"
 #include "i2c.h"
+#include "rtc.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -36,7 +37,7 @@
 #include "epd.h"
 #include "epd_gfx.h"
 #include "at_commands.h"
-//#include "main_gui.c"
+#include "main_gui.c"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,10 +100,10 @@ void display_setup() {
 //  display(false);
   serial_println("Done!");
 
-//  serial_printf("Drawing bitmap to buffer... ");
-//  draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
-//  display(false);
-//  serial_println("Done!\n");
+  serial_printf("Drawing bitmap to buffer... ");
+  draw_bitmap(0, 0, main_select, EPD_WIDTH, EPD_HEIGHT, EPD_BLACK);
+  display(false);
+  serial_println("Done!\n");
 }
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
@@ -114,11 +115,15 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
 
     if (curr_upper != 0x0FFF) { //  we trig'd because something was placed onto the sensor
         serial_println("Something was placed on me!");
+        food_present = true;
+
         // change upper threshold to max so that it can't be triggered due to something sitting on the pressure sensor
         hadc->Instance->TR = (0x0FFF << 16);
         hadc->Instance->TR |= curr_upper;
     } else {
         serial_println("Something was removed from me!");
+        food_present = false;
+
         hadc->Instance->TR = (curr_lower << 16);
         hadc->Instance->TR &= ~(0x0000FFFF); // clear the lower threshold
     }
@@ -163,60 +168,30 @@ int main(void)
   MX_ADC_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
+  MX_RTC_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  // set busy pins while setting up
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
+
   // Disable prox interrupt while refreshing display
   VCNL4010_disable_Interrupt();
 
   //Start Receive Buffer From ESP 8266
-  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
-
-  //WIFI Test
-  serial_select(DEBUG_PRINT);
-  serial_clear();
-  serial_print("Setting up Wi-Fi... ");
-  serial_select(WIFI);
-  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL){
-    // try again
-  }
-  serial_select(DEBUG_PRINT);
-  serial_println("Done!");
-//  if (sent_freshbyte_data(5000, 5000, 50000) == AT_FAIL){
-//    // try again
-//  }
-//  receive_prediction(prediction_str);
-//  if (HAL_UART_Transmit(&huart2, "Predicted Days: ", sizeof("Predicted Days: "), 100) != HAL_OK){
-//    serial_println("Error! Predicted Days");
-//  }
-//  if (HAL_UART_Transmit(&huart2, prediction_str, sizeof(prediction_str), 100)!= HAL_OK){
-//    serial_println("Error! Printing string");
-//  }
-//  serial_select(DEBUG_PRINT);
-//  serial_clear();
-//  serial_printf("Predicted Days: ");
-//  serial_printf("%s\n", prediction_str);
-//  serial_println("Did you see that? I was chatting with the wi-fi module for a little bit ;)");
-
-  // Test red and green LEDs
-  serial_print("Testing LEDs... ");
-  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_SET);
-  HAL_Delay(500);
-  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
-  serial_println("Done!");
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 20);
 
   // Setup display and I2C peripherals
+  serial_select(DEBUG_PRINT);
   display_setup();
-
   serial_printf("Initializing I2C peripherals... ");
   hts_cal_data = hts221_init();
   bq_init_ret = bq_init();
-//  VCNL4010_setLEDcurrent(20);
-//  VCNL4010_enable_Interrupt();
+  VCNL4010_setLEDcurrent(20);
+  VCNL4010_enable_Interrupt();
   serial_println("Done!");
 
   if (HAL_ADC_Start_DMA(&hadc, adc_dma_buffer, 9) != HAL_OK) {
@@ -226,7 +201,9 @@ int main(void)
   }
   HAL_Delay(100);
 
-
+  // Reset busy LED and set ready LED
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -242,40 +219,56 @@ int main(void)
       serial_printf("ADC[8] = 0x%x\n", adc_dma_buffer[8]);
       HAL_Delay(500);
 
-        while (adc_dma_buffer[8] > 3000); //wait
-        if (adc_dma_buffer[8] > 1500) {
-          // D
-          serial_println("D");
-          fruit_selection = MANGO;
-        }
-        else if (adc_dma_buffer[8] > 1000) {
-          // C
-          serial_println("C");
-          fruit_selection = LIME;
-        }
-        else if (adc_dma_buffer[8] > 500) {
-          // B
-          serial_println("B");
-          fruit_selection = BANANA;
-        }
-        else {
-          // A
-          serial_println("A");
-          fruit_selection = APPLE;
-        }
-
-        systemState = MONITORING_SETUP;
+      while (adc_dma_buffer[8] > 3000); //wait
+      if (adc_dma_buffer[8] > 1500) {
+        // D
+        serial_println("D");
+        fruit_selection = MANGO;
+      }
+      else if (adc_dma_buffer[8] > 1000) {
+        // C
+        serial_println("C");
+        fruit_selection = LIME;
+      }
+      else if (adc_dma_buffer[8] > 500) {
+        // B
+        serial_println("B");
+        fruit_selection = BANANA;
+      }
+      else {
+        // A
+        serial_println("A");
+        fruit_selection = APPLE;
+      }
+      HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
+      systemState = MONITORING_SETUP;
     }
 
     else if(systemState == MONITORING_SETUP){
-      HAL_TIM_Base_Start_IT(&htim6);
-      VCNL4010_setLEDcurrent(20);
-      VCNL4010_enable_Interrupt();
-      systemState = MONITORING;
+      if (food_present) {
+        serial_println("Food has been placed, starting monitoring!");
+        HAL_TIM_Base_Start_IT(&htim6);
+        VCNL4010_setLEDcurrent(20);
+        VCNL4010_enable_Interrupt();
+        systemState = MONITORING;
+      }
+      else {
+        serial_println("Waiting for food!");
+      }
     }
 
     else if (systemState == MONITORING) {
-      while(1);
+        if(food_present == false){
+          serial_println("Food is not present! Resarting to food selection screen.");
+          // if statement to allow return to waiting state
+          systemState = WAITING;
+          //update display for food selection screen
+          display_setup();
+        }
+        else{
+//          serial_println("Food present! Monitoring");
+        }
     }
   }
   /* USER CODE END 3 */
@@ -297,9 +290,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLLMUL_4;
@@ -322,10 +316,11 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_USART2
-                              |RCC_PERIPHCLK_I2C1;
+                              |RCC_PERIPHCLK_I2C1|RCC_PERIPHCLK_RTC;
   PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -349,18 +344,8 @@ static void MX_NVIC_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
   //once buffer is full - restart
-  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 600);
+  HAL_UART_Receive_DMA(&huart1, UART1_rxBuffer, 20);
 }
-
-//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-////  serial_print("*DMA* Updating ADC values... ");
-//  for (int i = 0; i < 9; i++)
-//  {
-//    adc_readings[i] = adc_dma_buffer[i];  // store the values in adc[]
-//  }
-////  serial_println("Done!");
-//}
-
 /* USER CODE END 4 */
 
 /**
