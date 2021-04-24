@@ -274,16 +274,15 @@ double ln(double x) {
   while (term > ALMOSTZERO)
   {
     sum += term;
-    //generate next term
     denom += 2.0;
     frac = frac * xmlxpl * xmlxpl;
-    term = frac / denom;
+    term = frac / denom; //generate next term
   }
   return 2.0 * sum;
 }
 
 double log10(double x) {
-  return ln(x) * LN10;
+  return ln(x) / LN10;
 }
 
 // source: https://stackoverflow.com/questions/27129006/float-power-program-in-c-without-math-h
