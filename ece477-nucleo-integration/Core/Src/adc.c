@@ -21,8 +21,10 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
-#include "math.h"
+//#include "math.h"
 float r0 = 0;
+#define ALMOSTZERO 0.0000000000000000001
+#define LN10 2.3025850929940456840179914546844
 
 /* USER CODE END 0 */
 
@@ -218,8 +220,8 @@ void ADC_calc_r0(void) {
 
   for(i = 0; i < 500; i++)
   {
-	  ADC_Select_CH0();
-	  HAL_ADC_Start(&hadc);
+	  //ADC_Select_CH0();
+	  HAL_ADC_Start(&hadc); // TODO: check if this is working. May need to change to delay and read from DMA buffer
 	  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
 	  methane = HAL_ADC_GetValue(&hadc);
 	  total += methane;
@@ -235,8 +237,8 @@ void ADC_calc_r0(void) {
 // takes 1 methane reading and converts the raw ADC value to ppm
 // uses the r0 global variable
 // source: https://thestempedia.com/tutorials/interfacing-mq-4-gas-sensor-evive/
-float ADC_calc_ppm(void) {
-	uint16_t methane;
+float ADC_calc_ppm(uint16_t methane) {
+	//uint16_t methane;
 	float voltage;
 	float rs_gas;
 	float ratio;
@@ -245,11 +247,11 @@ float ADC_calc_ppm(void) {
 	double ppm_log;
 	double ppm;
 
-	ADC_Select_CH0();
+	/*ADC_Select_CH0();
 	HAL_ADC_Start(&hadc);
 	HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
 	methane = HAL_ADC_GetValue(&hadc);    //Read analog values of sensor
-	HAL_ADC_Stop(&hadc);
+	HAL_ADC_Stop(&hadc);*/
 
 	voltage = methane * (5.0 / 1023.0);       //Convert analog values to voltage
 	rs_gas = ((5.0 * 10.0) / voltage) - 10.0;      //Get value of RS in a gas
@@ -258,6 +260,60 @@ float ADC_calc_ppm(void) {
 	ppm_log = (log10(ratio) - b) / m;     //Get ppm value in linear scale according to the the ratio value
 	ppm = pow(10, ppm_log);
 	return ppm;
+}
+
+// source: https://stackoverflow.com/questions/35968963/trying-to-calculate-logarithm-base-10-without-math-h-really-close-just-having
+double ln(double x) {
+  double sum = 0.0;
+  double xmlxpl = (x - 1) / (x + 1);
+  double denom = 1.0;
+  double frac = xmlxpl;
+  double term = frac / denom;
+
+
+  while (term > ALMOSTZERO)
+  {
+    sum += term;
+    //generate next term
+    denom += 2.0;
+    frac = frac * xmlxpl * xmlxpl;
+    term = frac / denom;
+  }
+  return 2.0 * sum;
+}
+
+double log10(double x) {
+  return ln(x) * LN10;
+}
+
+// source: https://stackoverflow.com/questions/27129006/float-power-program-in-c-without-math-h
+double pow(double x, double y) {
+  return exp(y * ln(x));
+}
+
+// source: https://www.quora.com/How-can-I-make-an-exponential-function-in-C-like-e-m-without-using-math-h-library-functions
+double exp(double x) {
+  const double epsilon = 1e-7;
+  double sum = 0.0;
+  int n = 0;
+  double factorial = 1;
+  double power = 1.0;
+  double term;
+  do {
+    term = power/factorial;
+    sum += term;
+    n += 1;
+    power *= x;
+    factorial *= n;
+  } while (fabs(term) >= epsilon);
+  return sum;
+}
+
+double fabs(double x) {
+  if(x < 0) {
+    x *= -1;
+  }
+  return x;
 }
 /* USER CODE END 1 */
 
