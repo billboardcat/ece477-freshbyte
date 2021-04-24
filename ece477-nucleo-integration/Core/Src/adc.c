@@ -205,6 +205,9 @@ void ADC_Select_CH0(void) {
     }
 }
 
+// takes 500 methane readings to calculate the resistance of the sensor in fresh air
+// changes r0 global variable
+// source: https://thestempedia.com/tutorials/interfacing-mq-4-gas-sensor-evive/
 void ADC_calc_r0(void) {
   uint16_t methane;
   int total = 0;
@@ -212,7 +215,6 @@ void ADC_calc_r0(void) {
   float voltage;
   float rs_air;
   int i;
-
 
   for(i = 0; i < 500; i++)
   {
@@ -230,6 +232,9 @@ void ADC_calc_r0(void) {
   r0 = rs_air / 4.4;
 }
 
+// takes 1 methane reading and converts the raw ADC value to ppm
+// uses the r0 global variable
+// source: https://thestempedia.com/tutorials/interfacing-mq-4-gas-sensor-evive/
 float ADC_calc_ppm(void) {
 	uint16_t methane;
 	float voltage;
