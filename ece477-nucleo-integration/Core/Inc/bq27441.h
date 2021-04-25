@@ -13,10 +13,11 @@
 
 #include "stm32l0xx_hal.h"
 #include "BQ27441_Definitions.h"
+#include "stdbool.h"
 
 /* === Battery Init SUCCESS == */
-#define BAT_INIT_SUCCESS 1
-#define BAT_INIT_FAIL -1
+#define BAT_INIT_SUCCESS true
+#define BAT_INIT_FAIL false
 
 
 /* === Battery Capacity == */
@@ -30,7 +31,7 @@
 
 
 /* === FUNCTION DECLARATIONS === */
-int bq_init();
+bool bq_init();
 
 int BQ27441_setCapacity(uint16_t capacity);
 int BQ27441_setDesignEnergy(uint16_t energy);

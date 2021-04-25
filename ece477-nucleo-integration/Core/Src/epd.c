@@ -7,9 +7,9 @@
 #include "serial_print.h"
 #include "stm32l0xx_hal.h"
 
-#define EPD_SPI     hspi1
-#define BUSY_WAIT   500
-#define REFRESH_WAIT 13000
+#define EPD_SPI       hspi1
+#define BUSY_WAIT     500
+#define REFRESH_WAIT  13000
 
 // Display parameters
 bool use_nrst = false;
@@ -22,7 +22,6 @@ bool color_buffer_inverted = false;
 
 uint32_t buffer1_size;
 uint8_t *buffer1;
-//uint8_t buffer1_array[((uint32_t) EPD_WIDTH * (uint32_t) EPD_HEIGHT) / 8];
 uint8_t *black_buffer;  // On-chip ram pointers for buffers
 uint16_t buffer1_addr;
 uint16_t black_buffer_addr; // Ext. sram address offsets for the color
@@ -37,7 +36,7 @@ uint16_t color_buffer_addr; // Ext. sram address offsets for the color
 
 uint8_t partials_since_last_full_update = 0;
 uint8_t rotation;
-uint8_t layer_colors[EPD_NUM_COLORS];
+static const uint8_t layer_colors[] = {0b00, 0b01, 0b10, 0b10, 0b00, 0b01};
 const uint8_t *epd_init_code = NULL;
 uint16_t width;
 uint16_t height;
@@ -140,12 +139,6 @@ void epd_commandList(const uint8_t *init_code) {
             HAL_Delay(num_args);
             continue;
         }
-//        if (num_args > sizeof(buf)) {
-//            serial_println("ERROR - buf not large enough!");
-//            while (1) {
-//                HAL_Delay(HAL_MAX_DELAY);
-//            }
-//        }
 
         for (int i = 0; i < num_args; i++) {
             buf[i] = *init_code;
@@ -370,14 +363,6 @@ void epd_init(bool sram_enabled) {
 #ifdef EPD_USE_COLOR
     set_color_buffer(1, false);
 #endif
-
-    // Initialize layer_colors[] LUT
-    layer_colors[EPD_WHITE] = 0b00;
-    layer_colors[EPD_BLACK] = 0b01;
-    layer_colors[EPD_RED] = 0b10;
-    layer_colors[EPD_GRAY] = 0b10;
-    layer_colors[EPD_LIGHT] = 0b00;
-    layer_colors[EPD_DARK] = 0b01;
 
     // Set the display width, height, and rotation to their default values.
     width = EPD_WIDTH;
@@ -626,7 +611,6 @@ void draw_pixel(int16_t x, int16_t y, uint16_t color) {
         *color_pBuf |= (1 << (7 - y % 8));
     }
 #endif
-
     bool black_bit;
     black_bit = layer_colors[color] & 0x1;
     if ((black_bit && black_buffer_inverted) || (!black_bit && !black_buffer_inverted)) {

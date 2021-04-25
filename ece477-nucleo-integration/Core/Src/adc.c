@@ -21,10 +21,10 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
-//#include "math.h"
 float r0 = 0;
 #define ALMOSTZERO 0.0000000000000000001
 #define LN10 2.3025850929940456840179914546844
+extern uint32_t adc_dma_buffer[9];
 
 /* USER CODE END 0 */
 
@@ -213,16 +213,18 @@ void ADC_calc_r0(void) {
   float average;
   float voltage;
   float rs_air;
-  int i;
+  int16_t i;
 
   for(i = 0; i < 500; i++)
   {
 	  //ADC_Select_CH0();
-	  HAL_ADC_Start(&hadc); // TODO: check if this is working. May need to change to delay and read from DMA buffer
-	  while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
-	  methane = HAL_ADC_GetValue(&hadc);
+	  //HAL_ADC_Start(&hadc); // TODO: check if this is working. May need to change to delay and read from DMA buffer
+	  //while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
+	  //methane = HAL_ADC_GetValue(&hadc);
+	  methane = adc_dma_buffer[0];
 	  total += methane;
-	  HAL_ADC_Stop(&hadc);
+      HAL_Delay(100);
+	  //HAL_ADC_Stop(&hadc);
   }
 
   average = total / 500.0;
@@ -236,10 +238,10 @@ float ADC_calc_ppm(uint16_t methane) {
 	float voltage;
 	float rs_gas;
 	float ratio;
-	float m = -0.318;
-	float b = 1.133;
-	double ppm_log;
-	double ppm;
+	//float m = -0.318;
+	//float b = 1.133;
+	float ppm_log;
+	float ppm;
 
 	/*ADC_Select_CH0();
 	HAL_ADC_Start(&hadc);
@@ -251,18 +253,18 @@ float ADC_calc_ppm(uint16_t methane) {
 	rs_gas = ((5.0 * 10.0) / voltage) - 10.0;      //Get value of RS in a gas
 	ratio = rs_gas / r0;                          // Get ratio RS_gas/RS_air
 
-	ppm_log = (log10(ratio) - b) / m;     //Get ppm value in linear scale according to the the ratio value
+	ppm_log = (log10(ratio) - 1.133) / -0.318;     //Get ppm value in linear scale according to the the ratio value
 	ppm = pow(10, ppm_log);
 	return ppm;
 }
 
 // source: https://stackoverflow.com/questions/35968963/trying-to-calculate-logarithm-base-10-without-math-h-really-close-just-having
-double ln(double x) {
-  double sum = 0.0;
-  double xmlxpl = (x - 1) / (x + 1);
-  double denom = 1.0;
-  double frac = xmlxpl;
-  double term = frac / denom;
+float ln(float x) {
+  float sum = 0.0;
+  float xmlxpl = (x - 1) / (x + 1);
+  float denom = 1.0;
+  float frac = xmlxpl;
+  float term = frac / denom;
 
 
   while (term > ALMOSTZERO)
@@ -276,23 +278,23 @@ double ln(double x) {
   return 2.0 * sum;
 }
 
-double log10(double x) {
-  return ln(x) * LN10;
+float log10(float x) {
+  return ln(x) / LN10;
 }
 
 // source: https://stackoverflow.com/questions/27129006/float-power-program-in-c-without-math-h
-double pow(double x, double y) {
+float pow(float x, float y) {
   return exp(y * ln(x));
 }
 
 // source: https://www.quora.com/How-can-I-make-an-exponential-function-in-C-like-e-m-without-using-math-h-library-functions
-double exp(double x) {
-  const double epsilon = 1e-7;
-  double sum = 0.0;
-  int n = 0;
-  double factorial = 1;
-  double power = 1.0;
-  double term;
+float exp(float x) {
+  const float epsilon = 1e-7;
+  float sum = 0.0;
+  int16_t n = 0;
+  float factorial = 1;
+  float power = 1.0;
+  float term;
   do {
     term = power/factorial;
     sum += term;
@@ -303,7 +305,7 @@ double exp(double x) {
   return sum;
 }
 
-double fabs(double x) {
+float fabs(float x) {
   if(x < 0) {
     x *= -1;
   }

@@ -9,6 +9,13 @@ int session_id = 1;
 extern unsigned char UART1_rxBuffer[600];
 extern unsigned char prediction_str[2];
 
+const char wifi_send_data_str [] = "AT+HTTPCLIENT=3,0,\"http://maker.ifttt.com/trigger/ece477/"
+                                   "with/key/cRY9n1jJnl-fCLuPYsZZ-8\",\"maker.ifttt.com\",\""
+                                   "/trigger/ece477/with/key/cRY9n1jJnl-fCLuPYsZZ-8\",1,\""
+                                   "value1=%d&value2=%d&value3=%d%%7C%%7C%%7C%d\"\n";
+
+const char wifi_receive_data_str [] = "AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=1wP-fJqQEgVEwBICx2EHh9-tfq526fHGmL53x4p5_quc&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1";
+
 
 //Todo check if busy before sending
 
@@ -35,10 +42,7 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
 
   //TODO - define all these as consts
 
-  serial_printf("AT+HTTPCLIENT=3,0,\"http://maker.ifttt.com/trigger/ece477/"
-                "with/key/cRY9n1jJnl-fCLuPYsZZ-8\",\"maker.ifttt.com\",\""
-                "/trigger/ece477/with/key/cRY9n1jJnl-fCLuPYsZZ-8\",1,\""
-                "value1=%d&value2=%d&value3=%d%%7C%%7C%%7C%d\"\n", temp_F, humid, methane, session_id);
+  serial_printf(wifi_send_data_str, temp_F, humid, methane, session_id);
   HAL_Delay(2000);
   session_id++;
 
@@ -52,7 +56,7 @@ unsigned char * receive_prediction(){
 
   serial_select(WIFI);
   //TODO test this new one!
-  serial_println("AT+HTTPCLIENT=2,0,\"http://gsx2json.com/api?id=1wP-fJqQEgVEwBICx2EHh9-tfq526fHGmL53x4p5_quc&sheet=1&q=Prediction(Days)\",\"gsx2json.com\",\"/get\",1");
+  serial_println(wifi_receive_data_str);
   HAL_Delay(5000);
 
   return extract_prediction();

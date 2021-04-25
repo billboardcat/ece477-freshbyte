@@ -21,7 +21,7 @@
 
 #define I2C hi2c1
 
-int bq_init(){
+bool bq_init(){
 	// return BAT_INIT_FAIL if not able to init (BAT_INIT_SUCCESS for success)
 
 	/* === Set BQ Max Battery Capacity === */

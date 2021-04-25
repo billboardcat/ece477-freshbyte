@@ -59,8 +59,7 @@
 /* USER CODE BEGIN PV */
 
 unsigned char UART1_rxBuffer[20] = {0};
-HTS_Cal * hts_cal_data;
-int bq_init_ret;
+bool bq_init_ret;
 //TODO - make this an enum? for battery state?
 enum battery_state batteryState = LOW;
 enum system_state systemState = WAITING;
@@ -71,6 +70,9 @@ bool food_present = false;
 extern uint32_t buffer1_size;
 extern uint8_t *buffer1;
 enum fruit_type fruit_selection = NONE;
+extern float r0;
+extern HTS_Cal hts_cal_data;
+extern HTS_Cal * hts_cal_ptr;
 
 /* USER CODE END PV */
 
@@ -166,7 +168,6 @@ int main(void)
   MX_TIM6_Init();
   MX_SPI1_Init();
   MX_ADC_Init();
-  MX_TIM2_Init();
   MX_USART1_UART_Init();
   MX_RTC_Init();
 
@@ -186,9 +187,10 @@ int main(void)
 
   // Setup display and I2C peripherals
   serial_select(DEBUG_PRINT);
+  serial_clear();
   display_setup();
   serial_printf("Initializing I2C peripherals... ");
-  hts_cal_data = hts221_init();
+  hts_cal_ptr = hts221_init();
   bq_init_ret = bq_init();
   VCNL4010_setLEDcurrent(20);
   VCNL4010_enable_Interrupt();
@@ -200,6 +202,9 @@ int main(void)
     serial_println("ADC DMA started OK");
   }
   HAL_Delay(100);
+
+  ADC_calc_r0();
+  serial_printf("Methane r0: %d\n", (int) r0);
 
   // Reset busy LED and set ready LED
   HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
@@ -336,9 +341,6 @@ static void MX_NVIC_Init(void)
   /* TIM6_DAC_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-  /* TIM2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(TIM2_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

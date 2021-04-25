@@ -66,6 +66,10 @@ const float coefficients[11][3] = {
         {-0.00155557, 0.28978902, -0.33514264},
         {-0.23635007 , 0.42145625,  0.50791264}
 };
+
+RTC_TimeTypeDef sTime1;
+RTC_DateTypeDef sDate1;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -80,15 +84,15 @@ const float coefficients[11][3] = {
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_adc;
 extern ADC_HandleTypeDef hadc;
-extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN EV */
 
+extern RTC_HandleTypeDef hrtc;
 extern uint32_t buffer1_size;
 extern uint8_t *buffer1;
-extern HTS_Cal * hts_cal_data;
-extern int bq_init_ret;
+extern HTS_Cal * hts_cal_ptr;
+extern bool bq_init_ret;
 extern enum battery_state batteryState;
 extern char  prediction_days_str[2];
 extern uint32_t adc_dma_buffer[9];
@@ -204,12 +208,12 @@ void EXTI2_3_IRQHandler(void)
 
   int temp = -200;
   int humid = -1;
-  if (hts_cal_data != NULL) {
-    temp = hts221_get_temp('F', hts_cal_data);
+  if (hts_cal_ptr != NULL) {
+    temp = hts221_get_temp('F', hts_cal_ptr);
     if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
     else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 
-    humid = hts221_get_humid(hts_cal_data);
+    humid = hts221_get_humid(hts_cal_ptr);
     if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
     else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
   } else {
@@ -266,20 +270,6 @@ void ADC1_COMP_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM2 global interrupt.
-  */
-void TIM2_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM2_IRQn 0 */
-
-  /* USER CODE END TIM2_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim2);
-  /* USER CODE BEGIN TIM2_IRQn 1 */
-
-  /* USER CODE END TIM2_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM6 global interrupt and DAC1/DAC2 underrun error interrupts.
   */
 void TIM6_DAC_IRQHandler(void)
@@ -304,12 +294,12 @@ void TIM6_DAC_IRQHandler(void)
 
   int temp = -200;
   int humid = -1;
-  if (hts_cal_data != NULL) {
-    temp = hts221_get_temp('F', hts_cal_data);
+  if (hts_cal_ptr != NULL) {
+    temp = hts221_get_temp('F', hts_cal_ptr);
     if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
     else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 
-    humid = hts221_get_humid(hts_cal_data);
+    humid = hts221_get_humid(hts_cal_ptr);
     if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
     else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
   } else {
@@ -317,8 +307,6 @@ void TIM6_DAC_IRQHandler(void)
   }
 
   uint16_t soc = BQ27441_soc(FILTERED);
-
-  serial_printf("Methane: %d\n", adc_dma_buffer[0]);
 
   // Send sensor data to cloud
   //TODO uncomment this after SMAT
@@ -333,19 +321,22 @@ void TIM6_DAC_IRQHandler(void)
   //get wifi prediction here?
 
   // Disable the 5V regulator
+  serial_select(DEBUG_PRINT);
+
+  float methane_ppm = ADC_calc_ppm(adc_dma_buffer[0]);
+  serial_printf("Methane: %d\n", (int) methane_ppm);
   batteryState = LOW;
+
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_RESET);
   HAL_Delay(5000);
-  serial_select(DEBUG_PRINT);
-  serial_println("=== Interrupt done! === \n");
 
   //get prediction from prediction function
   //  int prediction = get_prediction();
 
   //TODO: get prediction int
 
-  display_readings(soc, temp, humid, adc_dma_buffer[0], 5);
-
+  display_readings(soc, temp, humid, methane_ppm, 5);
+  serial_println("=== Interrupt done! === \n");
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
@@ -377,27 +368,36 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
 
   serial_println("Printing random information to display\n");
   set_text_scale(2);
-  set_x_margin(1);
-  set_y_margin(1);
-  set_cursor(1,1);
+  set_x_margin(0);
+  set_y_margin(0);
+  set_cursor(0,0);
 
-  printString("4/10/2021, 12:00 PM\n");
-  printString("Battery: "); printFloat(battery, 0); printString("%\n");
-  printString("Temperature: "); printFloat(temp, 0); printString(" F\n");
-  printString("Rel. Humidity: "); printFloat(humid, 0); printString("%\n");
-  printString("Methane: "); printFloat(methane_ppm, 0); printString(" \n\n");
-  //  TODO: enable this when ppm
-  //  printString(" ppm\n\n");
+  HAL_RTC_GetTime(&hrtc, &sTime1, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(&hrtc, &sDate1, RTC_FORMAT_BCD);
+
+  //get datetime
+  printFloat( (((sDate1.Month & 0xF0) >> 4) * 10) + (sDate1.Month & 0xF), 0); printString("/");
+  printFloat( (((sDate1.Date & 0xF0) >> 4) * 10) + (sDate1.Date & 0xF), 0); printString("/");
+//  printString("20");
+  printFloat( (((sDate1.Year & 0xF0) >> 4) * 10) + (sDate1.Year & 0xF), 0); printString(", ");
+  printFloat( (((sTime1.Hours & 0xF0) >> 4) * 10) + (sTime1.Hours & 0xF), 0); printString(":");
+  printFloat( (((sTime1.Minutes & 0xF0) >> 4) * 10) + (sTime1.Minutes & 0xF), 0); printString("\n");
+
+  printString("Battery: ");       printFloat(battery, 0);     printString("%\n");
+  printString("Temperature: ");   printFloat(temp, 0);        printString(" F\n");
+  printString("Rel. Humidity: "); printFloat(humid, 0);       printString("%\n");
+  printString("Methane: ");       printFloat(methane_ppm, 0); printString(" ppm\n\n");
 
   // Print the current food being stored
   switch (fruit_selection) {
-    case NONE: 		printString("Food: None\n"); 	break;
-    case APPLE: 	printString("Food: Apple\n"); 	break;
-    case BANANA: 	printString("Food: Banana\n");	break;
-    case LIME: 		printString("Food: Lemon\n"); 	break;
-    case MANGO: 	printString("Food: Mango\n"); 	break;
+    case NONE:    printString("Food: None\n"); 	  break;
+    case APPLE:   printString("Food: Apple\n"); 	break;
+    case BANANA:  printString("Food: Banana\n");	break;
+    case LIME:    printString("Food: Lemon\n"); 	break;
+    case MANGO:   printString("Food: Mango\n"); 	break;
   }
   // TODO: get time elapsed from RTC
+
   printString("Time Elapsed: 0 days\n");
   printString("Est. Days Left: "); printFloat(prediction_days, 0); printString(" days\n");
 

@@ -61,19 +61,19 @@ extern "C" {
 
 /* === DATA STRUCTS === */
 typedef struct HTS_Cal{
-    int T0_OUT;
+    int16_t T0_OUT;
     float correction_factor;  //slope
-    int offset; //T0_degC_x8 w/ MSB then divided by 8
+    int16_t offset; //T0_degC_x8 w/ MSB then divided by 8
 
-    int H0_OUT;
+    int16_t H0_OUT;
     float humid_correction_factor;
-    int humid_offset;
+    int16_t humid_offset;
 } HTS_Cal;
 
 /* === FUNCTION DECLARATIONS === */
 HTS_Cal * hts221_init(void);
-int hts221_get_temp(char unit, HTS_Cal * hts_cal_data);
-int hts221_get_humid(HTS_Cal * hts_cal_data);
+int hts221_get_temp(char unit, HTS_Cal * hts_cal);
+int hts221_get_humid(HTS_Cal * hts_cal);
 
 
 #ifdef __cplusplus

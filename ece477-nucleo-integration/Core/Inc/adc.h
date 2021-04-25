@@ -43,11 +43,11 @@ void MX_ADC_Init(void);
 void ADC_Select_CH0(void);
 void ADC_calc_r0(void);
 float ADC_calc_ppm(uint16_t);
-double ln(double x);
-double log10(double x);
-double pow(double x, double y);
-double fabs(double x);
-double exp(double x);
+float ln(float x);
+float log10(float x);
+float pow(float x, float y);
+float fabs(float x);
+float exp(float x);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
