@@ -224,7 +224,9 @@ int main(void)
       serial_printf("ADC[8] = 0x%x\n", adc_dma_buffer[8]);
       HAL_Delay(500);
 
-      while (adc_dma_buffer[8] > 3000); //wait
+      while (adc_dma_buffer[8] > 3000) {
+    	  serial_println("Waiting for fruit selection..."); //wait
+      }
       if (adc_dma_buffer[8] > 1500) {
         // D
         serial_println("D");
