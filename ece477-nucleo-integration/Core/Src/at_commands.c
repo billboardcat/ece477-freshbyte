@@ -27,6 +27,7 @@ int setup_wifi(char * ssid, char * password){
   //TODO - define error
 
 //  serial_select(WIFI);
+  serial_select(WIFI);
   serial_println("AT+CWMODE=1");
   HAL_Delay(50); //dealy of 50 ms
   serial_printf("AT+CWJAP=\"%s\",\"%s\"\n", ssid, password);
@@ -41,7 +42,7 @@ int sent_freshbyte_data(int temp_F, int humid, int methane){
   //TODO - define error
 
   //TODO - define all these as consts
-
+  serial_select(WIFI);
   serial_printf(wifi_send_data_str, temp_F, humid, methane, session_id);
   HAL_Delay(2000);
   session_id++;

@@ -47,8 +47,8 @@ extern "C" {
 #define HTS_CAL_T1_OUT_H 0x3F
 
 /* === Error Return Values === */
-#define HTS_REBOOT_FAIL -1
-#define HTS_REBOOT_SUCCESS 1
+#define HTS_FAIL 0
+#define HTS_SUCCESS 1
 #define HUMID_ERROR -1
 #define TEMP_ERROR -460 //this is 1 deg. F below absolute 0 in F. in C absolute 0 is -273
 
@@ -71,9 +71,9 @@ typedef struct HTS_Cal{
 } HTS_Cal;
 
 /* === FUNCTION DECLARATIONS === */
-HTS_Cal * hts221_init(void);
-int hts221_get_temp(char unit, HTS_Cal * hts_cal);
-int hts221_get_humid(HTS_Cal * hts_cal);
+int hts221_init(void);
+int hts221_get_temp(char unit);
+int hts221_get_humid();
 
 
 #ifdef __cplusplus

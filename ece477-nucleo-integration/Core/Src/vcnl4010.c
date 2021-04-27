@@ -45,6 +45,11 @@ void VCNL4010_enable_Interrupt() {
   temp |= 0x2; //set INT_THRES_EN bit
   VCNL4010_write8(VCNL4010_INTCONTROL, temp);
 
+  //Set Prox_en + self_timed
+  VCNL4010_write8(VCNL4010_COMMAND, VCNL4010_MEASUREPROXIMITY_CONT);
+
+  //TODO - set for 2 measurements for
+
   //set low threshold - not really using... so set to 0.
   VCNL4010_write16(VCNL4010_LOWTHRESHOLD, 0);
 
@@ -66,7 +71,7 @@ void VCNL4010_enable_Interrupt() {
 void VCNL4010_ack_ISR() {
   //Set INT_THRES_EN
   uint8_t temp = VCNL4010_read8(VCNL4010_INTSTAT);
-  temp &= 0xfc; //clear first 2 bits
+  temp &= 0xff; //clear first 2 bits
   VCNL4010_write8(VCNL4010_INTSTAT, temp);
 }
 

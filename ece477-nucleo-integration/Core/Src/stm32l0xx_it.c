@@ -70,6 +70,9 @@ const float coefficients[11][3] = {
 RTC_TimeTypeDef sTime1;
 RTC_DateTypeDef sDate1;
 
+uint8_t current_day;
+uint8_t days_elapsed = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,12 +94,12 @@ extern DMA_HandleTypeDef hdma_usart1_rx;
 extern RTC_HandleTypeDef hrtc;
 extern uint32_t buffer1_size;
 extern uint8_t *buffer1;
-extern HTS_Cal * hts_cal_ptr;
 extern bool bq_init_ret;
 extern enum battery_state batteryState;
 extern char  prediction_days_str[2];
 extern uint32_t adc_dma_buffer[9];
 extern enum fruit_type fruit_selection;
+extern bool food_present;
 
 /* USER CODE END EV */
 
@@ -188,41 +191,69 @@ void EXTI2_3_IRQHandler(void)
   /* USER CODE BEGIN EXTI2_3_IRQn 0 */
 
   // Prox. Sensor Interrupt
-  serial_printf("==EXTI2 - PROX INT==\n");
+  serial_printf("== EXTI2 - PROX INT ==\n");
 
-  // Acknowledge the interrupt
-  VCNL4010_ack_ISR();
+  if (!food_present) {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
+    return;
+  }
+
+  // update days elapsed ...
+  HAL_RTC_GetTime(&hrtc, &sTime1, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(&hrtc, &sDate1, RTC_FORMAT_BCD);
+  if (current_day != sDate1.Date){
+    serial_print("Updating date... ");
+    current_day = sDate1.Date;
+    days_elapsed++;
+    serial_print("Done! \n\n");
+  }
 
   // Turn on the 5V power to the methane and Wi-Fi peripherals
   batteryState = HIGH;
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_SET);
-  HAL_Delay(5000);
+
+  int temp = -200;
+  int humid = -1;
+  temp = hts221_get_temp('F');
+  if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
+  else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
+
+  humid = hts221_get_humid();
+  if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
+  else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
+
+  uint16_t soc = BQ27441_soc(FILTERED);
+
+  // Send sensor data to cloud
+  serial_select(WIFI);
+  if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
+    // TODO: error handling
+  }
+  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
+    // TODO: error handling
+  }
+
+  //get wifi prediction here?
+
+  // Disable the 5V regulator
+  serial_select(DEBUG_PRINT);
+
+  uint32_t methane_raw = adc_dma_buffer[0];
+  float methane_ppm = ADC_calc_ppm(methane_raw);
+  serial_printf("Methane: %d\n", (int) methane_ppm);
+  batteryState = LOW;
+
+  HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_RESET);
+//  HAL_Delay(5000);
+
+  display_readings(soc, temp, humid, methane_ppm, predictive_model(temp, humid, methane_raw));
+// Acknowledge the interrupt
+  VCNL4010_ack_ISR();
+  serial_println("=== Interrupt done! === \n");
 
   /* USER CODE END EXTI2_3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_3_IRQn 1 */
-
-  // Gather sensor data
-  uint16_t proximity = VCNL4010_readProximity();
-  serial_printf("Proximity Reading is \t\t\t%d (0x%x)\r\n", proximity, proximity);
-
-  int temp = -200;
-  int humid = -1;
-  if (hts_cal_ptr != NULL) {
-    temp = hts221_get_temp('F', hts_cal_ptr);
-    if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
-    else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
-
-    humid = hts221_get_humid(hts_cal_ptr);
-    if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
-    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
-  } else {
-    serial_printf("Temp/RH sensor initialization has failed.\n Please power cycle system to attemp reinitialization.\n");
-  }
-
-  uint16_t soc = BQ27441_soc(FILTERED);
-
-  serial_printf("Methane: %d\n", adc_dma_buffer[0]);
 
   /* USER CODE END EXTI2_3_IRQn 1 */
 }
@@ -279,37 +310,39 @@ void TIM6_DAC_IRQHandler(void)
 
   serial_println("=== TIM6 Interrupt ===");
 
+  if (!food_present) {
+    HAL_TIM_IRQHandler(&htim6);
+    return;
+  }
+
+  // update days elapsed ...
+  HAL_RTC_GetTime(&hrtc, &sTime1, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(&hrtc, &sDate1, RTC_FORMAT_BCD);
+  if (current_day != sDate1.Date){
+    serial_print("Updating date... ");
+    current_day = sDate1.Date;
+    days_elapsed++;
+    serial_print("Done! \n\n");
+  }
+
   // Turn on the 5V power to the methane and Wi-Fi peripherals
   batteryState = HIGH;
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_SET);
-  HAL_Delay(5000);
-
-  /* USER CODE END TIM6_DAC_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim6);
-  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
-
-  // Gather sensor data
-  uint16_t proximity = VCNL4010_readProximity();
-  serial_printf("Proximity Reading is \t\t\t%d (0x%x)\r\n", proximity, proximity);
 
   int temp = -200;
   int humid = -1;
-  if (hts_cal_ptr != NULL) {
-    temp = hts221_get_temp('F', hts_cal_ptr);
-    if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
-    else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
+  temp = hts221_get_temp('F');
+  if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
+  else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 
-    humid = hts221_get_humid(hts_cal_ptr);
-    if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
-    else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
-  } else {
-    serial_printf("!!! Temp/RH sensor initialization has failed.\n!!! Please power cycle system to attempt reinitialization.\n");
-  }
+  humid = hts221_get_humid();
+  if (humid == HUMID_ERROR) serial_printf("Error reading humidity\r\n");
+  else serial_printf("Current Relative Humidity is \t\t%d\t%c\r\n", humid, 37);
 
   uint16_t soc = BQ27441_soc(FILTERED);
+  serial_printf("Current Battery is %d\n", soc);
 
   // Send sensor data to cloud
-  //TODO uncomment this after SMAT
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
     // TODO: error handling
@@ -318,40 +351,36 @@ void TIM6_DAC_IRQHandler(void)
     // TODO: error handling
   }
 
-  //get wifi prediction here?
+  // get wifi prediction here?
 
   // Disable the 5V regulator
   serial_select(DEBUG_PRINT);
 
-  float methane_ppm = ADC_calc_ppm(adc_dma_buffer[0]);
+  uint32_t methane_raw = adc_dma_buffer[0];
+  float methane_ppm = ADC_calc_ppm(methane_raw);
   serial_printf("Methane: %d\n", (int) methane_ppm);
   batteryState = LOW;
 
   HAL_GPIO_WritePin(EN_5V_GPIO_Port, EN_5V_Pin, GPIO_PIN_RESET);
-  HAL_Delay(5000);
+//  HAL_Delay(5000);
 
-  //get prediction from prediction function
-  //  int prediction = get_prediction();
-
-  //TODO: get prediction int
-
-  display_readings(soc, temp, humid, methane_ppm, 5);
+  display_readings(soc, temp, humid, methane_ppm, predictive_model(temp, humid, methane_raw));
   serial_println("=== Interrupt done! === \n");
+
+  /* USER CODE END TIM6_DAC_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim6);
+  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
+
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
-void display_readings(int battery, int temp, int humid, int methane_raw, int prediction_days) {
+void display_readings(int battery, int temp, int humid, int methane_ppm, int prediction_days) {
 
   //use string or use
 
   //turn on red led while updating display
   HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
-
-  int methane_ppm = methane_raw;
-  // TODO: get ppm methane value for display
-  // needs to init first
-  //  int methane_ppm = ADC_calc_ppm(methane_raw);
 
   serial_select(DEBUG_PRINT);
   serial_printf("Clearing display buffers...\n");
@@ -396,10 +425,16 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
     case LIME:    printString("Food: Lemon\n"); 	break;
     case MANGO:   printString("Food: Mango\n"); 	break;
   }
-  // TODO: get time elapsed from RTC
 
-  printString("Time Elapsed: 0 days\n");
-  printString("Est. Days Left: "); printFloat(prediction_days, 0); printString(" days\n");
+//  printString("Time Elapsed: 0 days\n");
+  if(days_elapsed == 1){
+    printString("Time Elapsed: ");  printFloat(days_elapsed, 0);    printString(" day\n");
+  }
+  else{
+    printString("Time Elapsed: ");  printFloat(days_elapsed, 0);    printString(" days\n");
+  }
+
+  printString("Est. Days Left: ");  printFloat(prediction_days, 0); printString(" days\n");
 
   display(true);
 
@@ -408,27 +443,33 @@ void display_readings(int battery, int temp, int humid, int methane_raw, int pre
 }
 
 int predictive_model(int new_temp, int new_rh, int new_methane) {
-  // for testing purposes only, take these three lines out for real thing
-  //int new_temp = 70;
-  //int new_rh = 50;
-  //int new_methane = 550;
-
-  int row[3] = {new_methane, new_temp, new_rh};
-
-  float max_val = 0;
   int days = 0;
-  float dot_product = 0;
-  float x = 0;
 
-  for(int i=0; i < 11; i++) {
-    dot_product = intercepts[i] + (coefficients[i][0] * row[0] + coefficients[i][1] * row[1] + coefficients[i][2] * row[2]);
-    x = 1 / (1 + pow(2.71828, -dot_product));
-    if (x > max_val){
-      max_val = x;
-      days = i;
+  if(fruit_selection == BANANA) {
+    int row[3] = {new_methane, new_temp, new_rh};
+
+    float max_val = 0;
+    float dot_product = 0;
+    float x = 0;
+
+    for(int i=0; i < 11; i++) {
+      dot_product = intercepts[i] + (coefficients[i][0] * row[0] + coefficients[i][1] * row[1] + coefficients[i][2] * row[2]);
+      x = 1 / (1 + pow(2.71828, -dot_product));
+      if (x > max_val){
+        max_val = x;
+        days = i;
+      }
     }
   }
-  //printf("\n%d Days Remaining\n", days);
+  else if (fruit_selection == APPLE){
+    days = 14 - days_elapsed;
+  }
+  else if(fruit_selection == LIME) {
+    days = 14 - days_elapsed;
+  }
+  else if(fruit_selection == MANGO) {
+    days = 7 - days_elapsed;
+  }
   return days;
 }
 

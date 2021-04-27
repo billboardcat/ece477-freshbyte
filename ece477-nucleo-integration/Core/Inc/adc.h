@@ -46,7 +46,6 @@ float ADC_calc_ppm(uint16_t);
 float ln(float x);
 float log10(float x);
 float pow(float x, float y);
-float fabs(float x);
 float exp(float x);
 /* USER CODE END Prototypes */
 

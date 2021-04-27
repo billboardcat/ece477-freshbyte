@@ -18,10 +18,11 @@ bool use_sram = true;
 bool single_byte_tx = false;
 
 bool black_buffer_inverted = false;
-bool color_buffer_inverted = false;
+//bool color_buffer_inverted = false;
 
 uint32_t buffer1_size;
-uint8_t *buffer1;
+uint8_t *buffer1 = NULL;
+//uint8_t buffer1[((uint32_t) EPD_WIDTH * (uint32_t) EPD_HEIGHT) / 8];
 uint8_t *black_buffer;  // On-chip ram pointers for buffers
 uint16_t buffer1_addr;
 uint16_t black_buffer_addr; // Ext. sram address offsets for the color
@@ -34,7 +35,7 @@ uint16_t buffer2_addr;
 uint16_t color_buffer_addr; // Ext. sram address offsets for the color
 #endif
 
-uint8_t partials_since_last_full_update = 0;
+//uint8_t partials_since_last_full_update = 0;
 uint8_t rotation;
 static const uint8_t layer_colors[] = {0b00, 0b01, 0b10, 0b10, 0b00, 0b01};
 const uint8_t *epd_init_code = NULL;
@@ -49,11 +50,9 @@ static const uint8_t ti_270c44_tri_init_code[] = {
         0xFF, 200,
         IL91874_PANEL_SETTING, 1, 0x0F, // OTP lut
         IL91874_PDRF, 1, 0x00,
-
         0xF8, 2, 0x60, 0xA5, // boost
         0xF8, 2, 0x73, 0x23, // boost
         0xF8, 2, 0x7C, 0x00, // boost
-
         0xFE // EOM
 };
 
@@ -126,14 +125,15 @@ void epd_pCommand(uint8_t c, const uint8_t *buf, uint16_t len) {
  * @brief This function is used by epd_powerUp() to send over the display initialization code
  * @param init_code
  */
-void epd_commandList(const uint8_t *init_code) {
+void epd_commandList(void) {
     uint8_t buf[64];
+    const uint8_t * epd_init = ti_270c44_tri_init_code;
 
-    while (*init_code != 0xFE) {
-        uint8_t cmd = *init_code;
-        init_code++;
-        uint8_t num_args = *init_code;
-        init_code++;
+    while (*epd_init != 0xFE) {
+        uint8_t cmd = *epd_init;
+        epd_init++;
+        uint8_t num_args = *epd_init;
+        epd_init++;
         if (cmd == 0xFF) {
             epd_busy();
             HAL_Delay(num_args);
@@ -141,8 +141,8 @@ void epd_commandList(const uint8_t *init_code) {
         }
 
         for (int i = 0; i < num_args; i++) {
-            buf[i] = *init_code;
-            init_code++;
+            buf[i] = *epd_init;
+            epd_init++;
         }
 
         epd_pCommand(cmd, buf, num_args);
@@ -202,9 +202,9 @@ void epd_powerUp() {
 
     epd_reset();  // TODO: Implement this later for future use. Would be helpful to have.
     HAL_Delay(200);
-    const uint8_t *init_code = epd_init_code;
+//    const uint8_t *init_code = epd_init_code;
 
-    epd_commandList(init_code);
+    epd_commandList();
 
     buf[0] = (EPD_HEIGHT >> 8) & 0xFF;
     buf[1] = EPD_HEIGHT & 0xFF;
@@ -231,10 +231,10 @@ void epd_powerDown() {
     epd_busy();
 
     // Only deep sleep if we can get out of it
-    if (use_nrst) {
-        buf[0] = 0xA5;
-        epd_pCommand(IL91874_DEEP_SLEEP, buf, 1);
-    }
+#ifdef EPD_NRST_Pin
+    buf[0] = 0xA5;
+    epd_pCommand(IL91874_DEEP_SLEEP, buf, 1);
+#endif
 }
 
 /*!
@@ -311,6 +311,12 @@ void set_color_buffer(int8_t index, bool inverted) {
  * @param sram_enabled  A boolean that indicates whether or not the use the EPD's external SRAM module.
  */
 void epd_init(bool sram_enabled) {
+
+  if (buffer1 != NULL) {  // Display is already initialized, don't try to do it again.
+    serial_println("Display already initialized, returning...");
+    return;
+  }
+
     buffer1_size = ((uint32_t) EPD_WIDTH * (uint32_t) EPD_HEIGHT) / 8;  // Calculate the (first) buffer's size
     use_sram = sram_enabled;                                            // Set the SRAM usage flag
 
@@ -337,10 +343,10 @@ void epd_init(bool sram_enabled) {
     if (use_sram) {         // Set up the buffer for SRAM usage
         buffer1_addr = 0;   // The buffer's address
         buffer1 = NULL;     // Set MCU RAM buffer pointer to NULL
-    } else {                                        // Set up buffer for MCU RAM usage
+    }
+    else if (buffer1 == NULL) {                     // Set up buffer for MCU RAM usage
         buffer1 = (uint8_t *) malloc(buffer1_size); // The buffer's address
-//        buffer1 = buffer1_array;
-        if(buffer1 == NULL){
+        if (buffer1 == NULL){
           serial_println("Malloc fail in epd_init");
           return;
         }
@@ -356,7 +362,7 @@ void epd_init(bool sram_enabled) {
     EPD_CS_HIGH;                                // Make sure CS starts high.
     epd_reset();                                // reset the display, if at all possible.
     epd_powerDown();                            // Turn off the display.
-    epd_init_code = ti_270c44_tri_init_code;    // Set the pointer to the correct initialization code.
+//    epd_init_code = ti_270c44_tri_init_code;    // Set the pointer to the correct initialization code.
 
     // Setup the black and color buffers to buffer1 and buffer2 respectively
     set_black_buffer(0, false);
@@ -515,7 +521,7 @@ void display(bool sleep) {
 #endif
 
     epd_update();
-    partials_since_last_full_update = 0;
+//    partials_since_last_full_update = 0;
 
     if (sleep) {
         epd_powerDown();
@@ -543,7 +549,7 @@ void clear_display() {
         write_RAM_to_epd(buffer1, buffer1_size, 1, false);
     }
     epd_update();
-    partials_since_last_full_update = 0;
+//    partials_since_last_full_update = 0;
 #endif
     HAL_Delay(100);
 }
@@ -574,8 +580,7 @@ void draw_pixel(int16_t x, int16_t y, uint16_t color) {
             break;
         case 2:
             x = EPD_WIDTH - x - 1;
-//            y = EPD_HEIGHT - y - 1;
-            y = EPD_HEIGHT - y - 1 + 8;
+            y = EPD_HEIGHT - y - 1 + 8; // Add 8 to fix issue where we end up drawing off-screen
             break;
         case 3: EPD_swap(x, y);
             y = EPD_HEIGHT - y - 1;

@@ -61,8 +61,8 @@ all: main-build
 main-build: ece477-i2c-integrated-nucleo.elf secondary-outputs
 
 # Tool invocations
-ece477-i2c-integrated-nucleo.elf: $(OBJS) $(USER_OBJS) /Users/pacmanpark/Library/Mobile\ Documents/com~apple~CloudDocs/School/PU/ECE\ 477/Cube\ Workspace/ece477-freshbyte/ece477-i2c-integrated-nucleo/STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ece477-i2c-integrated-nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/pacmanpark/Library/Mobile Documents/com~apple~CloudDocs/School/PU/ECE 477/Cube Workspace/ece477-freshbyte/ece477-i2c-integrated-nucleo/STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-i2c-integrated-nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ece477-i2c-integrated-nucleo.elf: $(OBJS) $(USER_OBJS) /Users/jgsung/Documents/GitHub/ece477-freshbyte/ece477-i2c-integrated-nucleo/STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ece477-i2c-integrated-nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/Users/jgsung/Documents/GitHub/ece477-freshbyte/ece477-i2c-integrated-nucleo/STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ece477-i2c-integrated-nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

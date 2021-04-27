@@ -106,4 +106,3 @@ ProjectManager.LibraryCopy=1
 RCC.LPTIMFreq_Value=2097000
 RCC.HSI48_VALUE=48000000
 RCC.TIMFreq_Value=2097000
-isbadioc=false

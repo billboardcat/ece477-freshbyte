@@ -122,8 +122,8 @@ int main(void)
   puts("\033[2J\033[H"); // This clears the terminal
 
   hts_cal_data = hts221_init();
-  bq_init_ret = bq_init();
-  VCNL4010_enable_Interrupt();
+//  bq_init_ret = bq_init();
+//  VCNL4010_enable_Interrupt();
 
   HAL_TIM_Base_Start_IT(&htim6);
 

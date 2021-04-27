@@ -49,7 +49,7 @@
 void epd_reset(void);
 uint8_t epd_command(uint8_t c, bool end);
 void epd_pCommand(uint8_t c, const uint8_t *buf, uint16_t len);
-void epd_commandList(const uint8_t *init_code);
+void epd_commandList(void);
 
 // From Adafruit_IL91874.cpp/.h
 void epd_data(const uint8_t *buf, uint16_t len);

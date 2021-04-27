@@ -181,7 +181,7 @@ void TIM6_DAC_IRQHandler(void)
 
   if (hts_cal_data != NULL){
 	  //temp
-	  int temp = hts221_get_temp('C', hts_cal_data);
+	  int temp = hts221_get_temp('F', hts_cal_data);
 	  if (temp == TEMP_ERROR) serial_printf("Error reading temperature\r\n");
 	  else serial_printf("Current temperature is \t\t\t%d\tC\r\n", temp);
 	  //humid
@@ -191,8 +191,8 @@ void TIM6_DAC_IRQHandler(void)
   }
 
   	  //Prox.
-//  	  uint16_t proximity = VCNL4010_readProximity();
-//  	  serial_printf("Proximity Reading is \t\t\t%d\r\n", proximity);
+  	  uint16_t proximity = VCNL4010_readProximity();
+  	  serial_printf("Proximity Reading is \t\t\t%d\r\n", proximity);
 
   	  //Battery Baby Sitter
   	  uint16_t voltage = BQ27441_voltage();

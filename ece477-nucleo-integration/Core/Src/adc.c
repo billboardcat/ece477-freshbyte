@@ -220,14 +220,9 @@ void ADC_calc_r0(void) {
 
   for(i = 0; i < 500; i++)
   {
-	  //ADC_Select_CH0();
-	  //HAL_ADC_Start(&hadc); // TODO: check if this is working. May need to change to delay and read from DMA buffer
-	  //while(HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY)){};
-	  //methane = HAL_ADC_GetValue(&hadc);
 	  methane = adc_dma_buffer[0];
 	  total += methane;
-      HAL_Delay(100);
-	  //HAL_ADC_Stop(&hadc);
+    HAL_Delay(100);
   }
 
   average = total / 500.0;
@@ -301,21 +296,16 @@ float exp(float x) {
   float power = 1.0;
   float term;
   do {
-    term = power/factorial;
+    term = power / factorial;
     sum += term;
     n += 1;
     power *= x;
     factorial *= n;
-  } while (fabs(term) >= epsilon);
+  } while ( ((term < 0) ? (-term) : term) >= epsilon);
+//  } while (fabs(term) >= epsilon);
   return sum;
 }
 
-float fabs(float x) {
-  if(x < 0) {
-    x *= -1;
-  }
-  return x;
-}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

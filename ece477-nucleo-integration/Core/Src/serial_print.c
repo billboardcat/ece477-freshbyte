@@ -28,11 +28,13 @@ char *convert(unsigned int num, int base) {
   return(ptr);
 }
 
-/*!
-    @brief https://stackoverflow.com/questions/22520413/c-strlen-implementation-in-one-line-of-code
-*/
 size_t strlen (const char *str) {
-  return (*str) ? strlen(++str) + 1 : 0;
+  size_t len = 0;
+  while (*str != '\0') {
+    len++;
+    str++;
+  }
+  return len;
 }
 // End of internal functions for serial_print
 

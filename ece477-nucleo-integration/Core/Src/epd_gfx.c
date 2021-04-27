@@ -352,7 +352,6 @@ void draw_bitmap(int16_t x, int16_t y, const uint8_t bitmap[], int16_t w, int16_
     int16_t byteWidth = (w + 7) / 8; // Bitmap scanline pad = whole byte
     uint8_t byte = 0;
 
-//    startWrite();
     for (int16_t j = 0; j < h; j++, y++) {
         for (int16_t i = 0; i < w; i++) {
             if (i & 7)
@@ -363,7 +362,6 @@ void draw_bitmap(int16_t x, int16_t y, const uint8_t bitmap[], int16_t w, int16_
                 draw_pixel(x + i, y, color); // writePixel(x + i, y, color);
         }
     }
-//    endWrite();
 }
 
 /***

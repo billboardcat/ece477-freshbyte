@@ -38,6 +38,8 @@
 #include "epd_gfx.h"
 #include "at_commands.h"
 #include "main_gui.c"
+#include "sram.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,7 +62,6 @@
 
 unsigned char UART1_rxBuffer[20] = {0};
 bool bq_init_ret;
-//TODO - make this an enum? for battery state?
 enum battery_state batteryState = LOW;
 enum system_state systemState = WAITING;
 uint32_t adc_dma_buffer[9];
@@ -72,7 +73,9 @@ extern uint8_t *buffer1;
 enum fruit_type fruit_selection = NONE;
 extern float r0;
 extern HTS_Cal hts_cal_data;
-extern HTS_Cal * hts_cal_ptr;
+extern uint8_t current_day;
+extern RTC_TimeTypeDef sTime1;
+extern RTC_DateTypeDef sDate1;
 
 /* USER CODE END PV */
 
@@ -97,7 +100,6 @@ void display_setup() {
   serial_printf("Clearing display buffers... ");
   clear_buffer();
   epd_powerUp();
-//  write_RAM_to_epd(buffer1, buffer1_size, 0, false);
   write_RAM_to_epd(buffer1, buffer1_size, 1, false);
 //  display(false);
   serial_println("Done!");
@@ -190,7 +192,8 @@ int main(void)
   serial_clear();
   display_setup();
   serial_printf("Initializing I2C peripherals... ");
-  hts_cal_ptr = hts221_init();
+  hts221_init();
+  
   bq_init_ret = bq_init();
   VCNL4010_setLEDcurrent(20);
   VCNL4010_enable_Interrupt();
@@ -225,7 +228,8 @@ int main(void)
       HAL_Delay(500);
 
       while (adc_dma_buffer[8] > 3000) {
-    	  serial_println("Waiting for fruit selection..."); //wait
+//    	  serial_println("Waiting for fruit selection..."); //wait
+        asm("nop");
       }
       if (adc_dma_buffer[8] > 1500) {
         // D
@@ -255,10 +259,15 @@ int main(void)
     else if(systemState == MONITORING_SETUP){
       if (food_present) {
         serial_println("Food has been placed, starting monitoring!");
-        HAL_TIM_Base_Start_IT(&htim6);
+        //init days elapsed ...
+        HAL_RTC_GetTime(&hrtc, &sTime1, RTC_FORMAT_BCD);
+        HAL_RTC_GetDate(&hrtc, &sDate1, RTC_FORMAT_BCD);
+        current_day = sDate1.Date;
+
+        systemState = MONITORING;
         VCNL4010_setLEDcurrent(20);
         VCNL4010_enable_Interrupt();
-        systemState = MONITORING;
+        HAL_TIM_Base_Start_IT(&htim6);
       }
       else {
         serial_println("Waiting for food!");
@@ -266,14 +275,21 @@ int main(void)
     }
 
     else if (systemState == MONITORING) {
-        if(food_present == false){
+      //Prox_inturrupt debug
+//      serial_printf("Prox. Sesnor %d\n", VCNL4010_readProximity());
+//      VCNL4010_readProximity();
+
+      if (food_present == false) {
+          HAL_TIM_Base_Stop_IT(&htim6);
+          VCNL4010_disable_Interrupt();
+          VCNL4010_setLEDcurrent(0);
           serial_println("Food is not present! Resarting to food selection screen.");
           // if statement to allow return to waiting state
           systemState = WAITING;
           //update display for food selection screen
           display_setup();
         }
-        else{
+        else {
 //          serial_println("Food present! Monitoring");
         }
     }

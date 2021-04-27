@@ -51,6 +51,8 @@ typedef enum {
 #define VCNL4010_AMBIENTREADY                                                  \
   0x40 ///< Read-only - Value = 1 when ambient light measurement data is
        ///< available
+#define VCNL4010_MEASUREPROXIMITY_CONT \
+  0x3 //set to read proximity values continuously + enable self timer
 
 /** Functions */
 void VCNL4010_setLEDcurrent(uint8_t current_10mA);
