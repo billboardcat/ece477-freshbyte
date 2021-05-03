@@ -1,0 +1,6 @@
+hts221.c:25:5:hts221_reboot	48	static
+hts221.c:58:5:hts221_init	64	static
+hts221.c:266:5:hts221_calc_temp	16	static
+hts221.c:200:5:hts221_get_temp	56	static
+hts221.c:345:5:hts221_calc_humid	16	static
+hts221.c:274:5:hts221_get_humid	48	static

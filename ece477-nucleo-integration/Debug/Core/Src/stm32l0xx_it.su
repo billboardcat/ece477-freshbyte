@@ -1,0 +1,12 @@
+stm32l0xx_it.c:113:6:NMI_Handler	8	static
+stm32l0xx_it.c:128:6:HardFault_Handler	8	static
+stm32l0xx_it.c:143:6:SVC_Handler	8	static
+stm32l0xx_it.c:156:6:PendSV_Handler	8	static
+stm32l0xx_it.c:169:6:SysTick_Handler	8	static
+stm32l0xx_it.c:190:6:EXTI2_3_IRQHandler	48	static
+stm32l0xx_it.c:274:6:DMA1_Channel1_IRQHandler	8	static
+stm32l0xx_it.c:288:6:DMA1_Channel2_3_IRQHandler	8	static
+stm32l0xx_it.c:302:6:ADC1_COMP_IRQHandler	8	static
+stm32l0xx_it.c:316:6:TIM6_DAC_IRQHandler	48	static
+stm32l0xx_it.c:402:6:display_readings	24	static
+stm32l0xx_it.c:469:5:predictive_model	72	static

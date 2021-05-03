@@ -1,0 +1,7 @@
+main.c:91:6:display_setup	16	static
+main.c:113:6:HAL_ADC_LevelOutOfWindowCallback	24	static
+main.c:143:5:main	8	static,ignoring_inline_asm
+main.c:304:6:SystemClock_Config	128	static
+main.c:357:13:MX_NVIC_Init	8	static
+main.c:365:6:HAL_UART_RxCpltCallback	16	static
+main.c:375:6:Error_Handler	8	static,ignoring_inline_asm

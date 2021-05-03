@@ -1,0 +1,10 @@
+adc.c:35:6:MX_ADC_Init	48	static
+adc.c:110:6:HAL_ADC_MspInit	56	static
+adc.c:166:6:HAL_ADC_MspDeInit	8	static
+adc.c:198:6:ADC_Select_CH0	16	static
+adc.c:213:6:ADC_calc_r0	16	static
+adc.c:263:7:ln	32	static
+adc.c:281:7:log10	8	static
+adc.c:291:7:exp	32	static
+adc.c:286:7:pow	8	static
+adc.c:237:7:ADC_calc_ppm	8	static

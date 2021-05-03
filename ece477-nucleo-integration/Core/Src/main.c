@@ -193,7 +193,7 @@ int main(void)
   display_setup();
   serial_printf("Initializing I2C peripherals... ");
   hts221_init();
-  
+
   bq_init_ret = bq_init();
   VCNL4010_setLEDcurrent(20);
   VCNL4010_enable_Interrupt();

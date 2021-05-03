@@ -1,0 +1,4 @@
+at_commands.c:25:5:setup_wifi	16	static
+at_commands.c:40:5:sent_freshbyte_data	32	static
+at_commands.c:66:17:extract_prediction	32	static
+at_commands.c:53:17:receive_prediction	8	static

@@ -72,6 +72,7 @@ RTC_DateTypeDef sDate1;
 
 uint8_t current_day;
 uint8_t days_elapsed = 0;
+uint8_t prev_prediction = 0xFF;
 
 /* USER CODE END PV */
 
@@ -192,6 +193,8 @@ void EXTI2_3_IRQHandler(void)
 
   // Prox. Sensor Interrupt
   serial_printf("== EXTI2 - PROX INT ==\n");
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+
 
   if (!food_present) {
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
@@ -224,13 +227,18 @@ void EXTI2_3_IRQHandler(void)
 
   uint16_t soc = BQ27441_soc(FILTERED);
 
+  uint32_t methane_raw = adc_dma_buffer[0];
+
+
   // Send sensor data to cloud
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
-    // TODO: error handling
+    serial_select(DEBUG_PRINT);
+    serial_printf("!!! wifi-setup-fail\n");
   }
-  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
-    // TODO: error handling
+  if (sent_freshbyte_data(temp, humid, methane_raw) == AT_FAIL){
+    serial_select(DEBUG_PRINT);
+    serial_printf("!!! wifi-send-fail\n");
   }
 
   //get wifi prediction here?
@@ -238,7 +246,6 @@ void EXTI2_3_IRQHandler(void)
   // Disable the 5V regulator
   serial_select(DEBUG_PRINT);
 
-  uint32_t methane_raw = adc_dma_buffer[0];
   float methane_ppm = ADC_calc_ppm(methane_raw);
   serial_printf("Methane: %d\n", (int) methane_ppm);
   batteryState = LOW;
@@ -249,6 +256,9 @@ void EXTI2_3_IRQHandler(void)
   display_readings(soc, temp, humid, methane_ppm, predictive_model(temp, humid, methane_raw));
 // Acknowledge the interrupt
   VCNL4010_ack_ISR();
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+
+  HAL_TIM_IRQHandler(&htim6);
   serial_println("=== Interrupt done! === \n");
 
   /* USER CODE END EXTI2_3_IRQn 0 */
@@ -309,6 +319,14 @@ void TIM6_DAC_IRQHandler(void)
   // Timer 6 should gather new sensor readings, upload these data to the cloud via Wi-Fi, pull the updated prediction, and update the display.
 
   serial_println("=== TIM6 Interrupt ===");
+  if ( ( (&htim6)->Instance->SR & 0x0001) == 0x0000) {
+	  serial_println("TIM6 ack'd in EXTI, returning...");
+    (&htim6)->Instance->CNT = 0x0001;
+	  HAL_TIM_IRQHandler(&htim6);
+	  return;
+  }
+
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
 
   if (!food_present) {
     HAL_TIM_IRQHandler(&htim6);
@@ -342,13 +360,17 @@ void TIM6_DAC_IRQHandler(void)
   uint16_t soc = BQ27441_soc(FILTERED);
   serial_printf("Current Battery is %d\n", soc);
 
+  uint32_t methane_raw = adc_dma_buffer[0];
+
   // Send sensor data to cloud
   serial_select(WIFI);
   if (setup_wifi("ASUS", "rickroll362") == AT_FAIL) {
-    // TODO: error handling
+    serial_select(DEBUG_PRINT);
+    serial_printf("!!! wifi-setup-fail\n");
   }
-  if (sent_freshbyte_data(temp, humid, adc_dma_buffer[0]) == AT_FAIL){
-    // TODO: error handling
+  if (sent_freshbyte_data(temp, humid, methane_raw) == AT_FAIL){
+    serial_select(DEBUG_PRINT);
+    serial_printf("!!! wifi-send-fail\n");
   }
 
   // get wifi prediction here?
@@ -356,7 +378,6 @@ void TIM6_DAC_IRQHandler(void)
   // Disable the 5V regulator
   serial_select(DEBUG_PRINT);
 
-  uint32_t methane_raw = adc_dma_buffer[0];
   float methane_ppm = ADC_calc_ppm(methane_raw);
   serial_printf("Methane: %d\n", (int) methane_ppm);
   batteryState = LOW;
@@ -365,8 +386,11 @@ void TIM6_DAC_IRQHandler(void)
 //  HAL_Delay(5000);
 
   display_readings(soc, temp, humid, methane_ppm, predictive_model(temp, humid, methane_raw));
-  serial_println("=== Interrupt done! === \n");
 
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+
+  serial_println("=== Interrupt done! === \n");
+  (&htim6)->Instance->CNT = 0x0001;
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
@@ -380,7 +404,7 @@ void display_readings(int battery, int temp, int humid, int methane_ppm, int pre
   //use string or use
 
   //turn on red led while updating display
-  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
 
   serial_select(DEBUG_PRINT);
   serial_printf("Clearing display buffers...\n");
@@ -439,7 +463,7 @@ void display_readings(int battery, int temp, int humid, int methane_ppm, int pre
   display(true);
 
   //turn off red led
-  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+//  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
 }
 
 int predictive_model(int new_temp, int new_rh, int new_methane) {
@@ -470,6 +494,15 @@ int predictive_model(int new_temp, int new_rh, int new_methane) {
   else if(fruit_selection == MANGO) {
     days = 7 - days_elapsed;
   }
+
+  // If the new prediction > old prediction, the just use the old prediction for the purposes of our demonstration
+  if (days > prev_prediction) {
+    days = prev_prediction;
+  }
+  else {
+    prev_prediction = days;
+  }
+
   return days;
 }
 
