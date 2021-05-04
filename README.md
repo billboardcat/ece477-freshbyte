@@ -54,6 +54,8 @@ ece477-freshbyte
 
 ## Components
 ### These are the final components used in the `ece477-nucleo-integration` project.
+Not listed are the resistors and capacitors required by some of these peripherals / used provide filtering on our analog inputs.
+
 * STM32L053 Nucleo-64 
 * Ai-Thinker ESP8266 (ESP-12E)
 * Adafruit Miniboost 5V @ 1A (TPS61023)
@@ -65,6 +67,4 @@ ece477-freshbyte
 * Pololu 3.3V Step-Up/Step-Down (S9V11F3S5)
 * Sparkfun Battery Babysitter
 * Sparkfun MQ-4 Methane Sensor + Breakout Board
-
-Not listed are the resistors and capacitors required by some of these peripherals / used provide filtering on our analog inputs.
 
