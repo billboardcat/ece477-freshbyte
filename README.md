@@ -56,15 +56,15 @@ ece477-freshbyte
 ### These are the final components used in the `ece477-nucleo-integration` project.
 Not listed are the resistors and capacitors required by some of these peripherals / used provide filtering on our analog inputs.
 
-* STM32L053 Nucleo-64 
-* Ai-Thinker ESP8266 (ESP-12E)
-* Adafruit Miniboost 5V @ 1A (TPS61023)
-* Adafruit 2.7" Tri-color eInk Shield
-* Adafruit HTS221 Breakout Board
-* Adafruit VCNL4010 Breakout Board
-* Adafruit Li-Ion Battery Pack, 3.7V 4400 mAh
-* Adafruit Square Force-Sensitive Resistor
-* Pololu 3.3V Step-Up/Step-Down (S9V11F3S5)
-* Sparkfun Battery Babysitter
-* Sparkfun MQ-4 Methane Sensor + Breakout Board
+* Main MCU: `STM32L053 Nucleo-64`
+* Wi-Fi MCU: `Ai-Thinker ESP8266 (ESP-12E)`
+* 3.3V Buck-Boost: `Pololu 3.3V Step-Up/Step-Down (S9V11F3S5)`
+* 5V Buck-Boost: `Adafruit Miniboost 5V @ 1A (TPS61023)`
+* Battery: `Adafruit Li-Ion Battery Pack, 3.7V 4400 mAh`
+* Battery PMIC: `Sparkfun Battery Babysitter`
+* Temp/RH: `Adafruit HTS221 Breakout Board`
+* Proximity: `Adafruit VCNL4010 Breakout Board`
+* Display: `Adafruit 2.7" Tri-color eInk Shield`
+* Pressure: `Adafruit Square Force-Sensitive Resistor`
+* Methane: `Sparkfun MQ-4 Methane Sensor + Breakout Board`
 
