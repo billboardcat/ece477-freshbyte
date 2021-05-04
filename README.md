@@ -20,8 +20,14 @@ threshold of longevity has been reached.
 - [x] An ability to wake the display using a proximity sensor.
 
 ## About the repository structure
-This repository contains the various STM32CubeIDE projects used to create FreshByte.
+This repository contains the various STM32CubeIDE projects used to create FreshByte. This was done to facilitate the writing and testing of driver code on different development boards.
 
+### Folder Descriptions
+- 📂 Archive : Contains projects used to develop driver code and related functions.
+- 📂 Data : Contains the data we collected in order to generate our predictive model for banana spoilage.
+- 📂 ece477-nucleo-integration : The project for integrating all of our components, driver code, and functionality (Nucleo-64, STM32L053)
+
+### Repository Structure
 ```
 ece477-freshbyte
  |-- Archive
@@ -45,8 +51,5 @@ ece477-freshbyte
  |
  `-- ece477-nucleo-integration
 ```
-- 📂 Archive : Contains projects used to develop driver code and related functions.
-- 📂 Data : Contains the data we collected in order to generate our predictive model for banana spoilage.
-- 📂 ece477-nucleo-integration : The project for integrating all of our components, driver code, and functionality (Nucleo-64, STM32L053)
 
 
