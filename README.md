@@ -66,5 +66,5 @@ ece477-freshbyte
 * Sparkfun Battery Babysitter
 * Sparkfun MQ-4 Methane Sensor + Breakout Board
 
-Not listed are the resistors and capacitors required by some of these peripherals / used provide low-pass filtering on our analog inputs.
+Not listed are the resistors and capacitors required by some of these peripherals / used provide filtering on our analog inputs.
 
