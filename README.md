@@ -13,17 +13,40 @@ Users will input the type of food through the use of a display and buttons. The 
 threshold of longevity has been reached.
 
 ### Project Specific Success Criteria
-- [ ] An ability to read pressure sensor data to determine if food is in the box.
-- [ ] An ability to transmit data to external device for analysis over a WiFi connection.
-- [ ] An ability to read battery charge level data through I2C using a PMIC.
-- [ ] An ability to show environmental conditions on the display.
-- [ ] An ability to wake the display using a proximity sensor.
+- [x] An ability to read pressure sensor data to determine if food is in the box.
+- [x] An ability to transmit data to external device for analysis over a WiFi connection.
+- [x] An ability to read battery charge level data through I2C using a PMIC.
+- [x] An ability to show environmental conditions on the display.
+- [x] An ability to wake the display using a proximity sensor.
 
 ## About the repository structure
-This repository contains the various STM32Cube projects used to create FreshByte.
+This repository contains the various STM32CubeIDE projects used to create FreshByte.
 
-- 📂 ece477-integration : The project for integrating all of our components and driver code.
-- 📂 ece477-epd : The project used to develop our e-ink display driver code.
-- 📂 spi_display_hx8357 : A project (1/2) used to develop our LCD driver code. (STM32F091)
-- 📂 ece477-hx8357-nucleo : A project (2/2) used to test our LCD driver code on our MCU. (STM32L053)
-- 📂 ece477-hts221-bq27441-vcnl4010 : The project used to integrate our I2C peripherals.
+```
+ece477-freshbyte
+ |-- Archive
+ |   |-- ece477-edp
+ |   |-- ece477-esp8266
+ |   |-- ece477-hts221-bq27441-vcnl4010
+ |   |-- ece477-hts221demo
+ |   |-- ece477-hx8357-nucleo
+ |   |-- ece477-i2c-integrated-nucleo
+ |   |-- ece477-integration
+ |   |-- ece477-methane-r0-calc
+ |   |-- ece477-pressure
+ |   |-- ece477-tim6demo
+ |   |-- Micropython
+ |   `-- spi_display_hx8357
+ |
+ |-- Data
+ |   |-- ECE477_freshbyte - Sheet1.csv
+ |   |-- ECE477_freshbyte (1) - Sheet1.csv
+ |   `-- ECE477_freshbyte (2) - Sheet1.csv
+ |
+ `-- ece477-nucleo-integration
+```
+- 📂 Archive : Contains projects used to develop driver code and related functions.
+- 📂 Data : Contains the data we collected in order to generate our predictive model for banana spoilage.
+- 📂 ece477-nucleo-integration : The project for integrating all of our components, driver code, and functionality (Nucleo-64, STM32L053)
+
+
