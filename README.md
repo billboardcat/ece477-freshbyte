@@ -1,4 +1,4 @@
-# FreshByte
+# FreshByte 🍎🍌🍋🥭
 ### ECE477 - Digital Systems Senior Design - Purdue University - Spring 2021
 ### Group 10: Sabriya Alam, Parker Crain, Natalie Rodeghier, Jimmy Sung
 
@@ -52,4 +52,19 @@ ece477-freshbyte
  `-- ece477-nucleo-integration
 ```
 
+## Components
+### These are the final components used in the `ece477-nucleo-integration` project.
+* STM32L053 Nucleo-64 
+* Ai-Thinker ESP8266 (ESP-12E)
+* Adafruit Miniboost 5V @ 1A (TPS61023)
+* Adafruit 2.7" Tri-color eInk Shield
+* Adafruit HTS221 Breakout Board
+* Adafruit VCNL4010 Breakout Board
+* Adafruit Li-Ion Battery Pack, 3.7V 4400 mAh
+* Adafruit Square Force-Sensitive Resistor
+* Pololu 3.3V Step-Up/Step-Down (S9V11F3S5)
+* Sparkfun Battery Babysitter
+* Sparkfun MQ-4 Methane Sensor + Breakout Board
+
+Not listed are the resistors and capacitors required by some of these peripherals / used provide low-pass filtering on our analog inputs.
 
